@@ -1,0 +1,37 @@
+﻿@using CoptLib.Models
+@using CopticChanterNet.Models
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+
+@{
+    var Model = new DocSetViewModel(env);
+    Model.LoadSetCommand.Execute(null);
+    ViewData["Title"] = Model.Title;
+}
+
+@if (Model.LoadSetCommand.IsRunning)
+{
+    <p>Loading, please be patient...</p>
+}
+else
+{
+    <h1>"@(Model.Title)" has @(Model.Docs.Count) documents.</h1>
+
+    @foreach (var doc in Model.Docs)
+    {
+        <h2>@doc.Name</h2>
+
+        @foreach (var trans in doc.Translations.Children.Cast<IContentCollectionContainer>())
+        {
+            <ul class="tableColumn">
+                @foreach (var item in trans.Children)
+                {
+                    @if (item is IContent stanza)
+                    {
+                        <li>@stanza.Text</li>
+                    }
+                }
+            </ul>
+        }
+    }
+}
+
