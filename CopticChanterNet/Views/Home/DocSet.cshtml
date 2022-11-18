@@ -14,24 +14,17 @@
 }
 else
 {
-    <h1>"@(Model.Title)" has @(Model.Docs.Count) documents.</h1>
+    <h1>@(Model.Title)</h1>
 
-    @foreach (var doc in Model.Docs)
-    {
-        <h2>@doc.Name</h2>
-
-        @foreach (var trans in doc.Translations.Children.Cast<IContentCollectionContainer>())
+    <table>
+        @foreach (var row in Model.Layout)
         {
-            <ul class="tableColumn">
-                @foreach (var item in trans.Children)
+            <tr>
+                @foreach (var cell in row)
                 {
-                    @if (item is IContent stanza)
-                    {
-                        <li>@stanza.Text</li>
-                    }
+                    <td>@((cell as IContent)?.Text)</td>
                 }
-            </ul>
+            </tr>
         }
-    }
+    </table>
 }
-
