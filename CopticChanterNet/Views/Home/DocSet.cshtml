@@ -22,7 +22,36 @@ else
             <tr>
                 @foreach (var cell in row)
                 {
-                    <td>@((cell as IContent)?.Text)</td>
+                    object item = cell;
+                    string css = string.Empty;
+                    string? text = item?.ToString();
+                    List<string> cl = new();
+
+                    if (item is Section section)
+                    {
+                        item = section.Title;
+                        cl.Add("sectionTitle");
+                        text = null;
+                    }
+                    else if (item is Doc doc)
+                    {
+                        <td class="docName" colspan="100">@doc.Name</td>
+                        continue;
+                    }
+
+                    if (item is IContent content)
+                    {
+                        text = content.Text;
+                    }
+                    if (item is IMultilingual multi)
+                    {
+                        cl.Add(multi.Language.ToString().ToLower());
+                    }
+
+                    if (text != null)
+                    {
+                        <td class="@string.Join(' ', cl)" style="@css">@text</td>
+                    }
                 }
             </tr>
         }

@@ -1,0 +1,31 @@
+﻿body {
+    font-family: "Noto Sans";
+}
+
+td {
+    vertical-align: text-top;
+}
+
+.docName {
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+.sectionTitle {
+    font-weight: bolder;
+    font-size: 16pt;
+}
+
+.arabic {
+    direction: rtl;
+    font-family: "Noto Sans Arabic";
+}
+
+.coptic {
+    font-family: "Noto Sans Coptic";
+}
+
+.hebrew {
+    direction: rtl;
+    font-family: "Noto Sans Hebrew";
+}

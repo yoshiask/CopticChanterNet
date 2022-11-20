@@ -31,7 +31,7 @@ public partial class DocSetViewModel
     private ObservableCollection<Doc> docs;
 
     [ObservableProperty]
-    private List<List<ContentPart>> layout;
+    private List<List<object>> layout;
 
     [ObservableProperty]
     private string title;
@@ -64,36 +64,32 @@ public partial class DocSetViewModel
         Title = "Midnight Praises";
     }
 
-    private List<List<ContentPart>> GenerateLayout(Doc doc)
+    private List<List<object>> GenerateLayout(Doc doc)
     {
         int translationCount = doc.Translations.Children.Count;
 
         // Create rows for each stanza
-        int numRows = doc.Translations?.CountRows() ?? 0;
-        List<List<ContentPart>> layout = new(numRows);
-        for (int i = 0; i <= numRows; i++)
+        int numRows = (doc.Translations?.CountRows() ?? 0) + 1;
+        List<List<object>> layout = new(numRows);
+        for (int i = 1; i <= numRows; i++)
             layout.Add(new(translationCount));
+
+        // Add Doc title
+        layout.Insert(0, new List<object> { doc });
 
         for (int t = 0; t < translationCount; t++)
         {
-            GenerateLayoutForContentPart(doc.Translations![t], layout, t, 0);
+            GenerateLayoutForContentPart(doc.Translations![t], layout, t, 1);
         }
 
         return layout;
     }
 
-    private void GenerateLayoutForContentPart(ContentPart part, List<List<ContentPart>> layout, int column, int row)
+    private void GenerateLayoutForContentPart(ContentPart part, List<List<object>> layout, int column, int row)
     {
-        switch (part)
-        {
-            case IContent content:
-                layout[row].Add(part);
-                break;
-
-            case IContentCollectionContainer contentCollection:
-                foreach (var content in contentCollection.Children)
-                    GenerateLayoutForContentPart(content, layout, column, ++row);
-                break;
-        }
+        layout[row].Add(part);
+        if (part is IContentCollectionContainer contentCollection)
+            foreach (var content in contentCollection.Children)
+                GenerateLayoutForContentPart(content, layout, column, ++row);
     }
 }
