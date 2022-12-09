@@ -29,6 +29,11 @@ namespace CopticChanterNet.Controllers
             return View();
         }
 
+        public IActionResult TasbehaOrgGenerator()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
