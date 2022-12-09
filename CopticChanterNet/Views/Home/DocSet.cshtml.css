@@ -6,6 +6,10 @@ td {
     vertical-align: text-top;
 }
 
+th, td {
+    padding: 4pt;
+}
+
 .docName {
     font-weight: bold;
     font-size: 16pt;
