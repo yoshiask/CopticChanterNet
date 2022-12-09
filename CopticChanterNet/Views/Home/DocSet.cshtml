@@ -45,6 +45,10 @@ else
                     if (item is IMultilingual multi)
                     {
                         cl.Add(multi.Language.ToString().ToLower());
+
+                        var culture = multi.Language.Secondary?.Culture ?? multi.Language.Culture;
+                        if (culture?.TextInfo.IsRightToLeft == true)
+                            css += "direction: rtl;";
                     }
 
                     if (text != null)
