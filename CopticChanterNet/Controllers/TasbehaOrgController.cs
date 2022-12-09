@@ -18,14 +18,6 @@ namespace CopticChanterNet.Controllers
         [HttpPost]
         public IActionResult Convert([FromForm] string html, [FromForm] int lyricId)
         {
-            // Get data from form body
-            //if (!Request.Form.TryGetValue("Html", out var htmlVals))
-            //    return BadRequest("Must provide outer HTML");
-            //var html = htmlVals.ToString();
-
-            //if (!Request.Form.TryGetValue("LyricIdStr", out var lyricIdVals) || !int.TryParse(lyricIdVals.ToString(), out var lyricId))
-            //    return BadRequest("Must provide a valid integer lyric ID");
-
             // Parse HTML into document tree
             var doc = TasbehaOrg.ConvertLyricsPage(html, lyricId);
 
