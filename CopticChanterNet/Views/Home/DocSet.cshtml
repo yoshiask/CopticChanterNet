@@ -1,11 +1,62 @@
 ﻿@using CoptLib.Models
+@using CoptLib.Models.Text;
+@using CoptLib.Writing;
 @using CopticChanterNet.Models
+
 @inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
 
 @{
     var Model = new DocSetViewModel(env);
     Model.LoadSetCommand.Execute(null);
     ViewData["Title"] = Model.Title;
+}
+
+@functions
+{
+        string HandleInline(Inline inline)
+        {
+            (string css, List<string> cl) = HandleText(inline);
+            var cls = string.Join(' ', cl);
+            string inner;
+
+            switch (inline)
+            {
+                case Span span:
+                    inner = string.Join(string.Empty, span.Inlines.Select(HandleInline));
+                    break;
+
+                default:
+                    inner = inline.ToString()!;
+                    break;
+
+            }
+
+            return $"<span class=\"{cls}\" style=\"{css}\">{inner}</span>";
+        }
+
+        (string css, List<string> cl) HandleText(object item)
+        {
+            string css = string.Empty;
+            List<string> classes = new();
+
+            if (item is IMultilingual multi)
+            {
+                LanguageInfo langInfo = multi.Language?.Secondary
+                    ?? multi.Language
+                    ?? LanguageInfo.Default;
+
+                var culture = langInfo.Culture;
+                if (culture != null)
+                {
+                    if (culture.TextInfo.IsRightToLeft == true)
+                        css += "direction: rtl;";
+                }
+
+                classes.Add(langInfo.Known.ToString().ToLowerInvariant());
+            }
+
+            return (css, classes);
+        }
 }
 
 @if (Model.LoadSetCommand.IsRunning)
@@ -17,46 +68,64 @@ else
     <h1>@(Model.Title)</h1>
 
     <table>
-        @foreach (var row in Model.Layout)
-        {
-            <tr>
-                @foreach (var cell in row)
+        @{
+            bool isNewDoc = false;
+
+            @foreach (var row in Model.Layout)
+            {
+                if (row.Count == 1 && row[0] is Doc)
                 {
-                    object item = cell;
-                    string css = string.Empty;
-                    string? text = item?.ToString();
-                    List<string> cl = new();
-
-                    if (item is Section section)
-                    {
-                        item = section.Title;
-                        cl.Add("sectionTitle");
-                        text = null;
-                    }
-                    else if (item is Doc doc)
-                    {
-                        continue;
-                    }
-
-                    if (item is IContent content)
-                    {
-                        text = content.Text;
-                    }
-                    if (item is IMultilingual multi)
-                    {
-                        cl.Add(multi.Language.ToString().ToLower());
-
-                        var culture = multi.Language.Secondary?.Culture ?? multi.Language.Culture;
-                        if (culture?.TextInfo.IsRightToLeft == true)
-                            css += "direction: rtl;";
-                    }
-
-                    if (text != null)
-                    {
-                        <td class="@string.Join(' ', cl)" style="@css">@text</td>
-                    }
+                    // Set flag so the title of the translations
+                    // can be displayed in bold font
+                    isNewDoc = true;
+                    continue;
                 }
-            </tr>
+
+                <tr>
+                    @foreach (var cell in row)
+                    {
+                        object item = cell;
+                        string css = string.Empty;
+                        string? text = item?.ToString();
+                        List<string> cl = new();
+
+                        if (item is Section section)
+                        {
+                            item = section.Title;
+                            cl.Add(isNewDoc ? "docName" : "sectionTitle");
+                        }
+
+                        if (item is IContent content)
+                        {
+                            if (content.Inlines.Count == 1 && content.Inlines[0] is Run singleRun)
+                            {
+                                // Avoid using multiple inlines when Text can be used directly
+                                text = singleRun.Text;
+                            }
+                            else
+                            {
+                                // Convert the CoptLib InlineCollection to HTML
+                                foreach (Inline inline in content.Inlines)
+                                {
+                                    HandleInline(inline);
+                                }
+                            }
+                        }
+
+                        // Handle language & font
+                        (var css2, var cl2) = HandleText(item);
+                        css += css2;
+                        cl.AddRange(cl2);
+
+                        if (text != null)
+                        {
+                            <td class="@string.Join(' ', cl)" style="@css">@text</td>
+                        }
+                    }
+                </tr>
+
+                isNewDoc = false;
+            }
         }
     </table>
 }
