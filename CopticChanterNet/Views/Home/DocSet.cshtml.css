@@ -1,5 +1,6 @@
 ﻿body {
     font-family: "Noto Sans";
+    line-height: unset;
 }
 
 td {
@@ -12,12 +13,12 @@ th, td {
 
 .docName {
     font-weight: bolder;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .sectionTitle {
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .arabic {

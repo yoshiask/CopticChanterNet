@@ -26,6 +26,7 @@ namespace CopticChanterNet.Controllers
 
         public IActionResult DocSet()
         {
+            ViewData["setId"] = Request.RouteValues["id"]?.ToString();
             return View();
         }
 

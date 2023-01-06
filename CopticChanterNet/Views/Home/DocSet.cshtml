@@ -6,7 +6,8 @@
 @inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
 
 @{
-    var Model = new DocSetViewModel(env);
+    var setId = ViewData["SetId"]?.ToString();
+    var Model = new DocSetViewModel(setId, env);
     Model.LoadSetCommand.Execute(null);
     ViewData["Title"] = Model.Title;
 }
@@ -86,7 +87,7 @@ else
                     {
                         object item = cell;
                         string css = string.Empty;
-                        string? text = item?.ToString();
+                        string? text = null;
                         List<string> cl = new();
 
                         if (item is Section section)
@@ -113,6 +114,7 @@ else
                         }
 
                         // Handle language & font
+                        text ??= item?.ToString();
                         (var css2, var cl2) = HandleText(item);
                         css += css2;
                         cl.AddRange(cl2);

@@ -16,10 +16,12 @@ namespace CopticChanterNet.Models;
 [ObservableObject]
 public partial class DocSetViewModel
 {
+    private readonly string _setId;
     private IHostEnvironment _env;
 
-    public DocSetViewModel(IHostEnvironment env)
+    public DocSetViewModel(string setId, IHostEnvironment env)
     {
+        _setId = setId;
         _env = env;
         loadSetCommand = new AsyncRelayCommand(LoadSetAync);
     }
@@ -38,7 +40,11 @@ public partial class DocSetViewModel
 
     private async Task LoadSetAync()
     {
-        var filePath = Path.Combine("wwwroot", "content", "docs");
+        // Prevent path traversal attacks
+        if (!_setId.Any(char.IsLetter))
+            throw new System.ArgumentException($"Set ID {_setId} was invalid.");
+
+        var filePath = Path.Combine("wwwroot", "content", "sets", _setId);
         var fileInfos = _env.ContentRootFileProvider.GetDirectoryContents(filePath);
 
         // TODO: Load set from file
@@ -50,17 +56,24 @@ public partial class DocSetViewModel
         foreach (var fileInfo in fileInfos)
         {
             using var file = fileInfo.CreateReadStream();
-            var doc = DocReader.ReadDocXml(file);
 
-            if (doc == null)
-                continue;
+            if (Path.GetExtension(fileInfo.Name) == ".xml")
+            {
+                var doc = DocReader.ReadDocXml(file);
 
-            DocReader.ApplyDocTransforms(doc);
-            docs.Add(doc);
+                if (doc == null)
+                    continue;
 
-            Layout.AddRange(doc.Flatten());
+                DocReader.ApplyDocTransforms(doc);
+                docs.Add(doc);
+
+                Layout.AddRange(doc.Flatten());
+            }
+            else
+            {
+                using StreamReader sr = new(file);
+                Title = sr.ReadToEnd();
+            }
         }
-
-        Title = "Midnight Praises";
     }
 }

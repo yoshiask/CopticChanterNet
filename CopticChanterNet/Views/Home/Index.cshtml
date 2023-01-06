@@ -4,11 +4,19 @@
 
 <div class="text-center">
     @* TODO: Switch to a Coptic font, then change the Coptic text below from Greek *@
-    <h1 class="display-4">Greetings | Νοϥρι | أهلا</h1>
+    <h1 class="display-4" style="font-family: 'Noto Sans', 'Segoe UI'">
+        Greetings | 
+        <span style="font-family: 'Noto Sans Coptic', 'Segoe UI';">Ⲛⲟϥⲣⲓ</span> | 
+        <span style="font-family: 'Noto Sans Arabic', 'Segoe UI';">أهلا</span>
+    </h1>
     <p>Welcome to the pre-alpha test of Coptic Chanter for the Web!</p>
     <p>If you have any issues or suggestions for this site, please contact Joshua Askharoun at <a href="mailto:jjask7@gmail.com">jjask7@gmail.com</a>.</p>
 
     <a asp-area="" asp-controller="Home" asp-action="DocSet">Go to documents view</a><br/>
+
+    <a href="/Home/DocSet/midnight-praises-nativity">Midnight Praises for the Feast of the Nativity</a><br/>
+    <a href="/Home/DocSet/matins-nativity">Matins for the Feast of the Nativity</a><br/>
+    <a href="/Home/DocSet/liturgy-nativity">Liturgy of St. Basil for the Feast of the Nativity</a><br/>
 
     <a asp-area="" asp-controller="TasbehaOrg" asp-action="Index">Create a Doc from Tasbeha.org</a>
 </div>
