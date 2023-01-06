@@ -11,17 +11,16 @@ th, td {
 }
 
 .docName {
-    font-weight: bold;
-    font-size: 16pt;
+    font-weight: bolder;
+    font-size: 2rem;
 }
 
 .sectionTitle {
-    font-weight: bolder;
-    font-size: 16pt;
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 
 .arabic {
-    direction: rtl;
     font-family: "Noto Sans Arabic";
 }
 
@@ -30,6 +29,5 @@ th, td {
 }
 
 .hebrew {
-    direction: rtl;
     font-family: "Noto Sans Hebrew";
 }
