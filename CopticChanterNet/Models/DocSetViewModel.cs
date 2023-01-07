@@ -33,6 +33,9 @@ public partial class DocSetViewModel
     private ObservableCollection<Doc> docs;
 
     [ObservableProperty]
+    private LoadContext context = new();
+
+    [ObservableProperty]
     private List<List<object>> layout;
 
     [ObservableProperty]
@@ -59,7 +62,7 @@ public partial class DocSetViewModel
 
             if (Path.GetExtension(fileInfo.Name) == ".xml")
             {
-                var doc = DocReader.ReadDocXml(file);
+                var doc = context.LoadDoc(file);
 
                 if (doc == null)
                     continue;

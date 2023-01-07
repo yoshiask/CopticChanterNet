@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Name>Doxologies</Name>
+    <Uuid>urn:suscopts:doxologies</Uuid>
+    <Translations>
+        <Translation Title="Doxologies" Language="English">
+            <Section Title="Introduction">
+                <Stanza>In Christ Jesus our Lord. Amen alleluia.</Stanza>
+                <Stanza>Hail to you. We ask you, O saint, full of glory, the ever-virgin, the Theotokos, the Mother of Christ,</Stanza>
+                <Stanza>Lift up our prayers unto your beloved Son, \def{ForgiveSins}</Stanza>
+                <Stanza>Hail to the holy Virgin, who has brought forth unto us the true Light, Christ out God.</Stanza>
+                <Stanza>Ask the Lord on our behalf, that He may have mercy on our souls, and forgive us our sins.</Stanza>
+                <Stanza>O Virgin May, the holy Theotokos, the faithful advocate for all mankind,</Stanza>
+                <Stanza>Intercede on our behalf before Christ whom you bore, that He may grant us the forgiveness of our sins.</Stanza>
+                <Stanza Key="1HailVirgin">Hail to you, O Virgin / the right and true Queen / Hail to the pride of our race / who bore to us Immanuel.</Stanza>
+                <Stanza Key="2HailVirgin">We ask you to remember us, / O our faithful advocate, / before our Lord Jesus Christ / \def{ForgiveSins}</Stanza>
+            </Section>
+            <Section Title="For the Nativity">
+                <Stanza>Then our mouths are filled with joy, and our tongues with rejoicing, for our Lord Jesus Christ, was born in Bethlehem.</Stanza>
+                <Stanza>Hail to the city of our Lord, the city of the living, the dwelling of the righteous, which is Jerusalem.</Stanza>
+                <Stanza>Hail to you O Bethlehem, the city of the prophets, who has foretold of, the birth of Immanuel.</Stanza>
+                <Stanza>Today the True Light, has shone upon us, from the Virgin Mary, the pure Bride.</Stanza>
+                <Stanza>Mary gave birth to our Savior, the Good Lover of Mankind, in Bethlehem of Judea, according to the sayings of the prophets.</Stanza>
+                <Stanza>Isaiah the Prophet, proclaimed with a voice of joy, saying "She will give birth to Immanuel, our good Savior."</Stanza>
+                <Stanza>Now the heavens rejoice, and the earth is glad, for she has born Immanuel for us, we the Christian people.</Stanza>
+                <Stanza>Therefore we are rich, with perfect good things, and in faith we sing, saying alleluia.</Stanza>
+                <Stanza>Alleluia alleluia, Alleluia alleluia, Jesus Christ the Son of God, was born in Bethlehem.</Stanza>
+                <Stanza>This is He to whom is due glory: with His good Father: and the Holy Spirit: both now and forever.</Stanza>
+            </Section>
+            <Section Title="Melody for the Matins of the Nativity">
+                <Section Source="\def{NativityMelodyRefrain}"/>
+                <Stanza>The great living God / By His goodness wished to grant us life / To raise up our dire straits / And elevate us to the kingdom.</Stanza>
+                <Stanza>He sent His shining angel / Carrying the message of love / To Mary, he uttered saying, / "Rejoice, O highly favored one."</Stanza>
+                <Stanza>You have found grace / And were exalted above the righteous / The God of Abraham has chosen you / Overshadowing you with power and grace.</Stanza>
+                <Stanza>To incarnate of you mysteriously / The Almighty Son will be born / To grant His servants all grace / And shine upon them with His light.</Stanza>
+                <Stanza>When you received the message / And submitted to the great mystery / The Word came according to plan / And took flesh from you, O Mary.</Stanza>
+                <Section Source="\def{NativityMelodyRefrain}"/>
+                <Stanza>The great King of glory / The eternal Word of the Father / Came and was incarnate with love / Of a pure, chaste Virgin.</Stanza>
+                <Stanza>As said by the Evangelist / Who chanted the Gospel of eternal life: / The eternal only-begotten Son / Who is in His Father's bosom.</Stanza>
+                <Stanza>By His own will, He came to the world / And we beheld His glory / The glory as of the only-begotten / The true Son of the merciful God.</Stanza>
+                <Stanza>He granted us forgiveness and grace / And a shining bright life / He renewed us with His honorable Birth / And called us His children through faith.</Stanza>
+                <Stanza>O how great are these glories / Poured out on Adam's race / Incomprehensible with human minds / How could the minds understand?</Stanza>
+                <Section Source="\def{NativityMelodyRefrain}"/>
+                <Stanza>All those of human tongues / Today rejoice with the Newborn / They sing with joyful voices / Chanting merrily with David.</Stanza>
+                <Stanza>All the high ranks / Worship His greatness / Crying with spiritual melodies / Sanctifying the Lord with reverence.</Stanza>
+                <Stanza>The Almighty Son was born today / From the Virgin, the offspring of saints / He was wholly manifested / As revealed in the Scriptures.</Stanza>
+                <Stanza>The Kind of might as glory / Will shine in Bethlehem / His manifestation of ancient times / Eternal, hidden from the eyes.</Stanza>
+                <Stanza>Blessed are you, O City of David / Wherein goodness has appeared / Your Shepherd came out of You / Hail to you, O Bethlehem!</Stanza>
+                <Section Source="\def{NativityMelodyRefrain}"/>
+            </Section>
+            <Section Title="For the Virgin">
+                <Stanza>Blessed are you O Mary / the wise and the chaste / the Second Tabernacle / the spiritual treasure.</Stanza>
+                <Stanza>The pure turtle-dove / who declared in our land / and brought to us / the Fruit of the Spirit.</Stanza>
+                <Stanza>The Spirit of Comfort / who came upon your son / in the waters of the Jordan. / According to the type of Noah-</Stanza>
+                <Stanza>That dove has / announced to us / the peace of God / for mankind.</Stanza>
+                <Stanza>Likewise you O our hope / the spiritual turtle-dove / have brought mercy unto us / carrying Him in your womb.</Stanza>
+                <Stanza>He is Jesus / the begotten of the Father / He was born of your for us / setting free our race.</Stanza>
+                <Stanza>Therefore let us declare / first with our hearts / then also with our tongues / proclaiming and saying,</Stanza>
+                <Stanza>"O our Lord Jesus Christ / make for Yourself within us / a temple of Your Holy Spirit / glorifying You."</Stanza>
+                <Stanza>\def{1HailVirgin}</Stanza>
+                <Stanza>\def{2HailVirgin}</Stanza>
+            </Section>
+            <Section Title="For Archangel Michael">
+                <Stanza>Michael the head of the heavenly: he is the first: among the angelic ranks: serving before the Lord.</Stanza>
+                <Stanza>God sends unto us: His mercy and compassion: through the supplications of Michael: the great archangel.</Stanza>
+                <Stanza>The harvest is perfected: through the prayers of Michael: for he is close to God, asking Him on our behalf.</Stanza>
+                <Stanza>All good honor: and every perfect gift: comes to us from on high: from the Father of lights.</Stanza>
+                <Stanza>Let us praise and glorify: and worship the Holy Trinity: one in essence: who abides forever.</Stanza>
+                <Stanza>Intercede on our behalf: o holy archangel: Michael the head of the heavenly: \def{ForgiveSins}</Stanza>
+            </Section>
+            <Section Title="For St. Mark the Evangelist">
+                <Stanza>O Mark the apostle: and the Evangelist: the witness of the Passion: of the only-begotten God.</Stanza>
+                <Stanza>You have come and enlightened us / through your Gospel / and taught us the Father and the Son / and the Holy Spirit.</Stanza>
+                <Stanza>You brought us out of darkness / into the true Light / feeding us the Bread of Life / the came down from heaven.</Stanza>
+                <Stanza>All the tribes of the earth / were blessed through you / and your words have reached / the ends of the world.</Stanza>
+                <Stanza>Hail to your, O martyr / Hail to the Evangelist / Hail to the Apostle / Mark the Beholder of God.</Stanza>
+                <Stanza>Pray to the Lord on our behalf / O Beholder of God, the Evangelist / Mark the apostle / \def{ForgiveSins}</Stanza>
+            </Section>
+            <Section Title="Conclusion">
+                <Stanza>Watch over us / from on high were you dwell / O Lady of us all / the ever-virgin Theotokos.</Stanza>
+                <Stanza>Ask of Him whom you have borne, / our good Savior, / to take away our troubles / and grant us His peace.</Stanza>
+                <Stanza>\def{1HailVirgin}</Stanza>
+                <Stanza>\def{2HailVirgin}</Stanza>
+            </Section>
+        </Translation>
+
+        <Translation Key="CopticTranslation" Title="Ϩⲁⲛⲇⲟⲝⲟⲗⲟⲅⲓⲁ" Language="Coptic">
+            <Section Title="">
+                <Stanza>Ϧⲉⲛ Ⲡⲓⲭ&#x0300;ⲣⲓⲥⲧⲟⲥ Ⲓⲏⲥⲟⲩⲥ Ⲡⲉⲛϭⲟⲓⲥ / ⲁ&#x0300;ⲙⲏⲛ ⲁⲗⲗⲏⲗⲟⲩⲓⲁ.</Stanza>
+                <Stanza>Ⲭⲉⲣⲉ ⲛⲉ ⲧⲉⲛϯϩⲟ ⲉ&#x0300;ⲣⲟ / ⲱ&#x0300; ⲑⲏⲉⲑⲟⲩⲁⲃ ⲉⲑⲙⲉϩ ⲛ&#x0300;ⲱ&#x0300;ⲟⲩ / ⲉ&#x0300;ⲧⲟⲓ ⲙ̀ⲡⲁⲣⲑⲉⲛⲟⲥ ⲛ̀ⲥⲏⲟⲩ ⲛⲓⲃⲉⲛ / ϯⲙⲁⲥⲛⲟⲩϯ ⲑ&#x0300;ⲙⲁⲩ ⲙ&#x0300;Ⲡⲓⲭ&#x0300;ⲣⲓⲥⲧⲟⲥ.</Stanza>
+                <Stanza>Ⲁⲛⲓⲟⲩⲓ&#x0300; ⲛ&#x0300;ⲧⲉⲛⲡ&#x0300;ⲣⲟⲥⲉⲩⲭⲏ / ⲉ&#x0300;ⲡ&#x0300;ϣⲱⲓϩⲁ ⲡⲉϣⲏⲣⲓ ⲙ̀ⲙⲉⲛⲣⲓⲧ / \def{ForgiveSins}</Stanza>
+                <Stanza>Ⲭⲉⲣⲉ ⲑⲏⲉⲧⲁⲩⲙⲓⲥⲓ ⲛⲁⲛ / ⲙ̀ⲡⲓⲟⲩⲱⲓⲛⲓ ⲛ̀ⲧⲁⲫ̀ⲙⲏⲓ / Ⲡⲓⲭ&#x0300;ⲣⲓⲥⲧⲟⲥ Ⲡⲉⲛⲛⲟⲩϯ / Ϯⲡⲁⲣⲑⲉⲛⲟⲥ ⲉⲑⲟⲩⲁⲃ.</Stanza>
+                <Stanza>Ⲙⲁϯϩⲟ ⲙ̀Ⲡ̀ϭⲟⲓⲥ ⲉ&#x0300;ϩ&#x0300;ⲣⲏⲓ ⲉ̀ϫⲱⲛ / ⲛ&#x0300;ⲧⲉϥⲉⲣⲟⲩⲛⲁⲓ ⲛⲉⲙ ⲛⲉⲛⲯⲩⲭⲏ / \def{ForgiveSins}</Stanza>
+                <Stanza>Ϯⲡⲁⲣⲑⲉⲛⲟⲥ Ⲙⲁⲣⲓⲁⲙ / ϯⲑⲉⲟ̀ⲧⲟⲕⲟⲥ ⲉⲑⲟⲩⲁⲃ / ϯⲡ̀ⲣⲟⲥⲧⲁⲧⲏⲥ ⲉ&#x0300;ⲧⲉⲛϩⲟⲧ / ⲛ̀ⲧⲉ ⲡ&#x0300;ϫⲉⲛⲟⲥ ⲛ̀ⲧⲉ ϯⲙⲉⲧⲣⲱⲙⲓ.</Stanza>
+                <Stanza>Ⲁ̀ⲣⲓⲡ̀ⲣⲉⲥⲃⲉⲩⲓⲛ ⲉ&#x0300;ϩ&#x0300;ⲣⲏⲓ ⲉ̀ϫⲱⲛ / ⲛⲁϩⲣⲉⲛ Ⲡⲓⲭ&#x0300;ⲣⲓⲥⲧⲟⲥ ⲫⲏⲉⲧⲁⲣⲉϫ&#x0300;ⲫⲟϥ / ϩⲟⲡⲱⲥ ⲛ̀ⲧⲉϥⲉⲣϩ̀ⲙⲟⲧ ⲛⲁⲛ / ⲙ̀ⲡⲓⲭⲱ ⲉ̀ⲃⲟⲗ ⲛ̀ⲧⲉ ⲛⲉⲛⲛⲟⲃⲓ.</Stanza>
+                <Stanza Key="1HailVirgin">Ⲭⲉⲣⲉ ⲛⲉ ⲱ&#x0300; ϯⲡⲁⲣⲑⲉⲛⲟⲥ / ϯⲟⲩⲣⲱ ⲙ̀ⲙⲏⲓ ⲛ&#x0300;ⲁ&#x0300;ⲗⲏⲑⲓⲛⲏ / ⲭⲉⲣⲉ ⲡ̀ϣⲟⲩϣⲟⲩ ⲛ̀ⲧⲉ ⲡⲉⲛⲅⲉⲛⲟⲥ / ⲁ&#x0300;ⲣⲉϫ&#x0300;ⲫⲟ ⲛⲁⲛ ⲛⲈⲙⲙⲁⲛⲟⲩⲏⲗ.</Stanza>
+                <Stanza Key="2HailVirgin">Ⲧⲉⲛϯϩⲟ ⲁ&#x0300;ⲣⲓⲡⲉⲛⲙⲉⲩⲓ&#x0300; / ⲱ&#x0300; ϯⲡ&#x0300;ⲣⲟⲥⲧⲁⲧⲏⲥ ⲉ&#x0300;ⲧⲉⲛϩⲟⲧ / ⲛⲁϩⲣⲉⲛ Ⲡⲉⲛϭⲟⲓⲥ Ⲓⲏⲥⲟⲩⲥ Ⲡⲓⲭ&#x0300;ⲣⲓⲥⲧⲟⲥ / \def{ForgiveSins}</Stanza>
+            </Section>
+            <Section Title="Ⲉⲑⲃⲉ Ⲡ&#x0300;ϫⲓⲛⲙⲓⲥⲓ ⲛ&#x0300;Ⲉⲙⲙⲁⲛⲟⲩⲏⲗ">
+                <Stanza>Ⲧⲟⲧⲉ ⲣⲱⲛ ⲁϥⲙⲟϩ ⲛ&#x0300;ⲣⲁϣⲓ / ⲟⲩⲟϩ ⲡⲉⲛⲗⲁⲥ ϧⲉⲛ ⲟⲩⲑⲉⲗⲏⲗ / ϫⲉ Ⲡⲉⲛϭⲟⲓⲥ Ⲓⲏⲥⲟⲩⲥ Ⲡⲓⲭ&#x0300;ⲣⲓⲥⲧⲟⲥ / ⲁⲩⲙⲁⲥϥ ϧⲉⲛ Ⲃⲏⲑⲗⲉⲉⲙ.</Stanza>
+                <Stanza>Ⲭⲉⲣⲉ ϯⲃⲁⲕⲓ ⲙ&#x0300;Ⲡⲉⲛⲛⲟⲩϯ / ⲧ&#x0300;ⲡⲟⲗⲓⲥ ⲛ&#x0300;ⲧⲉ ⲛⲏⲉⲧⲟⲛϧ / ⲫ&#x0300;ⲙⲁⲛⲛ&#x0300;ϣⲱⲡⲓ ⲛ&#x0300;ⲛⲓⲇⲓⲕⲉⲟⲥ / ⲉ&#x0300;ⲧⲉ ⲑⲁⲓ ⲧⲉ Ⲓⲉⲣⲟⲩⲥⲁⲗⲏⲙ.</Stanza>
+                <Stanza>Ⲭⲉⲣⲉ ⲛⲉ ⲱ&#x0300; Ⲃⲏⲑⲗⲉⲉⲙ / ⲧ&#x0300;ⲡⲟⲗⲓⲥ ⲛ&#x0300;ⲛⲓⲡⲣⲟⲫⲏⲧⲏⲥ / ⲛⲏⲉⲧⲁⲩⲉⲣ-ⲡ&#x0300;ⲣⲟⲫⲏⲧⲉⲫⲓⲛ / ⲉⲑⲃⲉ ϫ&#x0300;ⲓⲛⲙⲓⲥⲓ ⲛⲈⲙⲙⲁⲛⲟⲩⲏⲗ.</Stanza>
+                <Stanza>Ⲁⲡⲓⲟⲩⲱⲓⲛⲓ ⲛ̀ⲧⲁⲫ̀ⲙⲏⲓ / ⲁϥϣⲁⲓ ⲛⲁⲛ ϩⲱⲛ ⲙ&#x0300;ⲫⲟⲟⲩ / ϧⲉⲛ ϯⲡⲁⲣⲑⲉⲛⲟⲥ Ⲙⲁⲣⲓⲁⲙ / ϯϣⲉⲗⲉⲧ ⲛ&#x0300;ⲕⲁⲑⲁⲣⲟⲥ.</Stanza>
+                <Stanza>Ⲙⲁⲣⲓⲁ ⲁⲥⲙⲓⲥⲓ ⲙ&#x0300;Ⲡⲉⲛⲥⲱⲧⲏⲣ / ⲡⲓⲙⲁⲓⲣⲱⲙⲓ ⲛ&#x0300;ⲁ&#x0300;ⲅⲁⲑⲟⲥ / ϧⲉⲛ Ⲃⲏⲑⲗⲉⲉⲙ ⲛ̀ⲧⲉ ϯⲒⲟⲩⲇⲉⲁ&#x0300; / ⲕⲁⲧⲁ ⲛⲓⲥ&#x0300;ⲙⲏ ⲛ̀ⲧⲉ ⲡ&#x0300;ⲣⲟⲫⲏⲧⲏⲥ.</Stanza>
+                <Stanza>Ⲏⲥⲁⲏ&#x0300;ⲁⲥ ⲡⲓⲡ̀ⲣⲟⲫⲏⲧⲏⲥ / ⲱϣ ⲉ̀ⲃⲟⲗ ϧⲉⲛ ⲟⲩⲥ&#x0300;ⲙⲏ ⲛ&#x0300;ⲑⲉⲗⲏⲗ / ϫⲉ ⲉⲥⲉ&#x0300;ⲙⲓⲥⲓ ⲛⲈⲙⲙⲁⲛⲟⲩⲏⲗ Ⲡⲉⲛⲥⲱⲧⲏⲣ ⲛ&#x0300;ⲁ&#x0300;ⲅⲁⲑⲟⲥ.</Stanza>
+                <Stanza>Ⲓⲥ ⲛⲓⲫⲏⲟⲩⲓ ⲉⲩⲉ&#x0300;ⲟⲩⲛⲟϥ / ⲛⲉⲙ ⲡ&#x0300;ⲕⲁϩⲓ ⲑⲉⲗⲏⲗ / ϫⲉ ⲁⲥⲙⲓⲥⲓ ⲛⲁⲛ ⲛⲈⲙⲙⲁⲛⲟⲩⲏⲗ / ⲁ&#x0300;ⲛⲟⲛ ϧⲁ ⲛⲓⲭ&#x0300;ⲣⲓⲥⲧⲓⲁⲛⲟⲥ.</Stanza>
+                <Stanza>Ⲉⲑⲃⲉ ⲫⲁⲓ ⲧⲉⲛⲟⲓ ⲛ&#x0300;ⲣⲁⲙⲁⲟ&#x0300; / ϧⲉⲛ ⲛⲓⲁ&#x0300;ⲅⲁⲑⲟⲛ ⲉⲧϫⲏⲕ ⲉ̀ⲃⲟⲗ / ϧⲉⲛ ⲟⲩⲛⲁϩϯ ⲧⲉⲛⲉⲣⲯⲁⲗⲓⲛ / ⲉⲛϫⲱ ⲙ̀ⲙⲟⲥ ϫⲉ ⲁⲗⲗⲏⲗⲟⲩⲓⲁ.</Stanza>
+                <Stanza>Ⲁⲗⲗⲏⲗⲟⲩⲓⲁ ⲁⲗⲗⲏⲗⲟⲩⲓⲁ / Ⲁⲗⲗⲏⲗⲟⲩⲓⲁ ⲁⲗⲗⲏⲗⲟⲩⲓⲁ / Ⲓⲏⲥⲟⲩⲥ Ⲡⲓⲭ&#x0300;ⲣⲓⲥⲧⲟⲥ Ⲡ&#x0300;ϣⲏⲣⲓ ⲙ̀Ⲫ̀ⲛⲟⲩϯ / ⲁⲩⲙⲁⲥϥ ϧⲉⲛ Ⲃⲏⲑⲗⲉⲉⲙ.</Stanza>
+                <Stanza>Ⲫⲁⲓ ⲉ̀ⲣⲉ ⲡⲓⲱ&#x0300;ⲟⲩ ⲉⲣⲡ&#x0300;ⲣⲉⲡⲓ ⲛⲁϥ / ⲛⲉⲙ Ⲡⲉϥⲓⲱⲧ ⲛ&#x0300;ⲁ&#x0300;ⲅⲁⲑⲟⲥ / ⲛⲉⲙ Ⲡⲓⲡ̀ⲛⲉⲩⲙⲁ ⲉⲑⲟⲩⲁⲃ / ⲓⲥϫⲉⲛ ϯⲛⲟⲩ ⲛⲉⲙ ϣⲁ ⲉ&#x0300;ⲛⲉϩ.</Stanza>
+            </Section>
+            <Section Title="">
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+                <Stanza></Stanza>
+            </Section>
+            <Section Title="Ⲉⲑⲃⲉ Ϯⲡⲁⲣⲑⲉⲛⲟⲥ">
+                <Stanza>Ⲱⲟⲩⲛⲓⲁϯ ⲛ̀ⲑⲟ Ⲙⲁⲣⲓⲁ / ϯⲥⲁⲃⲏ ⲟⲩⲟϩ ⲛ&#x0300;ⲥⲉⲙⲛⲏ / ϯⲙⲁϩⲥ&#x0300;ⲛⲟⲩϯ ⲛ&#x0300;ⲥ&#x0300;ⲕⲏⲛⲏ / ⲡⲓⲁ&#x0300;ϩⲟ ⲙ&#x0300;ⲡⲓⲡ&#x0300;ⲛⲉⲩⲙⲁⲧⲓⲕⲟⲛ.</Stanza>
+                <Stanza>Ϯϭⲣⲟⲙⲡ&#x0300;ϣⲁⲗ ⲛ&#x0300;ⲕⲁⲑⲁⲣⲟⲥ / ⲑⲏⲉ&#x0300;ⲧⲁⲥⲙⲟⲩϯ ϧⲉⲛ ⲡⲉⲛⲕⲁϩⲓ / ⲟⲩⲟϩ ⲁⲥⲫⲓⲣⲓ ⲛⲁⲛ ⲉ̀ⲃⲟⲗ / ⲛ&#x0300;ⲟⲩⲕⲁⲣⲡⲟⲥ ⲛ̀ⲧⲉ Ⲡⲓⲡ̀ⲛⲉⲩⲙⲁ.</Stanza>
+                <Stanza>Ⲡⲓⲡ̀ⲛⲉⲩⲙⲁ ⲙ&#x0300;ⲡⲁⲣⲁⲕⲗⲏⲧⲟⲛ / ⲫⲏⲉ̀ⲧⲁϥ&#x0300;ⲓ ⲉ̀ϫⲉⲛ Ⲡⲉϣⲏⲣⲓ / ϩⲓϫⲉⲛ ⲛⲓⲙⲱⲟⲩ ⲛ̀ⲧⲉ Ⲡⲓⲓⲟⲣⲇⲁⲛⲏⲥ / ⲕⲁⲧⲁ ⲡ&#x0300;ⲧⲩⲡⲟⲥ ⲛ&#x0300;Ⲛⲱⲉ&#x0300;.</Stanza>
+                <Stanza>Ϯϭⲣⲟⲙⲡⲓ ⲅⲁⲣ ⲉ̀ⲧⲉ ⲙ&#x0300;ⲙⲁⲩ / ⲛ&#x0300;ⲑⲟⲥ ⲁⲥϩⲓϣⲉⲛⲛⲟⲩϥⲓ ⲛⲁⲛ / ⲛ&#x0300;ϯϩⲓⲣⲏⲛⲏ ⲛ̀ⲧⲉ Ⲫ̀ⲛⲟⲩϯ / ⲑⲏⲉ̀ⲧⲁⲥϣⲱⲡⲓ ϣⲁ ⲛⲓⲣⲱⲙⲓ.</Stanza>
+                <Stanza>Ⲛ̀ⲑⲟ ϩⲱⲓ ⲧⲉⲛϩⲉⲗⲡⲓⲥ / ϯϭⲣⲟⲙⲡ&#x0300;ϣⲁⲗ ⲛ&#x0300;ⲛⲟⲏ&#x0300;ⲧⲉ / ⲁ̀ⲣⲉⲓⲛⲓ ⲙ&#x0300;ⲡⲓⲛⲁⲓ ⲛⲁⲛ / ⲁ̀ⲣⲉϥⲁⲓ ϧⲁⲣⲟϥ ϧⲉⲛ ⲧⲉⲛⲉϫⲓ.</Stanza>
+                <Stanza>Ⲉⲧⲉ ⲫⲁⲓ ⲡⲉ Ⲓⲏⲥⲟⲩⲥ / ⲡⲓⲙⲓⲥⲓ ⲉ̀ⲃⲟⲗ ϧⲉⲛ Ⲫ̀ⲓⲱⲧ / ⲁⲩⲙⲁⲥϥ ⲛⲁⲛ ⲉ̀ⲃⲟⲗ ⲛ̀ϧⲏϯ / ⲁϥⲉⲣ ⲡⲉⲛⲅⲉⲛⲟⲥ ⲛ̀ⲣⲉⲙϩⲉ.</Stanza>
+                <Stanza>Ⲫⲁⲓ ⲅⲁⲣ ⲙⲁⲣⲉⲛⲧⲁⲟⲩⲟϥ / ⲉ̀ⲃⲟⲗ ϧⲉⲛ ⲡⲉⲛϩⲏⲧ ⲛ̀ϣⲟⲣⲡ / ⲙⲉⲛⲉⲛⲥⲱⲥ ⲟⲛ ϧⲉⲛ ⲡⲉⲛⲕⲉⲗⲁⲥ / ⲉⲛⲱϣ ⲉ̀ⲃⲟⲗ ⲉⲛϫⲱ ⲙ̀ⲙⲟⲥ.</Stanza>
+                <Stanza>Ϫⲉ Ⲡⲉⲛϭⲟⲓⲥ Ⲓⲏⲥⲟⲩⲥ Ⲡⲓⲭ&#x0300;ⲣⲓⲥⲧⲟⲥ / ⲙⲁⲑⲁⲙⲓⲟ&#x0300; ⲛⲁⲕ ⲛ&#x0300;ϧ&#x0300;ⲣⲏⲓ ⲛ&#x0300;ϧⲏⲧⲉⲛ / ⲛ&#x0300;ⲟⲩⲉⲣⲫⲉⲓ ⲛ̀ⲧⲉ Ⲡⲉⲕⲡ&#x0300;ⲛⲉⲩⲙⲁ ⲉⲑⲟⲩⲁⲃ / ⲉⲩϯⲇⲟⲝⲟⲗⲟⲅⲓⲁ&#x0300; ⲛⲁⲕ.</Stanza>
+                <Stanza>\def{1HailVirgin}</Stanza>
+                <Stanza>\def{2HailVirgin}</Stanza>
+            </Section>
+            <Section Title="Ⲉⲑⲃⲉ Ⲙⲓⲭⲁⲏⲗ ⲡⲓⲁⲣⲭⲏⲁⲅⲅⲉⲗⲟⲥ">
+                <Stanza>Ⲙⲓⲭⲁⲏⲗ ⲡ&#x0300;ⲁⲣⲁⲭⲟⲛ ⲛ̀ⲛⲁ ⲛⲓⲫⲏⲟⲩⲓ / ⲛ̀ⲑⲟϥ ⲉⲧⲟⲓ ⲛ̀ϣⲟⲣⲡ / ϧⲉⲛ ⲛⲓⲧⲁⲝⲓⲥ ⲛ̀ⲁⲅⲅⲉⲗⲓⲕⲟⲛ / ⲉϥϣⲉⲙϣⲓ ⲙ̀ⲡⲉⲙ̀ⲑⲟ ⲙ̀Ⲡ̀ϭⲟⲓⲥ.</Stanza>
+                <Stanza>Ϣⲁⲣⲉ Ⲫ̀ⲛⲟⲩϯ ⲟⲩⲱⲣⲡ ⲛⲁⲛ / ⲛ̀ⲛⲉϥⲛⲁⲓ ⲛⲉⲙ ⲛⲉϥⲙⲉⲧϣⲉⲛϩⲏⲧ / ϩⲓⲧⲉⲛ ⲛⲓϯϩⲟ ⲛ̀ⲧⲉ Ⲙⲓⲭⲁⲏⲗ / ⲡⲓⲛⲓϣϯ ⲛ̀ⲁⲣⲭⲏⲁⲅⲅⲉⲗⲟⲥ.</Stanza>
+                <Stanza>Ϣⲁⲩϫⲱⲕ ⲉ̀ⲃⲟⲗ ⲛ̀ϫⲉ ⲛⲓⲕⲁⲣⲡⲟⲥ / ϩⲓⲧⲉⲛ ⲛⲉⲛⲧⲱⲃϩ ⲙ&#x0300;Ⲙⲓⲭⲁⲏⲗ / ϫⲉ ⲛ̀ⲑⲟϥ ⲉⲧϧⲉⲛⲧ ⲉ̀ϧⲟⲩⲛ Ⲫ̀ⲛⲟⲩϯ / ⲉϥϯϩⲟ ⲉ&#x0300;ϩ&#x0300;ⲣⲏⲓ ⲉ̀ϫⲱⲛ.</Stanza>
+                <Stanza>Ⲧⲁⲓⲟ&#x0300; ⲛⲓⲃⲉⲛ ⲉⲑⲛⲁⲛⲉⲩ / ⲛⲁⲙ ⲇⲱⲣⲟⲛ ⲛⲓⲃⲉⲛ ⲉⲧϫⲏⲕ ⲉ̀ⲃⲟⲗ / ⲉⲩⲛⲏⲟⲩ ⲛⲁⲛ ⲉ̀ⲃⲟⲗ ⲙ&#x0300;ⲡ&#x0300;ϣⲱⲓ / ϩⲓⲧⲉⲛ Ⲫ̀ⲓⲱⲧ ⲛ̀ⲧⲉ ⲛⲓⲟⲩⲱⲓⲛⲓ.</Stanza>
+                <Stanza>Ⲙⲁⲣⲉⲛϩⲱⲥ ⲛ̀ⲧⲉⲛϯⲱ&#x0300;ⲟⲩ / ⲛ̀ⲧⲉⲛⲟⲩⲱϣⲧ ⲛ̀Ϯⲧ̀ⲣⲓⲁⲥ ⲉⲑⲟⲩⲁⲃ / ⲉⲧⲟⲓ ⲛ&#x0300;ⲟ&#x0300;ⲙⲟⲟⲩⲥⲓⲟⲥ / ⲉⲑⲙⲏⲛ ⲉ̀ⲃⲟⲗ ϣⲁ ⲉ&#x0300;ⲛⲉϩ.</Stanza>
+                <Stanza>Ⲁ̀ⲣⲓⲡ̀ⲣⲉⲥⲃⲉⲩⲓⲛ ⲉ&#x0300;ϩ&#x0300;ⲣⲏⲓ ⲉ̀ϫⲱⲛ / ⲱ&#x0300; ⲡⲓⲁⲣⲭⲏⲁⲅⲅⲉⲗⲟⲥ ⲉⲑⲟⲩⲁⲃ / Ⲙⲓⲭⲁⲏⲗ ⲡ&#x0300;ⲁⲣⲁⲭⲟⲛ ⲛ̀ⲛⲁ ⲛⲓⲫⲏⲟⲩⲓ / \def{ForgiveSins}</Stanza>
+            </Section>
+            <Section Title="Ⲉⲑⲃⲉ Ⲙⲁⲣⲕⲟⲥ ⲡⲓⲉⲩⲁⲅⲅⲉⲗⲓⲥⲧⲏⲥ">
+                <Stanza>Ⲙⲁⲣⲕⲟⲥ ⲡⲓⲁ̀ⲡⲟⲥⲧⲟⲗⲟⲥ / ⲟⲩⲟϩ ⲡⲓⲉⲩⲁⲅⲅⲉⲗⲓⲥⲧⲏⲥ / ⲡⲓⲙⲉⲑⲣⲉ ϧⲁ ⲛⲓⲙ&#x0300;ⲕⲁⲩϩ / ⲛ̀ⲧⲉ ⲡⲓⲙⲟⲛⲟⲅⲉⲛⲏⲥ ⲛ&#x0300;ⲛⲟⲩϯ.</Stanza>
+                <Stanza>Ⲁⲕⲓ&#x0300; ⲁⲕⲉⲣⲟⲩⲱⲓⲛⲓ ⲉ&#x0300;ⲣⲟⲛ / ϩⲓⲧⲉⲛ ⲡⲉⲕⲉⲩⲁⲅⲅⲉⲗⲓⲟⲛ / ⲁⲕⲧ&#x0300;ⲥⲁⲃⲟⲛ ⲙ̀Ⲫ̀ⲓⲱⲧ ⲛⲉⲙ Ⲡ&#x0300;ϣⲏⲣⲓ / ⲛⲉⲙ Ⲡⲓⲡ̀ⲛⲉⲩⲙⲁ ⲉⲑⲟⲩⲁⲃ.</Stanza>
+                <Stanza>Ⲁⲕⲉⲛⲧⲉⲛ ⲉ̀ⲃⲟⲗ ϧⲉⲛ ⲡ̀ⲭⲁⲕⲓ / ⲉ̀ϧⲟⲩⲛ ⲉ&#x0300;ⲡⲓⲟⲩⲱⲓⲛⲓ ⲙ̀ⲙⲏⲓ / ⲁⲕⲧⲉⲙⲙⲟⲛ ⲙ̀ⲡⲓⲱⲕ ⲛ̀ⲧⲉ ⲡ&#x0300;ⲱⲛϧ / ⲉ̀ⲧⲁϥⲓ&#x0300; ⲉ&#x0300;ⲡⲉⲥⲏⲧ ⲉ̀ⲃⲟⲗ ϧⲉⲛ ⲧ&#x0300;ⲫⲉ.</Stanza>
+                <Stanza>Ⲁⲩϭⲓⲥ&#x0300;ⲙⲟⲩ ⲛ&#x0300;ϧ&#x0300;ⲣⲏⲓ ⲛ&#x0300;ϧⲏⲧⲕ / ⲛ̀ϫⲉ ⲛⲓⲫⲩⲗⲏ ⲧⲏⲣⲟⲩ ⲛ̀ⲧⲉ ⲡ̀ⲕⲁϩⲓ / ⲟⲩⲟϩ ⲛⲉⲕⲥⲁϫⲓ ⲁⲩⲫⲟϩ / ϣⲁ ⲁⲩⲣⲏϫⲥ ⲛ̀ϯⲟⲓⲕⲟⲩⲙⲉⲛⲏ.</Stanza>
+                <Stanza>Ⲭⲉⲣⲉ ⲛⲁⲕ ⲱ&#x0300; ⲡⲓⲙⲁⲣⲧⲏⲣⲟⲥ / ⲭⲉⲣⲉ ⲡⲓⲉⲩⲁⲅⲅⲉⲗⲓⲥⲧⲏⲥ / ⲭⲉⲣⲉ ⲡⲓⲁ̀ⲡⲟⲥⲧⲟⲗⲟⲥ / Ⲙⲁⲣⲕⲟⲥ ⲡⲓⲑⲉⲱⲣⲓⲙⲟⲥ.</Stanza>
+                <Stanza>Ⲧⲱⲃϩ ⲙ̀Ⲡ̀ϭⲟⲓⲥ ⲉ&#x0300;ϩ&#x0300;ⲣⲏⲓ ⲉ̀ϫⲱⲛ / ⲱ&#x0300; ⲡⲓⲑⲉⲱⲣⲓⲙⲟⲥ ⲛ̀ⲉⲩⲁⲅⲅⲉⲗⲓⲥⲧⲏⲥ / Ⲙⲁⲣⲕⲟⲥ ⲡⲓⲁ̀ⲡⲟⲥⲧⲟⲗⲟⲥ / \def{ForgiveSins}</Stanza>
+            </Section>
+            <Section Title="">
+                <Stanza>Ϣⲱⲡⲓ ⲛ̀ⲑⲟ ⲉ&#x0300;ⲣⲉⲥⲟⲙⲥ ⲉ̀ϫⲱⲛ / ϧⲉⲛ ⲛⲓⲙⲁ ⲉⲧϭⲟⲥⲓ ⲉ̀ⲧⲁⲣⲉⲭⲏ ⲛ̀ϧⲏⲧⲟⲩ / ⲱ&#x0300; ⲧⲉⲛϭⲓⲟⲥ ⲛ&#x0300;ⲛⲏⲃ ⲧⲏⲣⲉⲛ ϯⲑⲉⲟ̀ⲧⲟⲕⲟⲥ / ⲉⲧⲟⲓ ⲙ̀ⲡⲁⲣⲑⲉⲛⲟⲥ ⲛ̀ⲥⲏⲟⲩ ⲛⲓⲃⲉⲛ.</Stanza>
+                <Stanza>Ⲙⲁϯϩⲟ ⲙ̀ⲫⲏⲉ̀ⲧⲁⲣⲉⲙⲁⲥϥ / Ⲡⲉⲛⲥⲱⲧⲏⲣ ⲛ&#x0300;ⲁ&#x0300;ⲅⲁⲑⲟⲥ / ⲛ̀ⲧⲉϥⲱ&#x0300;ⲗⲓ ⲛ̀ⲛⲁⲓϧⲓⲥⲓ ⲉ̀ⲃⲟⲗϩⲁⲣⲟⲛ / ⲛ̀ⲧⲉϥⲥⲉⲙⲛⲓ ⲛⲁⲛ ⲛ̀ⲧⲉϥϩⲓⲣⲏⲛⲏ.</Stanza>
+                <Stanza>\def{1HailVirgin}</Stanza>
+                <Stanza>\def{2HailVirgin}</Stanza>
+            </Section>
+        </Translation>
+
+        <Translation Source="\trslit{English|\def{CopticTranslation}}" />
+    </Translations>
+
+    <Definitions>
+        <Translations Key="NativityMelodyRefrain">
+            <Stanza Language="English">Glory to You, O Lord of Hosts / Who abides in the great light / Who came to us clothed in humanity / And was born of Virgin Mary.</Stanza>
+            <Stanza Language="Coptic">.</Stanza>
+        </Translations>
+        <Translations Key="ForgiveSins">
+            <Stanza Language="English">that He may forgive us our sins.</Stanza>
+            <Stanza Language="Coptic">ⲛ&#x0300;ⲧⲉϥⲭⲁ ⲛⲉⲛⲛⲟⲃⲓ ⲛⲁⲛ ⲉ&#x0300;ⲃⲟⲗ.</Stanza>
+        </Translations>
+    </Definitions>
+</Document>
