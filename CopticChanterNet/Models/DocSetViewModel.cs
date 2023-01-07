@@ -48,7 +48,8 @@ public partial class DocSetViewModel
             throw new System.ArgumentException($"Set ID {_setId} was invalid.");
 
         var filePath = Path.Combine("wwwroot", "content", "sets", _setId);
-        var fileInfos = _env.ContentRootFileProvider.GetDirectoryContents(filePath);
+        var fileInfos = _env.ContentRootFileProvider
+            .GetDirectoryContents(filePath);
 
         // TODO: Load set from file
         if (!fileInfos.Exists)
@@ -56,7 +57,7 @@ public partial class DocSetViewModel
 
         Docs = new();
         Layout = new();
-        foreach (var fileInfo in fileInfos)
+        foreach (var fileInfo in fileInfos.OrderBy(f => f.Name))
         {
             using var file = fileInfo.CreateReadStream();
 
