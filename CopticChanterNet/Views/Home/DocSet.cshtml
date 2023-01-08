@@ -1,5 +1,6 @@
 ﻿@model DocSetViewModel
-﻿@using CoptLib.Models
+
+@using CoptLib.Models
 @using CoptLib.Models.Text;
 @using CoptLib.Writing;
 @using CopticChanterNet.Models
@@ -51,6 +52,11 @@
                 }
 
                 classes.Add(langInfo.Known.ToString().ToLowerInvariant());
+            }
+
+            if (item is Comment)
+            {
+                classes.Add("comment");
             }
 
             return (css, classes);

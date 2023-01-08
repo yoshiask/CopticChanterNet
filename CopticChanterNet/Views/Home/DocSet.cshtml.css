@@ -21,6 +21,11 @@ th, td {
     font-size: 1.25rem;
 }
 
+.comment {
+    font-size: 0.9rem;
+    color: var(--bs-secondary);
+}
+
 .arabic {
     font-family: "Noto Sans Arabic";
 }
