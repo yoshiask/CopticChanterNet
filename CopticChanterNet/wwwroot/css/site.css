@@ -1,18 +1,36 @@
+@font-face {
+    font-family: "Antinoou";
+    src: url('../fonts/Antinoou.ttf');
+}
+@font-face {
+    font-family: "Arial Coptic";
+    src: url('../fonts/ArialCoptic.ttf');
+}
+@font-face {
+    font-family: "Free Serif Avva Shenouda";
+    src: url('../fonts/FreeSerifAvvaShenouda.ttf');
+}
+@font-face {
+    font-family: "Free Serif Copt";
+    src: url('../fonts/FreeSerifCopt.ttf');
+}
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    font-family: "Noto Sans Coptic";
+    margin-bottom: 60px;
 }
