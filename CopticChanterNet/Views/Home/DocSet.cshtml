@@ -1,13 +1,10 @@
+﻿@model DocSetViewModel
 ﻿@using CoptLib.Models
 @using CoptLib.Models.Text;
 @using CoptLib.Writing;
 @using CopticChanterNet.Models
 
-@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
-
 @{
-    var setId = ViewData["SetId"]?.ToString();
-    var Model = new DocSetViewModel(setId, env);
     Model.LoadSetCommand.Execute(null);
     ViewData["Title"] = Model.Title;
 }

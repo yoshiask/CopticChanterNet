@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Diagnostics;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using CoptLib.IO;
@@ -17,17 +18,20 @@ namespace CopticChanterNet.Models;
 public partial class DocSetViewModel
 {
     private readonly string _setId;
-    private IHostEnvironment _env;
+    private readonly IHostEnvironment _env;
 
     public DocSetViewModel(string setId, IHostEnvironment env)
     {
+        Guard.IsNotNull(setId);
+        Guard.IsNotNull(env);
+
         _setId = setId;
         _env = env;
-        loadSetCommand = new AsyncRelayCommand(LoadSetAync);
+        loadSetCommand = new RelayCommand(LoadSet);
     }
 
     [ObservableProperty]
-    private IAsyncRelayCommand loadSetCommand;
+    private IRelayCommand loadSetCommand;
 
     [ObservableProperty]
     private ObservableCollection<Doc> docs;
@@ -41,7 +45,7 @@ public partial class DocSetViewModel
     [ObservableProperty]
     private string title;
 
-    private async Task LoadSetAync()
+    private void LoadSet()
     {
         // Prevent path traversal attacks
         if (!_setId.Any(char.IsLetter))

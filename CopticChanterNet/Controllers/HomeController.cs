@@ -1,5 +1,6 @@
 ﻿using CopticChanterNet.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
@@ -8,10 +9,12 @@ namespace CopticChanterNet.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHostEnvironment _env;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHostEnvironment env)
         {
             _logger = logger;
+            _env = env;
         }
 
         public IActionResult Index()
@@ -26,8 +29,13 @@ namespace CopticChanterNet.Controllers
 
         public IActionResult DocSet()
         {
-            ViewData["setId"] = Request.RouteValues["id"]?.ToString();
-            return View();
+            var setId = Request.RouteValues["id"]?.ToString();
+            if (string.IsNullOrEmpty(setId))
+                throw new System.ArgumentException("A document set ID must be specified.");
+
+            DocSetViewModel vm = new(setId!, _env);
+
+            return View(vm);
         }
 
         public IActionResult TasbehaOrgGenerator()
@@ -38,7 +46,10 @@ namespace CopticChanterNet.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel(HttpContext)
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+            });
         }
     }
 }
