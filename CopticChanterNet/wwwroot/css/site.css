@@ -1,20 +1,26 @@
+@font-face {
+    font-family: "Segoe UI Variable Display";
+    src: url('./SegUIVar.ttf');
+}
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    font-family: "Segoe UI Variable Display", "Noto Sans";
+    margin-bottom: 60px;
 }
 
 .arabic {
