@@ -16,3 +16,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.arabic {
+    font-family: "Noto Sans Arabic";
+}
+
+.coptic {
+    font-family: "Noto Sans Coptic";
+}
+
+.hebrew {
+    font-family: "Noto Sans Hebrew";
+}

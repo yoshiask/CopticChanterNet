@@ -1,5 +1,4 @@
 ﻿body {
-    font-family: "Noto Sans";
     line-height: unset;
 }
 
@@ -24,16 +23,4 @@ th, td {
 .comment {
     font-size: 0.9rem;
     color: var(--bs-secondary);
-}
-
-.arabic {
-    font-family: "Noto Sans Arabic";
-}
-
-.coptic {
-    font-family: "Noto Sans Coptic";
-}
-
-.hebrew {
-    font-family: "Noto Sans Hebrew";
 }
