@@ -63,23 +63,6 @@
         }
 }
 
-<label for="font-selector">Choose Font:</label>
-<select id="font-selector">
-    <option value="Noto Sans Coptic">Noto Sans</option>
-    <option value="Arial Coptic">Arial</option>
-    <option value="Free Serif Avva Shenouda">Free Serif w/Avva Shenouda</option>
-    <option value="Free Serif Copt">Free Serif w/Copt</option>
-</select>
-
-<script language="javascript">
-    var fontSelector = document.getElementById('font-selector');
-    document.body.style.fontFamily = '"' + fontSelector.value + '"';
-
-    fontSelector.addEventListener('change', (event) => {
-        document.body.style.fontFamily = '"' + event.target.value + '"';
-    });
-</script>
-
 <h1>@(Model.Title)</h1>
 
 <table>
