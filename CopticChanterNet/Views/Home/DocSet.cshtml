@@ -63,74 +63,67 @@
         }
 }
 
-@if (Model.LoadSetCommand.IsRunning)
-{
-    <p>Loading, please be patient...</p>
-}
-else
-{
-    <h1>@(Model.Title)</h1>
+<h1>@(Model.Title)</h1>
 
-    <table>
-        @{
-            bool isNewDoc = false;
+<table>
+    @{
+        bool isNewDoc = false;
 
-            @foreach (var row in Model.Layout)
+        @foreach (var row in Model.Layout)
+        {
+            if (row.Count == 1 && row[0] is Doc)
             {
-                if (row.Count == 1 && row[0] is Doc)
+                // Set flag so the title of the translations
+                // can be displayed in bold font
+                isNewDoc = true;
+                continue;
+            }
+
+            <tr>
+                @foreach (var cell in row)
                 {
-                    // Set flag so the title of the translations
-                    // can be displayed in bold font
-                    isNewDoc = true;
-                    continue;
-                }
+                    object item = cell;
+                    string css = string.Empty;
+                    string? text = null;
+                    List<string> cl = new();
 
-                <tr>
-                    @foreach (var cell in row)
+                    if (item is Section section)
                     {
-                        object item = cell;
-                        string css = string.Empty;
-                        string? text = null;
-                        List<string> cl = new();
+                        item = section.Title;
+                        cl.Add(isNewDoc ? "docName" : "sectionTitle");
+                    }
 
-                        if (item is Section section)
+                    if (item is IContent content)
+                    {
+                        if (content.Inlines.Count == 1 && content.Inlines[0] is Run singleRun)
                         {
-                            item = section.Title;
-                            cl.Add(isNewDoc ? "docName" : "sectionTitle");
+                            // Avoid using multiple inlines when Text can be used directly
+                            text = singleRun.Text;
                         }
-
-                        if (item is IContent content)
+                        else
                         {
-                            if (content.Inlines.Count == 1 && content.Inlines[0] is Run singleRun)
+                            // Convert the CoptLib InlineCollection to HTML
+                            foreach (Inline inline in content.Inlines)
                             {
-                                // Avoid using multiple inlines when Text can be used directly
-                                text = singleRun.Text;
+                                HandleInline(inline);
                             }
-                            else
-                            {
-                                // Convert the CoptLib InlineCollection to HTML
-                                foreach (Inline inline in content.Inlines)
-                                {
-                                    HandleInline(inline);
-                                }
-                            }
-                        }
-
-                        // Handle language & font
-                        text ??= item?.ToString();
-                        (var css2, var cl2) = HandleText(item);
-                        css += css2;
-                        cl.AddRange(cl2);
-
-                        if (text != null)
-                        {
-                            <td class="@string.Join(' ', cl)" style="@css">@text</td>
                         }
                     }
-                </tr>
 
-                isNewDoc = false;
-            }
+                    // Handle language & font
+                    text ??= item?.ToString();
+                    (var css2, var cl2) = HandleText(item);
+                    css += css2;
+                    cl.AddRange(cl2);
+
+                    if (text != null)
+                    {
+                        <td class="@string.Join(' ', cl)" style="@css">@text</td>
+                    }
+                }
+            </tr>
+
+            isNewDoc = false;
         }
-    </table>
-}
+    }
+</table>
