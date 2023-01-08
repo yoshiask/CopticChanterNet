@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Name>Gospel Response [Nativity]</Name>
+    <Uuid>urn:suscopts:gospel-response:nativity</Uuid>
+    <Translations>
+        <Translation Title="Gospel Response" Language="English">
+            <Stanza>The One without flesh became flesh / and the Logos became incarnate; / the One without beginning was born, / the One outside of time became subject to time.</Stanza>
+            <Stanza>Alleluia, alleluia, / alleluia, alleluia. / Jesus Christ the Son of God, / who was born in Bethlehem.</Stanza>
+            <Stanza>This is He to whom is due glory / with His good Father / and the Holy Spirit, / both now and forever.</Stanza>
+            <Stanza>Blessed be the Father and the Son / and the Holy Spirit / the perfect Trinity, / we worship Him and glorify Him.</Stanza>
+        </Translation>
+        <Translation Key="CopticTranslation" Title="Ϫⲉ ⲡⲓⲁⲧⲥⲁⲣⲝ ⲁϥϭⲓⲥⲁⲣⲝ" Language="Coptic">
+            <Stanza>Ϫⲉ ⲡⲓⲁⲧⲥⲁⲣⲝ ⲁϥϭⲓⲥⲁⲣⲝ / ⲟⲩⲟϩ ⲡⲓⲗⲟⲅⲟⲥ ⲁϥϧ&#x0300;ⲑⲁⲓ / ⲡⲓⲁⲧⲁⲣⲭⲏ ⲁϥⲉⲣϩⲏⲧⲥ / ⲡⲓⲁⲧⲥⲏⲟⲩ ⲁϥϣⲱⲡⲓ ϧⲁ ⲟⲩⲭ&#x0300;ⲣⲟⲛⲟⲥ.</Stanza>
+            <Stanza>Ⲁⲗⲗⲏⲗⲟⲩⲓⲁ, ⲁⲗⲗⲏⲗⲟⲩⲓⲁ, ⲁⲗⲗⲏⲗⲟⲩⲓⲁ, ⲁⲗⲗⲏⲗⲟⲩⲓⲁ. / Ⲓⲏⲥⲟⲩⲥ Ⲡⲓⲭ&#x0300;ⲣⲓⲥⲧⲟⲥ Ⲡ&#x0300;ϣⲏⲣⲓ ⲙ&#x0300;Ⲫ&#x0300;ⲛⲟⲩϯ / ⲫⲏⲉⲧⲁⲩⲙⲁⲥϥ ϧⲉⲛ Ⲃⲏⲑⲗⲉⲉⲙ.</Stanza>
+            <Stanza>Ⲫⲁⲓ ⲉ&#x0300;ⲣⲉ ⲡⲓⲱ&#x0300;ⲟⲩ ⲉⲣⲡ&#x0300;ⲣⲉⲡⲓ ⲛⲁϥ / ⲛⲉⲙ Ⲡⲉϥⲓⲱⲧ ⲛ&#x0300;ⲁ&#x0300;ⲅⲁⲑⲟⲥ / ⲛⲉⲙ Ⲡⲓⲡ&#x0300;ⲛⲉⲩⲁ ⲉⲑⲟⲩⲁⲃ / ⲓⲥϫⲉⲛ ϯⲛⲟⲩ ⲛⲉⲙ ϣⲁ ⲉ&#x0300;ⲛⲉϩ.</Stanza>
+            <Stanza>Ϫⲉ ϥ&#x0300;ⲥ&#x0300;ⲙⲁⲣⲱⲟⲩⲧ ⲛ&#x0300;ϫⲉ Ⲫ&#x0300;ⲓⲱⲧ ⲛⲉⲙ Ⲡ&#x0300;ϣⲏⲣⲓ / ⲛⲉⲙ Ⲡⲓⲡ&#x0300;ⲛⲉⲩⲁ ⲉⲑⲟⲩⲁⲃ / Ϯⲧ&#x0300;ⲣⲓⲁⲥ ⲉⲧϫⲏⲕ ⲉ&#x0300;ⲃⲟⲗ / ⲧⲉⲛⲟⲩⲱϣⲧ ⲙ&#x0300;ⲙⲟⲥ ⲧⲉⲛϯⲱ&#x0300;ⲟⲩ ⲛⲁⲥ.</Stanza>
+        </Translation>
+        <Translation Source="\trslit{English|\def{CopticTranslation}}" />
+    </Translations>
+</Document>

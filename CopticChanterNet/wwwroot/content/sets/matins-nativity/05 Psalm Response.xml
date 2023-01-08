@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Name>Psalm Response [Nativity]</Name>
+    <Uuid>urn:suscopts:psalm-response:nativity</Uuid>
+    <Translations>
+        <Translation Title="Psalm Response" Language="English">
+            <Stanza>Alleluia, Alleluia. / Jesus Christ the Son of God / was born of the Virgin in Bethlehem of Judea / according to the prophetic voices. Alleluia, Alleluia.</Stanza>
+        </Translation>
+        <Translation Key="CopticTranslation" Title="" Language="Coptic">
+            <Stanza>Ⲁⲗⲗⲏⲗⲟⲩⲓⲁ, ⲁⲗⲗⲏⲗⲟⲩⲓⲁ. / Ⲓⲏⲥⲟⲩⲥ Ⲡⲓⲭ&#x0300;ⲣⲓⲥⲧⲟⲥ Ⲡ&#x0300;ϣⲏⲣⲓ ⲙ&#x0300;Ⲫ&#x0300;ⲛⲟⲩϯ ⲁⲥⲙⲁⲥϥ ⲛ&#x0300;ϫⲉ ϯⲡⲁⲣⲑⲉⲛⲟⲥ ϧⲉⲛ Ⲃⲏⲑⲗⲉⲉⲙ ⲛ&#x0300;ⲧⲉ ϯⲒⲟⲩⲇⲉⲁ ⲕⲁⲧⲁ ⲛⲓⲥ&#x0300;ⲙⲏ ⲙ&#x0300;ⲡ&#x0300;ⲣⲟⲫⲏⲧⲓⲕⲟⲛ. / Ⲁⲗⲗⲏⲗⲟⲩⲓⲁ, ⲁⲗⲗⲏⲗⲟⲩⲓⲁ.</Stanza>
+        </Translation>
+        <Translation Source="\trslit{English|\def{CopticTranslation}}" />
+    </Translations>
+</Document>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Name>Concluding Hymn [Nativity]</Name>
+    <Uuid>urn:suscopts:concluding-hymn:nativity</Uuid>
+    <Translations>
+        <Translation Title="Concluding Hymn" Language="English">
+            <Stanza>Amen. Alleluia. Glory to God the Father and to the Son and the Holy Spirit.</Stanza>
+            <Stanza>Now and ever and unto the ages of the ages. Amen.</Stanza>
+            <Stanza>We proclaim and say, O our Lord Jesus Christ,</Stanza>
+            <Stanza>who was born in Bethlehem, according to the prophetic voices. Save us and have mercy on us.</Stanza>
+            <Stanza>Lord have mercy. Lord have mercy. Lord bless us. Amen. Bless me. Bless me. Lo, the repentance. Forgive me. Say the blessing.</Stanza>
+        </Translation>
+        <Translation Key="CopticTranslation" Title="" Language="Coptic">
+            <Stanza>Ⲁⲙⲏⲛ: ⲁⲗⲗⲏⲗⲟⲩⲓⲁ. / Ⲇⲟⲝⲁ Ⲡⲁⲧⲣⲓ ⲕⲉ Ⲩⲓⲱ ⲕⲉ ⲁ&#x0300;ⲅⲓⲱ Ⲡ&#x0300;ⲛⲉⲩⲙⲁⲧⲓ:</Stanza>
+            <Stanza>Ⲕⲉ ⲛⲩⲛ ⲕⲉ ⲁ&#x0300;ⲓ&#x0300; ⲕⲉ ⲓⲥ ⲧⲟⲩⲥ ⲉ&#x0300;ⲱ&#x0300;ⲛⲁⲥ ⲧⲱⲛ ⲉ&#x0300;ⲱ&#x0300;ⲛⲱⲛ: ⲁ&#x0300;ⲙⲏⲛ.</Stanza>
+            <Stanza>Ⲧⲉⲛⲱϣ ⲉ&#x0300;ⲃⲟⲗ ⲉⲛϫⲱ ⲙ&#x0300;ⲙⲟⲥ: ϫⲉ ⲱ&#x0300; Ⲡⲉⲛϭⲟⲓⲥ Ⲓⲏⲥⲟⲩⲥ Ⲡⲓⲭ&#x0300;ⲣⲓⲥⲧⲟⲥ</Stanza>
+            <Stanza>ⲫⲏⲉⲧⲁⲩⲙⲁⲥϥ ϧⲉⲛ Ⲃⲏⲑⲗⲉⲉⲙ: ⲕⲁⲧⲁ ⲛⲓⲥ&#x0300;ⲙⲏ ⲙ&#x0300;ⲡ&#x0300;ⲣⲟⲫⲏⲧⲏⲕⲟⲛ: ⲥⲱϯ ⲙ&#x0300;ⲙⲟⲛ ⲟⲩⲟϩ ⲛⲁⲓ ⲛⲁⲛ.</Stanza>
+            <Stanza>Ⲕⲩⲣⲓⲉ ⲉ&#x0300;ⲗⲉⲏ&#x0300;ⲥⲟⲛ: Ⲕⲩⲣⲓⲉ ⲉ&#x0300;ⲗⲉⲏ&#x0300;ⲥⲟⲛ: Ⲕⲩⲣⲓⲉ ⲉ&#x0300;ⲩⲗⲟⲩⲅⲓⲥⲟⲛ ⲁ&#x0300;ⲙⲏⲛ. Ⲥ&#x0300;ⲙⲟⲩ ⲉ&#x0300;ⲣⲟⲓ: ⲥ&#x0300;ⲙⲟⲩ ⲉ&#x0300;ⲣⲟⲓ ⲓⲥ ϯⲙⲉⲧⲁⲛⲟⲓⲁ: ⲭⲱ ⲛⲏ ⲉ&#x0300;ⲃⲟⲗ: ϫⲱ ⲙ&#x0300;ⲡⲓⲥ&#x0300;ⲙⲟⲩ.</Stanza>
+        </Translation>
+        <Translation Source="\trslit{English|\def{CopticTranslation}}" />
+    </Translations>
+</Document>
