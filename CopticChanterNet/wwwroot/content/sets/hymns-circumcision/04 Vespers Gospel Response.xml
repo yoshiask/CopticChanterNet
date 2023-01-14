@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Name>Vespers Gospel Response [Circumcision]</Name>
+    <Uuid>urn:suscopts:vespers-gospel-response:circumcision</Uuid>
+    <Translations>
+        <Translation Title="Vespers Gospel Response" Language="English">
+            <Stanza>Alleluia, alleluia, alleluia, alleluia. Jesus Christ, the Son of God, accepted to Himself the circumcision.</Stanza>
+            <Stanza>This is He to whom is due glory: with His good Father: and the Holy Spirit: both now and forever.</Stanza>
+        </Translation>
+        <Translation Key="CopticTranslation" Title="" Language="Coptic">
+            <Stanza>Ⲁⲗⲗⲏⲗⲟⲩⲓⲁ: ⲁⲗⲗⲏⲗⲟⲩⲓⲁ: ⲁⲗⲗⲏⲗⲟⲩⲓⲁ: ⲁⲗⲗⲏⲗⲟⲩⲓⲁ. Ⲓⲏⲥⲟⲩⲥ Ⲡⲓⲭ&#x0300;ⲣⲓⲥⲧⲟⲥ Ⲡ̀ϣⲏⲣⲓ ⲙ&#x0300;Ⲫ&#x0300;ⲛⲟⲩϯ: ⲁϥϣⲱⲡ ⲉ&#x0300;ⲣⲟϥ ⲙ&#x0300;ⲡⲓⲥⲉⲃⲓ.</Stanza>
+            <Stanza>Ⲫⲁⲓ ⲉ&#x0300;ⲣⲉ ⲡⲓⲱ&#x0300;ⲟⲩ ⲉⲣⲡ&#x0300;ⲣⲉⲡⲓ ⲛⲁϥ: ⲛⲉⲙ Ⲡⲉϥⲓⲱⲧ ⲛ&#x0300;ⲁ&#x0300;ⲅⲁⲑⲟⲥ: ⲛⲉⲙ Ⲡⲓⲡ̀ⲛⲉⲩⲙⲁ ⲉⲑⲟⲩⲁⲃ: ⲓⲥϫⲉⲛ ϯⲛⲟⲩ ⲛⲉⲙ ϣⲁ ⲉ&#x0300;ⲛⲉϩ.</Stanza>
+        </Translation>
+        <Translation Source="\trslit{English|\def{CopticTranslation}}" />
+        <Translation Title="مرد الإنجيل" Language="Arabic">
+            <Stanza>الليويا الليويا الليويا الليويا يسوع المسيح ابن ﷲ قبل اليه الختان.</Stanza>
+            <Stanza>هذا النى له المجد مح أبيه الصالح والروح القدس من الآن وإلى الأبد.</Stanza>
+        </Translation>
+    </Translations>
+</Document>

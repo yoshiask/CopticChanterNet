@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Name>Psalm Response [Circumcision]</Name>
+    <Uuid>urn:suscopts:psalm-response:circumcision</Uuid>
+    <Translations>
+        <Translation Title="Psalm Response" Language="English">
+            <Stanza>Alleluia, alleluia. / Jesus Christ, the Son of God, / accepted to Himself the circumcision according to the custom of the law. / Alleluia, alleluia.</Stanza>
+        </Translation>
+        <Translation Key="CopticTranslation" Title="" Language="Coptic">
+            <Stanza>Ⲁⲗⲗⲏⲗⲟⲩⲓⲁ: ⲁⲗⲗⲏⲗⲟⲩⲓⲁ. / Ⲓⲏⲥⲟⲩⲥ Ⲡⲓⲭ&#x0300;ⲣⲓⲥⲧⲟⲥ Ⲡ̀ϣⲏⲣⲓ ⲙ&#x0300;Ⲫ&#x0300;ⲛⲟⲩϯ / ⲁϥϣⲱⲡ ⲉ&#x0300;ⲣⲟϥ ⲙ&#x0300;ⲡⲓⲥⲉⲃⲓ ⲕⲁⲧⲁ ⲡⲉⲧⲉⲥϣⲉ ϧⲉⲛ ⲡⲓⲛⲟⲙⲟⲥ. / Ⲁⲗⲗⲏⲗⲟⲩⲓⲁ: ⲁⲗⲗⲏⲗⲟⲩⲓⲁ.</Stanza>
+        </Translation>
+        <Translation Source="\trslit{English|\def{CopticTranslation}}" />
+        <Translation Title="مرد المزمور" Language="Arabic">
+            <Stanza>الليلويا الليويا يسوع المسيح ابن ﷲ قبل اليه الختان كما ينبغي نالناموس. الليلويا الليويا.</Stanza>
+        </Translation>
+    </Translations>
+</Document>
