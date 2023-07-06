@@ -33,7 +33,7 @@ namespace CopticChanterNet.Controllers
             if (string.IsNullOrEmpty(setId))
                 throw new System.ArgumentException("A document set ID must be specified.");
 
-            DocSetViewModel vm = new(setId!, _env);
+            DocSetViewModel vm = new(setId, _env);
 
             return View(vm);
         }
