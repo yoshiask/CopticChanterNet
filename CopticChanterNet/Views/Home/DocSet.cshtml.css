@@ -15,9 +15,14 @@ th, td {
     font-size: 1.5rem;
 }
 
+.docName.english {
+    font-family: "Segoe UI Variable Display", sans-serif;
+}
+
 .sectionTitle {
     font-weight: bold;
     font-size: 1.25rem;
+    font-family: "Segoe UI Variable Display", sans-serif;
 }
 
 .comment {

@@ -15,19 +15,29 @@ html {
     }
 }
 
+h1 {
+    font-weight: bolder;
+    font-family: "Segoe UI Variable Display", sans-serif;
+}
+
+h2 {
+    font-weight: bold;
+    font-family: "Segoe UI Variable Display", sans-serif;
+}
+
 body {
-    font-family: "Segoe UI Variable Display", "Noto Sans";
+    font-family: "Noto Sans", sans-serif;
     margin-bottom: 60px;
 }
 
 .arabic {
-    font-family: "Noto Sans Arabic";
+    font-family: "Noto Sans Arabic", "Noto Sans", sans-serif;
 }
 
 .coptic {
-    font-family: "Noto Sans Coptic";
+    font-family: "Noto Sans Coptic", "Noto Sans", sans-serif;
 }
 
 .hebrew {
-    font-family: "Noto Sans Hebrew";
+    font-family: "Noto Sans Hebrew", "Noto Sans", sans-serif;
 }
