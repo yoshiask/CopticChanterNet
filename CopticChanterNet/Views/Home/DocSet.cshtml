@@ -1,9 +1,8 @@
 ﻿@model DocSetViewModel
 
 @using CoptLib.Models
-@using CoptLib.Models.Text;
-@using CoptLib.Writing;
-@using CopticChanterNet.Models
+@using CoptLib.Models.Text
+@using CoptLib.Extensions
 
 @{
     Model.LoadSetCommand.Execute(null);
@@ -12,44 +11,32 @@
 
 @functions
 {
-        string HandleInline(Inline inline)
+        static string HandleInline(Inline inline)
         {
             (string css, List<string> cl) = HandleText(inline);
             var cls = string.Join(' ', cl);
-            string inner;
 
-            switch (inline)
+            string inner = inline switch
             {
-                case Span span:
-                    inner = string.Join(string.Empty, span.Inlines.Select(HandleInline));
-                    break;
-
-                default:
-                    inner = inline.ToString()!;
-                    break;
-
-            }
+                Span span => string.Join(string.Empty, span.Inlines.Select(HandleInline)),
+                _ => inline.ToString()!
+            };
 
             return $"<span class=\"{cls}\" style=\"{css}\">{inner}</span>";
         }
 
-        (string css, List<string> cl) HandleText(object item)
+        static (string css, List<string> cl) HandleText(object item)
         {
             string css = string.Empty;
             List<string> classes = new();
 
-            if (item is IMultilingual multi)
+            
+            if (item is IDefinition def)
             {
-                LanguageInfo langInfo = multi.Language?.Secondary
-                    ?? multi.Language
-                    ?? LanguageInfo.Default;
+                var langInfo = def.GetLanguage();
 
-                var culture = langInfo.Culture;
-                if (culture != null)
-                {
-                    if (culture.TextInfo.IsRightToLeft == true)
-                        css += "direction: rtl;";
-                }
+                if (langInfo.Culture is { TextInfo.IsRightToLeft: true })
+                    css += "direction: rtl;";
 
                 classes.Add(langInfo.Known.ToString().ToLowerInvariant());
             }
@@ -69,9 +56,9 @@
     @{
         Doc? currentDoc = null;
 
-        @foreach (var row in Model.Layout)
+        @foreach (var row in Model.SetLayout)
         {
-            if (row.Count == 1 && row[0] is Doc doc)
+            if (row is [Doc doc])
             {
                 // Set flag so the title of the translations
                 // can be displayed in bold font
@@ -85,7 +72,7 @@
                     object item = cell;
                     string css = string.Empty;
                     string? text = null;
-                    string? docId = currentDoc?.Uuid;
+                    string? docKey = currentDoc?.Key;
                     List<string> cl = new();
 
                     if (item is Section section)
@@ -113,13 +100,13 @@
 
                     // Handle language & font
                     text ??= item?.ToString();
-                    (var css2, var cl2) = HandleText(item);
+                    var (css2, cl2) = HandleText(item!);
                     css += css2;
                     cl.AddRange(cl2);
 
                     if (text != null)
                     {
-                        <td id="@docId" class="@string.Join(' ', cl)" style="@css">@text</td>
+                        <td id="@docKey" class="@string.Join(' ', cl)" style="@css">@text</td>
                     }
                 }
             </tr>

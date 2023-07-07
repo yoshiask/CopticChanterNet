@@ -1,22 +1,21 @@
 ﻿using CommunityToolkit.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using CoptLib.IO;
 using CoptLib.Models;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using OwlCore.Extensions;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using CoptLib.ViewModels;
+
+// ReSharper disable InconsistentNaming
 
 namespace CopticChanterNet.Models;
 
-[ObservableObject]
-public partial class DocSetViewModel
+public partial class DocSetViewModel : ObservableObject
 {
     private readonly string _setId;
     private readonly IHostEnvironment _env;
@@ -35,16 +34,16 @@ public partial class DocSetViewModel
     private IRelayCommand loadSetCommand;
 
     [ObservableProperty]
-    private ObservableCollection<Doc> docs;
+    private ObservableCollection<DocViewModel> docs = new();
 
     [ObservableProperty]
     private LoadContext context = new();
 
     [ObservableProperty]
-    private List<List<object>> layout;
+    private List<List<object>> setLayout = new();
 
     [ObservableProperty]
-    private string title;
+    private string? title;
 
     private void LoadSet()
     {
@@ -63,15 +62,14 @@ public partial class DocSetViewModel
         // Load definitions shared across all docs
         var cmDefsPath = Path.Combine("wwwroot", "content", "docs", "Common Definitions.xml");
         var cmDefsInfo = _env.ContentRootFileProvider.GetFileInfo(cmDefsPath);
+        using (var cmDefsFile = cmDefsInfo.CreateReadStream())
+        {
+            // Ensure that all scripts are run
+            var cmDefsDoc = Context.LoadDoc(cmDefsFile);
+            cmDefsDoc.ApplyTransforms();
+        }
 
-        Docs = new();
-        Layout = new();
-
-        var setDocs = fileInfos
-            .OrderBy(f => f.Name)
-            .Prepend(cmDefsInfo);
-
-        foreach (var fileInfo in setDocs)
+        foreach (var fileInfo in fileInfos.OrderBy(f => f.Name))
         {
             using var file = fileInfo.CreateReadStream();
 
@@ -79,19 +77,18 @@ public partial class DocSetViewModel
             {
                 try
                 {
-                    var doc = context.LoadDoc(file);
-
+                    var doc = Context.LoadDoc(file);
                     if (doc == null)
                         continue;
+                    
+                    DocViewModel dvm = new(doc);
+                    Docs.Add(dvm);
 
-                    DocReader.ApplyDocTransforms(doc);
-                    docs.Add(doc);
-
-                    Layout.AddRange(doc.Flatten());
+                    SetLayout.AddRange(dvm.CreateTable());
                 }
                 catch (System.Exception ex)
                 {
-                    Layout.Add(new SimpleContent($"Document failed to load:\r\n{ex}", null).IntoList<object>());
+                    SetLayout.Add(new SimpleContent($"Document failed to load:\r\n{ex}", null).IntoList<object>());
                 }
             }
             else
