@@ -71,9 +71,18 @@ public override IDefinition GetDefinition()
     }
 
     var res = new TranslationRunCollection("AkiAktonk");
-    res.AddNew(engText, KnownLanguage.English);
-    res.AddNew(copText, KnownLanguage.Coptic);
-    res.AddNew(araText, KnownLanguage.Arabic);
+    res.AddRun(new(engText, res)
+    {
+        Language = new(KnownLanguage.English)
+    });
+    res.AddRun(new(copText, res)
+    {
+        Language = new(KnownLanguage.Coptic)
+    });
+    res.AddRun(new(araText, res)
+    {
+        Language = new(KnownLanguage.Arabic)
+    });
 
     return res;
 }

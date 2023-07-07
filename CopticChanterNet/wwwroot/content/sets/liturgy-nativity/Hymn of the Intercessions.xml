@@ -20,24 +20,24 @@
             <Stanza>Through their prayers, keep the life of our honored father the high priest, Papa Abba \def{PopeName}, \def{Refrain}</Stanza>
             <Stanza>We worship You O Christ, with Your good Father, and the Holy Spirit, for you have \def{AkiAktonk} and saved us. Have mercy on us.</Stanza>
         </Translation>
-        <Translation Title="Ϩⲓⲧⲉⲛ ⲛⲓ̀ⲡⲣⲉⲥⲃⲓ̀ⲁ" Key="CopticTranslation" Language="Coptic" Font="CS Avva Shenouda">
-            <Stanza>Hiten ni`precbia@ `nte ];e`otokoc =e=;=u Maria@ \def{Refrain}</Stanza>
-            <Stanza>Hiten ni`precbia@ `nte `pi`ar,y`aggeloc =e=;=u@ Mi,ayl `p`ar,wn `nna nivyou`i@ \def{Refrain}</Stanza>
+        <Translation Title="Ϩⲓⲧⲉⲛ ⲛⲓⲡ&#x0300;ⲣⲉⲥⲃⲓⲁ&#x0300;" Key="CopticTranslation" Language="Coptic" Font="CS Avva Shenouda">
+            <Stanza>Hiten ni`precbia@ `nte ];e`otokoc \abvsh{ethu} Maria@ \def{Refrain}</Stanza>
+            <Stanza>Hiten ni`precbia@ `nte `pi`ar,y`aggeloc \abvsh{ethu}@ Mi,ayl `p`ar,wn `nna nivyou`i@ \def{Refrain}</Stanza>
             <Stanza>Hiten ni`precbia@ `nte pisasf `n`ar,y`aggeloc@ nem nitagma  `n`epouranion@ \def{Refrain}</Stanza>
             <Stanza>Hiten ni`precbia@ `nte pi`prodromoc `mbaptictyc@ Iwannyc piref]wmc@ \def{Refrain}</Stanza>
-            <Stanza>Hiten ni`eu,y@ `nte na=o=c `nio] `n`apoctoloc@ nem `pcepi `nte nima;ytyc@ \def{Refrain}</Stanza>
+            <Stanza>Hiten ni`eu,y@ `nte na\abvsh{oc} `nio] `n`apoctoloc@ nem `pcepi `nte nima;ytyc@ \def{Refrain}</Stanza>
             <Stanza>Hiten ni`eu,y@ `nte pi;e`wrimoc `n`eu`aggelictyc@ Markoc pi`apoctoloc@ \def{Refrain}</Stanza>
             <Stanza>Hiten ni`eu,y@ `nte pi`ar,ydiakwn `et`cmarwout@ `Ctevanoc pisorp `mmarturoc@ \def{Refrain}</Stanza>
-            <Stanza>Hiten ni`eu,y@ `nte pi`a;lovoroc `mmarturoc@ pa=o=c `pouro Ge`wrgioc@ \def{Refrain}</Stanza>
+            <Stanza>Hiten ni`eu,y@ `nte pi`a;lovoroc `mmarturoc@ pa\abvsh{oc} `pouro Ge`wrgioc@ \def{Refrain}</Stanza>
             <Stanza>Hiten ni`eu,y@ `nte pi`a;lovoroc `mmarturoc@ :e`odwroc pi`c`tratilatyc@ \def{Refrain}</Stanza>
             <Stanza>Hiten ni`eu,y@ `nte pi`a;lovoroc `mmarturoc@ Vilopatyr Merkourioc@ \def{Refrain}</Stanza>
             <Stanza>Hiten ni`eu,y@ `nte pi`a;lovoroc `mmarturoc@ abba Myna `nte niVaiat@ \def{Refrain}</Stanza>
             <Stanza>Hiten ni`eu,y@ `nte pi`a;lovoroc `mmarturoc@ `apa Ic,uron `nremKallin@ \def{Refrain}</Stanza>
-            <Stanza>Hiten ni`eu,y@ `nte ny=e=;=u `nte pai`ehoou@ piouai piouai kata pefran@ \def{Refrain}</Stanza>
+            <Stanza>Hiten ni`eu,y@ `nte ny\abvsh{ethu} `nte pai`ehoou@ piouai piouai kata pefran@ \def{Refrain}</Stanza>
             <Stanza>Hiten nou`eu,y@ `areh `e`pwnq `mpeniwt ettaiyout `n`ar,y`ereuc@ papa abba \def{PopeName}@ \def{Refrain}</Stanza>
             <Stanza>Tenouwst `mmok `w Pi`,rictoc@ nem Pekiwt `n`aga;oc@ nem pi`Pneuma e;ouab@ je \def{AkiAktonk} akcw] `mmon nai nan.</Stanza>
         </Translation>
-        <Translation Source="\trslit{English|\def{CopticTranslation}}" Title="\trslit{English|Ϩⲓⲧⲉⲛ ⲛⲓ̀ⲡⲣⲉⲥⲃⲓ̀ⲁ}"/>
+        <Translation Source="\trslit{English|\def{CopticTranslation}}" Title="\trslit{English|Ϩⲓⲧⲉⲛ ⲛⲓⲡ&#x0300;ⲣⲉⲥⲃⲓⲁ&#x0300;}"/>
         <Translation Title="الهيتينيات" Language="Arabic">
             <Stanza>بشفاعات والدة الإله القديسة مريم, \def{Refrain}</Stanza>
             <Stanza>بشفاعات رئيس الملائكة الطاهر ميخائيل رئيس السمائين, \def{Refrain}</Stanza>
