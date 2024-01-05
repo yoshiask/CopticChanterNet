@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using CoptLib
+@using CoptLib.Writing
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -34,11 +37,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="coptic nav-item nav-link" style="color: rgba(0,0,0,.55);">
-                            @{
-                                @using CoptLib;
-                                @using CoptLib.Writing;
-                                @DateHelper.NowCoptic().Format(new LanguageInfo(KnownLanguage.Coptic));
-                            }
+                            @{ DateHelper.TodayCoptic().Format(new LanguageInfo(KnownLanguage.Coptic)); }
                         </li>
                     </ul>
                 </div>
