@@ -40,7 +40,7 @@ public partial class DocSetViewModel : ObservableObject
     private LoadContext context = new();
 
     [ObservableProperty]
-    private List<List<object>> setLayout = new();
+    private List<List<IDefinition>> setLayout = new();
 
     [ObservableProperty]
     private string? title;
@@ -88,7 +88,8 @@ public partial class DocSetViewModel : ObservableObject
                 }
                 catch (System.Exception ex)
                 {
-                    SetLayout.Add(new SimpleContent($"Document failed to load:\r\n{ex}", null).IntoList<object>());
+                    SetLayout.Add(new SimpleContent($"Document failed to load:\r\n{ex}", null)
+                        .IntoList<IDefinition>());
                 }
             }
             else
