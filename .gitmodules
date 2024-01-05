@@ -1,0 +1,3 @@
+[submodule "libs/CopticChanter"]
+	path = libs/CopticChanter
+	url = https://github.com/yoshiask/CopticChanter
