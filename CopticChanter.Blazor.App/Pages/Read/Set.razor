@@ -1,0 +1,64 @@
+﻿@page "/read/set/{setId}"
+@using CoptLib.IO
+@using CoptLib.Models
+
+@inject HttpClient Http
+
+@if (!IsLoaded)
+{
+    <p>
+        <em>Loading @SetId...</em>
+    </p>
+}
+else if (ViewModel != null)
+{
+    <PageTitle>@ViewModel.Name - Coptic Chanter</PageTitle>
+    <CoptLayout Table="@Table" />
+}
+else
+{
+    <p>@ErrorMessage</p>
+}
+
+@code {
+    [Parameter]
+    public string? SetId { get; set; }
+
+    public bool IsLoaded { get; set; } = false;
+
+    public string ErrorMessage { get; set; } = string.Empty;
+
+    public CoptLib.ViewModels.DocSetViewModel? ViewModel { get; set; }
+
+    public List<List<IDefinition>>? Table { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if (SetId is null)
+                throw new ArgumentNullException("A set ID must be provided.");
+
+            var filePath = await Helpers.ResolveSetPathAsync(Http, SetId);
+            using var setStream = await Http.GetStreamAsync(filePath);
+            using var setArchive = SharpCompress.Archives.Zip.ZipArchive.Open(setStream);
+            using var setFolder = new OwlCore.Storage.SharpCompress.ReadOnlyArchiveFolder(setArchive, SetId, SetId);
+             
+            DocSetReader reader = new(setFolder);
+            await reader.ReadDocs();
+
+            ViewModel = new(reader.Set);
+
+            await ViewModel.CreateTablesAync();
+            Table = new();
+            foreach (var docTable in ViewModel.Tables)
+                Table.AddRange(docTable);
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.ToString();
+        }
+
+        IsLoaded = true;
+    }
+}
