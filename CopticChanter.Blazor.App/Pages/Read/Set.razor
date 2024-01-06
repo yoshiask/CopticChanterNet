@@ -4,20 +4,28 @@
 
 @inject HttpClient Http
 
-@if (!IsLoaded)
+@if (Title == null)
 {
-    <p>
-        <em>Loading @SetId...</em>
-    </p>
+    <PageTitle>Coptic Chanter</PageTitle>
 }
-else if (ViewModel != null)
+else
 {
-    <PageTitle>@ViewModel.Name - Coptic Chanter</PageTitle>
+    <PageTitle>@Title - Coptic Chanter</PageTitle>
+}
+
+@if (ErrorMessage != null)
+{
+    <p>@ErrorMessage</p>
+}
+else if (IsLoaded && Table != null)
+{
     <CoptLayout Table="@Table" />
 }
 else
 {
-    <p>@ErrorMessage</p>
+    <p>
+        <em>Loading @Title...</em>
+    </p>
 }
 
 @code {
@@ -26,7 +34,9 @@ else
 
     public bool IsLoaded { get; set; } = false;
 
-    public string ErrorMessage { get; set; } = string.Empty;
+    public string? ErrorMessage { get; set; }
+
+    public string? Title { get; set; }
 
     public CoptLib.ViewModels.DocSetViewModel? ViewModel { get; set; }
 
@@ -39,16 +49,23 @@ else
             if (SetId is null)
                 throw new ArgumentNullException("A set ID must be provided.");
 
+            Title = SetId;
+            StateHasChanged();
+
             var filePath = await Helpers.ResolveSetPathAsync(Http, SetId);
             using var setStream = await Http.GetStreamAsync(filePath);
             using var setArchive = SharpCompress.Archives.Zip.ZipArchive.Open(setStream);
             using var setFolder = new OwlCore.Storage.SharpCompress.ReadOnlyArchiveFolder(setArchive, SetId, SetId);
-             
+
+            // Read metadata first so we can display the set name ASAP.
+            // Don't create the view model until after the index is read.
             DocSetReader reader = new(setFolder);
+            await reader.ReadMetadata();
+            Title = reader.Set.Name;
+            StateHasChanged();
+
             await reader.ReadDocs();
-
             ViewModel = new(reader.Set);
-
             await ViewModel.CreateTablesAync();
             Table = new();
             foreach (var docTable in ViewModel.Tables)
@@ -56,6 +73,8 @@ else
         }
         catch (Exception ex)
         {
+            ViewModel = null;
+            Table = null;
             ErrorMessage = ex.ToString();
         }
 
