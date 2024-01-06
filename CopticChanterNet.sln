@@ -5,9 +5,9 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CopticChanterNet", "CopticChanterNet\CopticChanterNet.csproj", "{54064C88-343A-4607-8E7A-B63B98FC971D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoptLib", "libs\CopticChanter\CoptLib\CoptLib.csproj", "{AD2994D1-985C-4B99-854F-ABE2B0AC4024}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoptLib", "libs\CopticChanter\CoptLib\CoptLib.csproj", "{AD2994D1-985C-4B99-854F-ABE2B0AC4024}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopticChanter.Blazor.App", "CopticChanter.Blazor.App\CopticChanter.Blazor.App.csproj", "{DB22A7BB-9EC5-4066-BE27-42BD4934844F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CopticChanter.Blazor.App", "CopticChanter.Blazor.App\CopticChanter.Blazor.App.csproj", "{DB22A7BB-9EC5-4066-BE27-42BD4934844F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,51 @@
+﻿@page "/read/doc/{docId}"
+@using CoptLib.IO
+@using CoptLib.Models
+
+@inject HttpClient Http
+
+@if (!IsLoaded)
+{
+    <p>
+        <em>Loading @DocId...</em>
+    </p>
+}
+else if (ErrorMessage != null)
+{
+    <p>@ErrorMessage</p>
+}
+else
+{
+    <PageTitle>@ViewModel.Doc.Name - Coptic Chanter</PageTitle>
+    <CoptLayout Table="@Table" />
+}
+
+@code {
+    [Parameter]
+    public string? DocId { get; set; }
+
+    public bool IsLoaded { get; set; } = false;
+
+    public string? ErrorMessage { get; set; }
+
+    public CoptLib.ViewModels.DocViewModel? ViewModel { get; set; }
+
+    public List<List<IDefinition>>? Table { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var filePath = await Helpers.ResolveDocPathAsync(Http, DocId);
+            using var docStream = await Http.GetStreamAsync(filePath);
+            ViewModel = new(DocReader.ReadDocXml(docStream));
+            Table = await ViewModel.CreateTableAsync();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.ToString();
+        }
+
+        IsLoaded = true;
+    }
+}

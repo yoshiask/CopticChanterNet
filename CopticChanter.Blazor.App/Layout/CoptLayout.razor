@@ -1,62 +1,72 @@
-﻿@model DocSetViewModel
-
-@using CoptLib.Models
+﻿@using CoptLib.Models
 @using CoptLib.Models.Text
 @using CoptLib.Extensions
 
-@{
-    Model.LoadSetCommand.Execute(null);
-    ViewData["Title"] = Model.Title;
+@code
+{
+    [Parameter]
+    public List<List<IDefinition>> Table { get; set; } = new();
+
+    private int fontSize = 18;
 }
 
 @functions
 {
-        static string HandleInline(Inline inline)
+    static string HandleInline(Inline inline)
+    {
+        (string css, List<string> cl) = HandleText(inline);
+        var cls = string.Join(' ', cl);
+
+        string inner = inline switch
         {
-            (string css, List<string> cl) = HandleText(inline);
-            var cls = string.Join(' ', cl);
+            Span span => string.Join(string.Empty, span.Inlines.Select(HandleInline)),
+            _ => inline.ToString()!
+        };
 
-            string inner = inline switch
-            {
-                Span span => string.Join(string.Empty, span.Inlines.Select(HandleInline)),
-                _ => inline.ToString()!
-            };
+        return $"<span class=\"{cls}\" style=\"{css}\">{inner}</span>";
+    }
 
-            return $"<span class=\"{cls}\" style=\"{css}\">{inner}</span>";
+    static (string css, List<string> cl) HandleText(object item)
+    {
+        string css = string.Empty;
+        List<string> classes = new();
+
+
+        if (item is IDefinition def)
+        {
+            var langInfo = def.GetLanguage();
+
+            if (langInfo.Culture is { TextInfo.IsRightToLeft: true })
+                css += "direction: rtl;";
+
+            classes.Add(langInfo.Known.ToString().ToLowerInvariant());
         }
 
-        static (string css, List<string> cl) HandleText(object item)
+        if (item is Comment)
         {
-            string css = string.Empty;
-            List<string> classes = new();
-
-            
-            if (item is IDefinition def)
-            {
-                var langInfo = def.GetLanguage();
-
-                if (langInfo.Culture is { TextInfo.IsRightToLeft: true })
-                    css += "direction: rtl;";
-
-                classes.Add(langInfo.Known.ToString().ToLowerInvariant());
-            }
-
-            if (item is Comment)
-            {
-                classes.Add("comment");
-            }
-
-            return (css, classes);
+            classes.Add("comment");
         }
+
+        return (css, classes);
+    }
 }
 
-<h1>@(Model.Title)</h1>
+<link rel="stylesheet" href="css/app.css" />
+<link rel="stylesheet" href="css/docText.css" />
+
+<p>Font size:</p><InputNumber @bind-Value="fontSize"/>
+
+<style>
+    table {
+        font-size: @(fontSize)px;
+    }
+</style>
 
 <table>
     @{
         Doc? currentDoc = null;
 
-        @foreach (var row in Model.SetLayout)
+        @foreach (var row in Table)
         {
             if (row is [Doc doc])
             {
@@ -115,22 +125,3 @@
         }
     }
 </table>
-
-<style>
-    body {
-        font-family: "Noto Sans", sans-serif;
-        margin-bottom: 60px;
-    }
-
-    .arabic {
-        font-family: "Noto Sans Arabic", "Noto Sans", sans-serif;
-    }
-
-    .coptic {
-        font-family: "Noto Sans Coptic", "Noto Sans", sans-serif;
-    }
-
-    .hebrew {
-        font-family: "Noto Sans Hebrew", "Noto Sans", sans-serif;
-    }
-</style>

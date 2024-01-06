@@ -1,7 +1,82 @@
 ﻿@page "/"
+@page "/home"
+@inject HttpClient Http
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div>
+    <div class="text-center">
+        <h1 class="display-4" style="font-weight: unset;">
+            Greetings |
+            <span class="coptic">Ⲛⲟϥⲣⲓ</span> |
+            <span class="arabic">أهلا</span>
+        </h1>
+        <p>Welcome to the pre-alpha test of Coptic Chanter for the web!</p>
+        <p>If you have any issues or suggestions for this site, please contact Joshua Askharoun at <a href="mailto:jjask7@gmail.com">jjask7@gmail.com</a>.</p>
+    </div>
 
-Welcome to your new app.
+    <h2>Content</h2>
+    @if (!IsLoaded)
+    {
+        <p><em>Loading available content...</em></p>
+    }
+    else if (ErrorMessage != null)
+    {
+        <p>@ErrorMessage</p>
+    }
+    else
+    {
+        <h3>Documents</h3>
+        @if (AllContent.Docs.Count <= 0)
+        {
+            <p>No documents are available right now.</p>
+        }
+        @foreach (var doc in AllContent.Docs)
+        {
+            <a href="/read/doc/@(doc.Key)">@(System.IO.Path.GetFileNameWithoutExtension(doc.Value))</a><br />
+        }
+
+        <br />
+        <h3>Sequences</h3>
+        @if (AllContent.Sequences.Count <= 0)
+        {
+            <p>No sequences are available right now.</p>
+        }
+        @foreach (var seq in AllContent.Sequences)
+        {
+            <a href="/read/seq/@(seq.Key)">@(System.IO.Path.GetFileNameWithoutExtension(seq.Value))</a><br />
+        }
+
+        <br />
+        <h3>Sets</h3>
+        @if (AllContent.Sets.Count <= 0)
+        {
+            <p>No sets are available right now.</p>
+        }
+        @foreach (var set in AllContent.Sets)
+        {
+            <a href="/read/set/@(set.Key)">@(System.IO.Path.GetFileNameWithoutExtension(set.Value))</a><br />
+        }
+    }
+</div>
+
+@code
+{
+    public bool IsLoaded { get; set; }
+    public AvailableContent? AllContent { get; set; }
+    public string? ErrorMessage { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            AllContent = await Helpers.GetAvailableContentAsync(Http);
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.ToString();
+        }
+
+        IsLoaded = true;
+    }
+}

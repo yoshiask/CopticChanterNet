@@ -1,5 +1,5 @@
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 h1:focus {
@@ -7,13 +7,13 @@ h1:focus {
 }
 
 a, .btn-link {
-    color: #0071c1;
+    color: #F44336;
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    background-color: #e53935;
+    border-color: #d32f2f;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -100,4 +100,29 @@ a, .btn-link {
 
 code {
     color: #c02d76;
+}
+
+h1 {
+    font-weight: bolder;
+}
+
+h2 {
+    font-weight: bold;
+}
+
+h3 {
+    font-weight: 600;
+}
+
+.arabic {
+    font-family: "Noto Sans Arabic", "Noto Sans", sans-serif;
+    direction: rtl;
+}
+
+.coptic {
+    font-family: "Noto Sans Coptic", "Noto Sans", sans-serif;
+}
+
+.hebrew {
+    font-family: "Noto Sans Hebrew", "Noto Sans", sans-serif;
 }
