@@ -33,7 +33,7 @@
         }
         @foreach (var doc in AllContent.Docs)
         {
-            <a href="/read/doc/@(doc.Key)">@(System.IO.Path.GetFileNameWithoutExtension(doc.Value))</a><br />
+            <a href="/read/doc/@(doc.Key)">@(Helpers.GetName(doc.Value))</a><br />
         }
 
         <br />
@@ -44,7 +44,7 @@
         }
         @foreach (var seq in AllContent.Sequences)
         {
-            <a href="/read/seq/@(seq.Key)">@(System.IO.Path.GetFileNameWithoutExtension(seq.Value))</a><br />
+            <a href="/read/seq/@(seq.Key)">@(Helpers.GetName(seq.Value))</a><br />
         }
 
         <br />
@@ -55,7 +55,7 @@
         }
         @foreach (var set in AllContent.Sets)
         {
-            <a href="/read/set/@(set.Key)">@(System.IO.Path.GetFileNameWithoutExtension(set.Value))</a><br />
+            <a href="/read/set/@(set.Key)">@(Helpers.GetName(set.Value))</a><br />
         }
     }
 </div>

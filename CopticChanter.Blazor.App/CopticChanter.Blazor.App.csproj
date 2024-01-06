@@ -12,8 +12,11 @@
     <ItemGroup>
         <ProjectReference Include="..\libs\CopticChanter\CoptLib\CoptLib.csproj" />
 
+        <PackageReference Include="Humanizer.Core" Version="2.14.1" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.0" PrivateAssets="all" />
+        <PackageReference Include="OwlCore.ComponentModel" Version="0.6.0" />
+        <PackageReference Include="OwlCore.Storage.SharpCompress" Version="0.0.1" />
     </ItemGroup>
 
     <ItemGroup>
