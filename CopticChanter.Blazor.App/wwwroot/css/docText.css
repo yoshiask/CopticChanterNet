@@ -1,0 +1,34 @@
+﻿body {
+    line-height: unset;
+}
+
+td {
+    vertical-align: text-top;
+}
+
+th, td {
+    padding: 4pt;
+}
+
+.docName {
+    font-weight: bolder;
+    font-size: 1.5em;
+}
+
+    .docName.english {
+        font-family: "Segoe UI Variable Display", sans-serif;
+    }
+
+.sectionTitle {
+    font-weight: bold;
+    font-size: 1.25em;
+}
+
+    .sectionTitle.english {
+        font-family: "Segoe UI Variable Display", sans-serif;
+    }
+
+.comment {
+    font-size: 0.9em;
+    color: var(--bs-secondary);
+}
