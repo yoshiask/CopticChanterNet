@@ -38,7 +38,7 @@ public static class Helpers
         return $"content/Sets/{fileName}";
     }
 
-    public static async Task<string> ResolveSequencePathAsync(HttpClient client, string id)
+    public static async Task<(string, AvailableContent)> ResolveSequencePathAsync(HttpClient client, string id)
     {
         var allContent = await GetAvailableContentAsync(client);
         if (!allContent.Sequences.TryGetValue(id, out var fileName))
@@ -48,7 +48,7 @@ public static class Helpers
             fileName = id + ".xml";
         }
 
-        return $"content/Sequences/{fileName}";
+        return ($"content/Sequences/{fileName}", allContent);
     }
 
     public static string GetName(string path)
