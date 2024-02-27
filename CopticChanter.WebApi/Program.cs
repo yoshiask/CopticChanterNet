@@ -7,9 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.ConfigureHttpJsonOptions(
-    options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
-);
 
 var app = builder.Build();
 
