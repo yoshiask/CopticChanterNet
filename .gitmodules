@@ -4,3 +4,6 @@
 [submodule "CopticChanter.Blazor.App/wwwroot/content"]
 	path = CopticChanter.Blazor.App/wwwroot/content
 	url = https://github.com/yoshiask/CopticChanterContent
+[submodule "CopticChanter.WebApi/wwwroot/content"]
+	path = CopticChanter.WebApi/wwwroot/content
+	url = https://github.com/yoshiask/CopticChanterContent

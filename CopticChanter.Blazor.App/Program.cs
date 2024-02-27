@@ -9,8 +9,8 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)});
 
 // Initialize CoptLib
-CoptLib.Scripting.LuaScript.Register();
 CoptLib.Scripting.DotNetScript.Register();
+CoptLib.Scripting.LuaScript.Register();
 builder.Services.AddSingleton<CoptLib.IO.ILoadContext>(new CoptLib.IO.LoadContext());
 
 await builder.Build().RunAsync();
