@@ -1,0 +1,6 @@
+@CopticChanter.WebApi_HostAddress = http://localhost:5289
+
+GET {{CopticChanter.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
