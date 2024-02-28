@@ -1,12 +1,10 @@
 ﻿using System.Collections.Concurrent;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 using CoptLib.IO;
 using CoptLib.Models;
+using CoptLib.ViewModels;
 using CoptLib.Writing;
 using Microsoft.AspNetCore.Mvc;
 using NodaTime;
@@ -36,16 +34,59 @@ public class LayoutController : Controller
             context.SetDate(LocalDateTime.FromDateTime(options.Date.Value));
 
         type = type.ToUpperInvariant();
-        var stream = new Lazy<Stream>(() => AvailableContent.Open(type, id, _env));
+        Stream stream;
+        try
+        {
+            stream = AvailableContent.Open(type, id, _env);
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound($"No {type} with ID '{id}' was found");
+        }
 
-        List<List<IDefinition>> table = new();
+        List<List<IDefinition>> table;
+        DocLayoutOptions layoutOptions = new(excludedLanguages: options?.ExcludedLanguages);
         if (type == "DOC")
         {
             var doc = context.LookupDefinition(id) as Doc
-                ?? context.LoadDoc(stream.Value);
+                ?? context.LoadDoc(stream);
             
-            var docLayout = new DocLayout(doc, new(excludedLanguages: options?.ExcludedLanguages));
+            var docLayout = new DocLayout(doc, layoutOptions);
             table = docLayout.CreateTable();
+        }
+        else if (type == "SET")
+        {
+            using var setArchive = SharpCompress.Archives.Zip.ZipArchive.Open(stream);
+            using var setFolder = new OwlCore.Storage.SharpCompress.ReadOnlyArchiveFolder(setArchive, id, id);
+            DocSetReader setReader = new(setFolder, context);
+            await setReader.ReadDocs();
+            
+            var set = setReader.Set!;
+            DocSetViewModel setVm = new(set)
+            {
+                LayoutOptions = layoutOptions
+            };
+
+            await setVm.CreateTablesAync();
+            table = setVm.Tables.SelectMany(t => t).ToList();
+        }
+        else if (type == "SEQ")
+        {
+            var seqXml = await XDocument.LoadAsync(stream, LoadOptions.None, default);
+            var seq = SequenceReader.ParseSequenceXml(seqXml, context);
+            
+            var docs = await seq.EnumerateDocs().ToListAsync();
+            DocSetViewModel seqVm = new(seq.Name, docs)
+            {
+                LayoutOptions = layoutOptions
+            };
+
+            await seqVm.CreateTablesAync();
+            table = seqVm.Tables.SelectMany(t => t).ToList();
+        }
+        else
+        {
+            return BadRequest($"Invalid type '{type}'");
         }
 
         XElement xResponse = new("Layout");
@@ -55,7 +96,7 @@ public class LayoutController : Controller
             XElement xRow = new("Row");
             foreach (var def in row)
             {
-                var cell = DocWriter.SerializeObject(def);
+                var cell = DocWriter.SerializeTransformedObject(def);
                 xRow.Add(cell);
             }
             xResponse.Add(xRow);
