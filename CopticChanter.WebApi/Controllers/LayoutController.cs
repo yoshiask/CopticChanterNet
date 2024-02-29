@@ -2,6 +2,7 @@
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using CopticChanter.WebApi.Core;
 using CoptLib.IO;
 using CoptLib.Models;
 using CoptLib.Models.Sequences;
@@ -100,32 +101,10 @@ public class LayoutController : Controller
             return BadRequest($"Invalid type '{type}'");
         }
 
-        XElement xResponse = new("Layout");
-        xResponse.SetAttributeValue("Session", sessionKey);
-        foreach (var row in table)
-        {
-            XElement xRow = new("Row");
-            foreach (var def in row)
-            {
-                var cell = DocWriter.SerializeTransformedObject(def);
-                xRow.Add(cell);
-            }
-            xResponse.Add(xRow);
-        }
+        Layout layout = new(sessionKey, table);
+        var layoutXml = await layout.ToXmlStringAsync();
         
-        XDocument xDoc = new();
-        xDoc.Add(xResponse);
-
-        StringBuilder sb = new();
-        await using var xmlWriter = XmlWriter.Create(sb, new XmlWriterSettings
-        {
-            Async = true,
-        });
-        await xDoc.WriteToAsync(xmlWriter, default);
-        await xmlWriter.FlushAsync();
-        
-        return Content(sb.ToString(), "application/xml");
-        //return Ok(new { Key = sessionKey, Table = table });
+        return Content(layoutXml, "application/xml");
     }
 
     public record Options(DateTime? Date, List<string>? ExcludedLanguageTags)
