@@ -30,7 +30,8 @@ public static class LayoutReaderWriter
     public static Layout FromXml(XDocument xml)
     {
         var layoutXml = xml.Root!;
-        var sessionKey = layoutXml.Attribute(nameof(Layout.SessionKey))!.Value;
+        var sessionKey = layoutXml.Attribute("Session")?.Value
+            ?? throw new InvalidDataException("No session key was found.");
         
         Layout layout = new(sessionKey, new());
 
