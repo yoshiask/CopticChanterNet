@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using CopticChanter.WebApi.Core;
+using CoptLib.Writing;
 using Flurl;
 using Flurl.Http;
 
@@ -16,12 +17,28 @@ public class CoptClient(Url? baseUrl = null)
     public async Task<AvailableContent> GetAvailableContentAsync()
         => await GetBase().AppendPathSegment("content").GetJsonAsync<AvailableContent>();
 
-    public async Task<Layout> GetLayoutAsync(string type, string id, string? sessionKey)
+    public async Task<Layout> GetLayoutAsync(string type, string id, string? sessionKey,
+        DateTime? date = null, IEnumerable<LanguageInfo>? excludedLanguages = null)
     {
-        var response = await GetBase()
+        var exclude = excludedLanguages?.Select(l => l.ToString());
+        return await GetLayoutAsync(type, id, sessionKey, date, exclude);
+    }
+
+    public async Task<Layout> GetLayoutAsync(string type, string id, string? sessionKey,
+        DateTime? date, IEnumerable<string>? excludedLanguageTags)
+    {
+        var request = GetBase()
             .AppendPathSegments("layout", type, id)
-            .SendUrlEncodedAsync(HttpMethod.Get, "{}")
-            .ReceiveStream();
+            .SetQueryParam("sessionKey", sessionKey);
+
+        if (date is not null)
+            request = request.SetQueryParam("date", date);
+
+        if (excludedLanguageTags is not null)
+            request = excludedLanguageTags
+                .Aggregate(request, (current, tag) => current.SetQueryParam("exclude", tag));
+
+        var response = await request.GetStreamAsync();
         
         var xml = XDocument.Load(response);
         return LayoutReaderWriter.FromXml(xml);
