@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopticChanter.WebApi", "Cop
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopticChanter.WebApi.Core", "CopticChanter.WebApi.Core\CopticChanter.WebApi.Core.csproj", "{28D6377D-D1FE-47EC-A351-EE86168EB989}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopticChanter.WebApi.Client", "CopticChanter.WebApi.Client\CopticChanter.WebApi.Client.csproj", "{F0ED1001-66CB-4835-8A61-83D6407EF20C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{28D6377D-D1FE-47EC-A351-EE86168EB989}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28D6377D-D1FE-47EC-A351-EE86168EB989}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28D6377D-D1FE-47EC-A351-EE86168EB989}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0ED1001-66CB-4835-8A61-83D6407EF20C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0ED1001-66CB-4835-8A61-83D6407EF20C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0ED1001-66CB-4835-8A61-83D6407EF20C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0ED1001-66CB-4835-8A61-83D6407EF20C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
