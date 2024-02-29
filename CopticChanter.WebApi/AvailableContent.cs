@@ -16,7 +16,10 @@ public static class AvailableContent
 
     public static IReadOnlyDictionary<string, string> Sets = new Dictionary<string, string>
     {
+        ["midnight-praises"] = "midnight-praises.zip",
         ["apostles-fast"] = "apostles-fast.zip",
+        ["malankara-nativity"] = "malankara-nativity.zip",
+        ["nativity-paramone"] = "nativity-paramone.zip",
     };
 
     public static string GetDocPath(string id) => Path.Combine("content/Docs", Docs[id]);
