@@ -1,6 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using System.Text;
-using System.Xml;
 using System.Xml.Linq;
 using CopticChanter.WebApi.Core;
 using CoptLib.IO;
@@ -104,7 +102,7 @@ public class LayoutController : Controller
         Layout layout = new(sessionKey, table);
         var layoutXml = await layout.ToXmlStringAsync();
         
-        return Content(layoutXml, "application/xml");
+        return File(layoutXml, "application/xml");
     }
 
     public record Options(DateTime? Date, List<string>? ExcludedLanguageTags)
