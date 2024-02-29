@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CopticChanter.Blazor.App", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopticChanter.WebApi", "CopticChanter.WebApi\CopticChanter.WebApi.csproj", "{A1C266E7-0BB6-45F6-A5EE-0AF4E9D94721}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopticChanter.WebApi.Core", "CopticChanter.WebApi.Core\CopticChanter.WebApi.Core.csproj", "{28D6377D-D1FE-47EC-A351-EE86168EB989}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A1C266E7-0BB6-45F6-A5EE-0AF4E9D94721}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1C266E7-0BB6-45F6-A5EE-0AF4E9D94721}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1C266E7-0BB6-45F6-A5EE-0AF4E9D94721}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28D6377D-D1FE-47EC-A351-EE86168EB989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28D6377D-D1FE-47EC-A351-EE86168EB989}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28D6377D-D1FE-47EC-A351-EE86168EB989}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28D6377D-D1FE-47EC-A351-EE86168EB989}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
