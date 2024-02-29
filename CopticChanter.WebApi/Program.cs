@@ -13,8 +13,7 @@ if (builder.Environment.IsDevelopment())
                 policy
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials();
+                    .AllowAnyHeader();
             });
     });
 }
