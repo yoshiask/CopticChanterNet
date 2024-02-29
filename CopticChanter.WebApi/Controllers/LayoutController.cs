@@ -4,6 +4,7 @@ using System.Xml;
 using System.Xml.Linq;
 using CoptLib.IO;
 using CoptLib.Models;
+using CoptLib.Models.Sequences;
 using CoptLib.ViewModels;
 using CoptLib.Writing;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ public class LayoutController : Controller
     [Route("{type}/{id}")]
     [HttpGet]
     public async Task<IActionResult> GetLayout(string type, string id, [FromQuery] string? sessionKey,
-        [FromBody] Options? options)
+        [FromForm] Options? options)
     {
         sessionKey ??= Guid.NewGuid().ToString("N").ToUpper();
         
@@ -74,8 +75,18 @@ public class LayoutController : Controller
         {
             var seqXml = await XDocument.LoadAsync(stream, LoadOptions.None, default);
             var seq = SequenceReader.ParseSequenceXml(seqXml, context);
+
+            var docResolver = SequenceEx.LazyLoadedDocResolverFactory(context,
+                AvailableContent.Sets.Keys
+                    .Select(setId =>
+                    {
+                        var setStream = AvailableContent.Open("SET", setId, _env);
+                        var setArchive = SharpCompress.Archives.Zip.ZipArchive.Open(setStream);
+                        return new OwlCore.Storage.SharpCompress.ReadOnlyArchiveFolder(setArchive, setId, setId);
+                    }).ToAsyncEnumerable()
+            );
             
-            var docs = await seq.EnumerateDocs().ToListAsync();
+            var docs = await seq.EnumerateDocs(docResolver).ToListAsync();
             DocSetViewModel seqVm = new(seq.Name, docs)
             {
                 LayoutOptions = layoutOptions
@@ -117,8 +128,8 @@ public class LayoutController : Controller
         //return Ok(new { Key = sessionKey, Table = table });
     }
 
-    public record Options(DateTime? Date, List<string> ExcludedLanguageTags)
+    public record Options(DateTime? Date, List<string>? ExcludedLanguageTags)
     {
-        public IEnumerable<LanguageInfo> ExcludedLanguages = ExcludedLanguageTags.Select(LanguageInfo.Parse);
+        public IEnumerable<LanguageInfo> ExcludedLanguages = ExcludedLanguageTags?.Select(LanguageInfo.Parse) ?? [];
     }
 }
