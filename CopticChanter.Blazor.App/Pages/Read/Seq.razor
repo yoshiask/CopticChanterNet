@@ -1,10 +1,8 @@
 ﻿@page "/read/seq/{seqId}"
-@using CoptLib.IO
 @using CoptLib.Models
-@using CoptLib.Models.Sequences
+@using CopticChanter.WebApi.Client
 
-@inject HttpClient Http
-@inject ILoadContext Context
+@inject CoptClient Client
 
 @if (Title == null)
 {
@@ -40,8 +38,6 @@ else
 
     public string? Title { get; set; }
 
-    public CoptLib.ViewModels.DocSetViewModel? ViewModel { get; set; }
-
     public List<List<IDefinition>>? Table { get; set; }
 
     protected override async Task OnInitializedAsync()
@@ -51,41 +47,11 @@ else
             Title = SeqId ?? throw new ArgumentNullException(nameof(SeqId), "A sequence ID must be provided.");
             StateHasChanged();
 
-            var (filePath, allContent) = await Helpers.ResolveSequencePathAsync(Http, SeqId);
-            await using var seqStream = await Http.GetStreamAsync(filePath);
-            var seqXml = System.Xml.Linq.XDocument.Load(seqStream);
-
-            // Read metadata first so we can display the sequence name ASAP.
-            var sequence = SequenceReader.ParseSequenceXml(seqXml, (LoadContextBase)Context);
-            Title = sequence.Name;
-            StateHasChanged();
-
-            if (Context.LoadedDocs.Count <= 0)
-            {
-                // Load all sets into context
-                foreach (var setInfo in allContent.Sets)
-                {
-                    var setId = setInfo.Key;
-                    var setFilePath = $"content/Sets/{setInfo.Value}";
-                    
-                    await using var setStream = await Http.GetStreamAsync(setFilePath);
-                    using var setArchive = SharpCompress.Archives.Zip.ZipArchive.Open(setStream);
-                    using var setFolder = new OwlCore.Storage.SharpCompress.ReadOnlyArchiveFolder(setArchive, setId, setId);
-
-                    DocSetReader setReader = new(setFolder, Context);
-                    await setReader.ReadDocs();
-                }
-            }
-
-            ViewModel = new(sequence.Name, await sequence.EnumerateDocs().ToListAsync());
-            await ViewModel.CreateTablesAync();
-            Table = new();
-            foreach (var docTable in ViewModel.Tables)
-                Table.AddRange(docTable);
+            var layout = await Client.GetLayoutAsync("seq", SeqId, null);
+            Table = layout.Rows;
         }
         catch (Exception ex)
         {
-            ViewModel = null;
             Table = null;
             ErrorMessage = ex.ToString();
         }
