@@ -1,6 +1,9 @@
 @CopticChanter.WebApi_HostAddress = http://localhost:5289
 
-GET {{CopticChanter.WebApi_HostAddress}}/weatherforecast/
-Accept: application/json
+GET {{CopticChanter.WebApi_HostAddress}}/content/
+
+###
+
+GET {{CopticChanter.WebApi_HostAddress}}/layout/seq/midnight-praises?sessionKey=2&date=3/1/2024
 
 ###
