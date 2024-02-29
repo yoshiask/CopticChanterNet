@@ -1,8 +1,9 @@
 ﻿@page "/read/doc/{docId}"
 @using CoptLib.IO
 @using CoptLib.Models
+@using CopticChanter.WebApi.Client
 
-@inject HttpClient Http
+@inject CoptClient Client
 
 @if (!IsLoaded)
 {
@@ -16,7 +17,7 @@ else if (ErrorMessage != null)
 }
 else
 {
-    <PageTitle>@ViewModel.Doc.Name - Coptic Chanter</PageTitle>
+    <PageTitle>@Name - Coptic Chanter</PageTitle>
     <CoptLayout Table="@Table" />
 }
 
@@ -28,7 +29,7 @@ else
 
     public string? ErrorMessage { get; set; }
 
-    public CoptLib.ViewModels.DocViewModel? ViewModel { get; set; }
+    public string? Name { get; set; }
 
     public List<List<IDefinition>>? Table { get; set; }
 
@@ -36,10 +37,13 @@ else
     {
         try
         {
-            var filePath = await Helpers.ResolveDocPathAsync(Http, DocId);
-            using var docStream = await Http.GetStreamAsync(filePath);
-            ViewModel = new(DocReader.ReadDocXml(docStream));
-            Table = await ViewModel.CreateTableAsync();
+            var layout = await Client.GetLayoutAsync("doc", DocId!, null);
+            
+            if (layout.TryGetDoc(out var doc))
+                Name = doc.Name;
+            Table = layout.Rows;
+            
+            StateHasChanged();
         }
         catch (Exception ex)
         {

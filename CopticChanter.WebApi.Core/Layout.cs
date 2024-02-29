@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using CoptLib.IO;
@@ -7,7 +8,22 @@ using CoptLib.Models;
 namespace CopticChanter.WebApi.Core;
 
 [Serializable]
-public record Layout(string SessionKey, List<List<IDefinition>> Rows);
+public record Layout(string SessionKey, List<List<IDefinition>> Rows)
+{
+    public bool TryGetDoc([NotNullWhen(true)] out Doc? doc)
+    {
+
+        var firstDef = Rows.FirstOrDefault()?.FirstOrDefault();
+        if (firstDef is not Doc foundDoc)
+        {
+            doc = null;
+            return false;
+        }
+
+        doc = foundDoc;
+        return true;
+    }
+}
 
 public static class LayoutReaderWriter
 {
