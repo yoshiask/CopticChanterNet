@@ -63,35 +63,39 @@ public static class LayoutReaderWriter
         return xDoc;
     }
 
-    public static string ToXmlString(this Layout layout)
+    public static Stream ToXmlString(this Layout layout)
     {
         var xml = layout.ToXml();
         
-        StringBuilder sb = new("\xFEFF");
-        using var xmlWriter = XmlWriter.Create(sb);
+        MemoryStream stream = new();
+        StreamWriter streamWriter = new(stream, Encoding.Unicode);
+        using var xmlWriter = XmlWriter.Create(streamWriter);
         xml.WriteTo(xmlWriter);
         xmlWriter.Flush();
 
-        return sb.ToString();
+        return stream;
     }
 
     #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
-    public static async Task<string> ToXmlStringAsync(this Layout layout, CancellationToken token = default)
+    public static async Task<Stream> ToXmlStringAsync(this Layout layout, CancellationToken token = default)
     {
         var xml = layout.ToXml();
-        
-        StringBuilder sb = new("\xFEFF");
+
+        MemoryStream stream = new();
+        StreamWriter streamWriter = new(stream, Encoding.Unicode);
         
         #if NETCOREAPP2_0_OR_GREATER
         await
         #endif
-            using var xmlWriter = XmlWriter.Create(sb, new XmlWriterSettings
+            using var xmlWriter = XmlWriter.Create(streamWriter, new XmlWriterSettings
         {
             Async = true,
         });
         await xml.WriteToAsync(xmlWriter, token);
         await xmlWriter.FlushAsync();
-        return sb.ToString();
+
+        stream.Position = 0;
+        return stream;
     }
     #endif
 }
