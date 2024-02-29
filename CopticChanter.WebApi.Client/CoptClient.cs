@@ -11,7 +11,7 @@ public class CoptClient(Url? baseUrl = null)
 
     public Url BaseUrl { get; } = baseUrl ?? DefaultBaseUrl;
 
-    public IFlurlRequest GetBase() => new FlurlRequest(BaseUrl);
+    public IFlurlRequest GetBase() => new FlurlRequest(BaseUrl.Clone());
 
     public async Task<AvailableContent> GetAvailableContentAsync()
         => await GetBase().AppendPathSegment("content").GetJsonAsync<AvailableContent>();
@@ -20,7 +20,7 @@ public class CoptClient(Url? baseUrl = null)
     {
         var response = await GetBase()
             .AppendPathSegments("layout", type, id)
-            .SendUrlEncodedAsync(HttpMethod.Get, null!)
+            .SendUrlEncodedAsync(HttpMethod.Get, "{}")
             .ReceiveStream();
         
         var xml = XDocument.Load(response);

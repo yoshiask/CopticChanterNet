@@ -67,7 +67,7 @@ public static class LayoutReaderWriter
     {
         var xml = layout.ToXml();
         
-        StringBuilder sb = new();
+        StringBuilder sb = new("\xFEFF");
         using var xmlWriter = XmlWriter.Create(sb);
         xml.WriteTo(xmlWriter);
         xmlWriter.Flush();
@@ -80,7 +80,7 @@ public static class LayoutReaderWriter
     {
         var xml = layout.ToXml();
         
-        StringBuilder sb = new();
+        StringBuilder sb = new("\xFEFF");
         
         #if NETCOREAPP2_0_OR_GREATER
         await
