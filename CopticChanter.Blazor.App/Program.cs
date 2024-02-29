@@ -8,7 +8,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)});
-builder.Services.AddSingleton(sp => new CoptClient("http://127.0.0.1:5289"));
+builder.Services.AddSingleton(sp => new CoptClient());
 
 // Initialize CoptLib
 CoptLib.Scripting.DotNetScript.Register();
