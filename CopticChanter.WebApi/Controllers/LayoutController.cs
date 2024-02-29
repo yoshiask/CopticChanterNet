@@ -25,13 +25,14 @@ public class LayoutController : Controller
     [Route("{type}/{id}")]
     [HttpGet]
     public async Task<IActionResult> GetLayout(string type, string id, [FromQuery] string? sessionKey,
-        [FromForm] Options? options)
+        [FromQuery] DateTime? date, [FromQuery(Name = "exclude")] List<string>? excludedLanguageTags)
     {
         sessionKey ??= Guid.NewGuid().ToString("N").ToUpper();
         
         var context = _sessions.GetOrAdd(sessionKey, _ => new LoadContext());
-        if (options?.Date is not null)
-            context.SetDate(LocalDateTime.FromDateTime(options.Date.Value));
+        if (date is not null)
+            context.SetDate(LocalDateTime.FromDateTime(date.Value));
+        var excludedLanguages = excludedLanguageTags?.Select(LanguageInfo.Parse).ToList() ?? [];
 
         type = type.ToUpperInvariant();
         Stream stream;
@@ -45,7 +46,7 @@ public class LayoutController : Controller
         }
 
         List<List<IDefinition>> table;
-        DocLayoutOptions layoutOptions = new(excludedLanguages: options?.ExcludedLanguages);
+        DocLayoutOptions layoutOptions = new(excludedLanguages: excludedLanguages);
         if (type == "DOC")
         {
             var doc = context.LookupDefinition(id) as Doc
@@ -103,10 +104,5 @@ public class LayoutController : Controller
         var layoutXml = await layout.ToXmlStringAsync();
         
         return File(layoutXml, "application/xml");
-    }
-
-    public record Options(DateTime? Date, List<string>? ExcludedLanguageTags)
-    {
-        public IEnumerable<LanguageInfo> ExcludedLanguages = ExcludedLanguageTags?.Select(LanguageInfo.Parse) ?? [];
     }
 }
