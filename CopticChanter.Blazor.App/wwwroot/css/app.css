@@ -1,5 +1,11 @@
+@font-face {
+    font-family: 'Go Noto Current-Regular';
+    url('fonts/GoNotoCurrent-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
+
 html, body {
-    font-family: 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Go Noto Current-Regular', 'Go Noto Current', 'Noto Sans',
+        'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 h1:focus {
@@ -115,14 +121,9 @@ h3 {
 }
 
 .arabic {
-    font-family: "Noto Sans Arabic", "Noto Sans", sans-serif;
     direction: rtl;
 }
 
-.coptic {
-    font-family: "Noto Sans Coptic", "Noto Sans", sans-serif;
-}
-
 .hebrew {
-    font-family: "Noto Sans Hebrew", "Noto Sans", sans-serif;
+    direction: rtl;
 }
