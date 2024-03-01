@@ -19,7 +19,10 @@ else
 }
 else if (IsLoaded && Table != null)
 {
-    <p>Excluded Languages:</p><InputText @bind-Value="ExcludedTags" @onchange="ExcludedLanguagesChanged"/>
+    <p>Excluded Languages:</p><InputText @bind-Value="ExcludedTags"/>
+    <button @onclick="LayoutOptionsChanged">Go</button>
+    
+    <hr/>
     <CoptLayout Table="@Table" />
 }
 else
@@ -75,11 +78,15 @@ else
         IsLoaded = true;
     }
 
-    private async void ExcludedLanguagesChanged()
+    private async void LayoutOptionsChanged()
     {
-        if (!IsLoaded) return;
+        if (!IsLoaded)
+        {
+            return;
+        }
 
-        var excludedTags = ExcludedTags.Split(',', StringSplitOptions.TrimEntries);
+        var excludedTags = ExcludedTags.Split(',',
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         
         var layout = await Client.GetLayoutAsync(Type!, Id!, SessionKey, null, excludedTags);
         Table = layout.Rows;
