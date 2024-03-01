@@ -36,7 +36,7 @@ public class CoptClient(Url? baseUrl = null)
 
         if (excludedLanguageTags is not null)
             request = excludedLanguageTags
-                .Aggregate(request, (current, tag) => current.SetQueryParam("exclude", tag));
+                .Aggregate(request, (current, tag) => current.AppendQueryParam("exclude", tag));
 
         var response = await request.GetStreamAsync();
         
