@@ -1,10 +1,14 @@
 @font-face {
-    font-family: 'Go Noto Current-Regular';
-    url('fonts/GoNotoCurrent-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+    font-family: 'Go Noto Current';
+    src:
+        local("Go Noto Current"),
+        local("Go Noto Current-Regular"),
+        url("../fonts/GoNotoCurrent-Regular.ttf")  format("truetype"), /* Safari, Android, iOS */
+        url("../fonts/GoNotoCurrent-Regular.woff2")  format("woff2");
 }
 
 html, body {
-    font-family: 'Go Noto Current-Regular', 'Go Noto Current', 'Noto Sans',
+    font-family: 'Go Noto Current', 'Noto Sans',
         'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
