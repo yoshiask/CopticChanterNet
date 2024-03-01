@@ -1,0 +1,89 @@
+﻿@page "/read/{type}/{id}"
+@using CoptLib.Models
+@using CopticChanter.WebApi.Client
+
+@inject CoptClient Client
+
+@if (Title == null)
+{
+    <PageTitle>Coptic Chanter</PageTitle>
+}
+else
+{
+    <PageTitle>@Title - Coptic Chanter</PageTitle>
+}
+
+@if (ErrorMessage != null)
+{
+    <p>@ErrorMessage</p>
+}
+else if (IsLoaded && Table != null)
+{
+    <p>Excluded Languages:</p><InputText @bind-Value="ExcludedTags" @onchange="ExcludedLanguagesChanged"/>
+    <CoptLayout Table="@Table" />
+}
+else
+{
+    <p>
+        <em>Loading @Title...</em>
+    </p>
+}
+
+@code {
+    [Parameter]
+    public string? Type { get; set; }
+    
+    [Parameter]
+    public string? Id { get; set; }
+
+    public bool IsLoaded { get; set; } = false;
+
+    public string? ErrorMessage { get; set; }
+
+    public string? Title { get; set; }
+
+    public List<List<IDefinition>>? Table { get; set; }
+
+    public string SessionKey { get; } = Guid.NewGuid().ToString("N").ToUpperInvariant();
+
+    public string ExcludedTags { get; set; } = "";
+    
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            Title = Id ?? throw new ArgumentNullException(nameof(Id), "An ID must be provided.");
+            StateHasChanged();
+            
+            if (Type is null)
+                throw new ArgumentNullException(nameof(Type), "A type must be provided.");
+
+            var layout = await Client.GetLayoutAsync(Type, Id, SessionKey);
+            Table = layout.Rows;
+            StateHasChanged();
+            
+            if (Type.ToUpperInvariant() == "DOC" && layout.TryGetDoc(out var doc))
+                Title = doc.Name;
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Table = null;
+            ErrorMessage = ex.ToString();
+        }
+
+        IsLoaded = true;
+    }
+
+    private async void ExcludedLanguagesChanged()
+    {
+        if (!IsLoaded) return;
+
+        var excludedTags = ExcludedTags.Split(',', StringSplitOptions.TrimEntries);
+        
+        var layout = await Client.GetLayoutAsync(Type!, Id!, SessionKey, null, excludedTags);
+        Table = layout.Rows;
+        StateHasChanged();
+    }
+
+}
