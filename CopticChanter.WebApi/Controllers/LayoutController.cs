@@ -51,7 +51,8 @@ public class LayoutController : Controller
         {
             var doc = context.LookupDefinition(id) as Doc
                 ?? context.LoadDoc(stream);
-            
+
+            doc.ApplyTransforms();
             var docLayout = new DocLayout(doc, layoutOptions);
             table = docLayout.CreateTable();
         }
