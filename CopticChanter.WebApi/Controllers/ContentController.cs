@@ -1,6 +1,7 @@
 ﻿using CopticChanter.WebApi.Core;
 using CoptLib.IO;
 using Microsoft.AspNetCore.Mvc;
+using System.Xml.Linq;
 
 namespace CopticChanter.WebApi.Controllers;
 
@@ -28,7 +29,8 @@ public class ContentController : Controller
         var stream = file.OpenReadStream();
         if (type == "DOC")
         {
-            _ = context.LoadDoc(stream);
+            var doc = context.LoadDoc(stream);
+            await session.Content.AddAsync(doc);
         }
         else if (type == "SET")
         {
@@ -36,10 +38,15 @@ public class ContentController : Controller
             using var setFolder = new OwlCore.Storage.SharpCompress.ReadOnlyArchiveFolder(setArchive, file.FileName, file.Name);
             DocSetReader setReader = new(setFolder, context);
             await setReader.ReadDocs();
+
+            await session.Content.AddAsync(setReader.Set);
         }
         else if (type == "SEQ")
         {
-            return BadRequest("Custom sequences are not supported at this time.");
+            var seqXml = await XDocument.LoadAsync(stream, LoadOptions.None, default);
+            var seq = SequenceReader.ParseSequenceXml(seqXml, session.Context);
+
+            await session.Content.AddAsync(seq);
         }
 
         return Ok(Request.HttpContext.Items["sessionKey"]);
