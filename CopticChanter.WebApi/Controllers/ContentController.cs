@@ -11,9 +11,9 @@ namespace CopticChanter.WebApi.Controllers;
 public class ContentController : Controller
 {
     [HttpGet]
-    public IActionResult AvailableContent()
+    public IActionResult AvailableContent([FromServices] Core.AvailableContent content)
     {
-        return Ok(WebApi.AvailableContent.List);
+        return Ok(content);
     }
 
     [HttpPost]

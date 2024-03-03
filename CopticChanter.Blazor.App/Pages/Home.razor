@@ -25,17 +25,6 @@
     }
     else if (AllContent != null)
     {
-        <h3>Documents</h3>
-        @if (AllContent.Docs.Count <= 0)
-        {
-            <p>No documents are available right now.</p>
-        }
-        @foreach (var doc in AllContent.Docs)
-        {
-            <a href="/read/doc/@(doc)">@(Helpers.GetName(doc))</a><br />
-        }
-
-        <br />
         <h3>Sequences</h3>
         @if (AllContent.Sequences.Count <= 0)
         {
@@ -43,7 +32,7 @@
         }
         @foreach (var seq in AllContent.Sequences)
         {
-            <a href="/read/seq/@(seq)">@(Helpers.GetName(seq))</a><br />
+            <a href="/read/seq/@(seq.Key)">@(seq.Value)</a><br />
         }
 
         <br />
@@ -54,7 +43,18 @@
         }
         @foreach (var set in AllContent.Sets)
         {
-            <a href="/read/set/@(set)">@(Helpers.GetName(set))</a><br />
+            <a href="/read/set/@(set.Key)">@(set.Value)</a><br />
+        }
+
+        <br />
+        <h3>Documents</h3>
+        @if (AllContent.Docs.Count <= 0)
+        {
+            <p>No documents are available right now.</p>
+        }
+        @foreach (var doc in AllContent.Docs)
+        {
+            <a href="/read/doc/@(doc.Key)">@(doc.Value)</a><br />
         }
     }
     else

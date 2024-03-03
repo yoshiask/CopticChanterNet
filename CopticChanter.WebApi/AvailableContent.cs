@@ -1,25 +1,7 @@
 ﻿namespace CopticChanter.WebApi;
 
 public static class AvailableContent
-{
-    private static Core.AvailableContent? _list;
-
-    public static Core.AvailableContent List
-    {
-        get
-        {
-            if (_list is null)
-            {
-                var docs = Docs.Keys.ToList();
-                var sets = Sets.Keys.ToList();
-                var sequences = Sequences.Keys.ToList();
-                _list = new(docs, sets, sequences);
-            }
-
-            return _list;
-        }
-    }
-    
+{   
     public static IReadOnlyDictionary<string, string> Docs = new Dictionary<string, string>
     {
         ["28c70071-ce5e-4add-aa5c-d093acfb2787"] = "The Morning Doxology.xml",

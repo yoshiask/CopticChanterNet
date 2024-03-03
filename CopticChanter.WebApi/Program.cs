@@ -27,6 +27,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 builder.Services.AddCoptSessions();
+builder.Services.AddAvailableContent();
 
 DotNetScript.Register();
 LuaScript.Register();

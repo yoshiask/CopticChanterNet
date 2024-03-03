@@ -1,4 +1,4 @@
 ﻿namespace CopticChanter.WebApi.Core;
 
 [Serializable]
-public record AvailableContent(List<string> Docs, List<string> Sets, List<string> Sequences);
+public record AvailableContent(Dictionary<string, string> Docs, Dictionary<string, string> Sets, Dictionary<string, string> Sequences);
