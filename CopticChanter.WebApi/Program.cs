@@ -1,3 +1,4 @@
+using CopticChanter.WebApi;
 using CoptLib.IO;
 using CoptLib.Scripting;
 using System.Collections.Concurrent;
@@ -27,7 +28,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
-builder.Services.AddKeyedSingleton<ConcurrentDictionary<string, ILoadContext>>("sessions");
+builder.Services.AddKeyedSingleton<ConcurrentDictionary<string, Session>>("sessions");
 builder.Services.AddScoped(ctx =>
 {
     var contextAccessor = ctx.GetRequiredService<IHttpContextAccessor>();
@@ -37,8 +38,13 @@ builder.Services.AddScoped(ctx =>
         ?? Guid.NewGuid().ToString("N").ToUpperInvariant();
     httpContext.Items["sessionKey"] = sessionKey;
 
-    var sessions = ctx.GetRequiredKeyedService<ConcurrentDictionary<string, ILoadContext>>("sessions");
-    var context = sessions.GetOrAdd(sessionKey, _ => new LoadContext());
+    var sessions = ctx.GetRequiredKeyedService<ConcurrentDictionary<string, Session>>("sessions");
+    var context = sessions.GetOrAdd(sessionKey, k =>
+    {
+        ILoadContext context = new LoadContext();
+        var env = ctx.GetRequiredService<IWebHostEnvironment>();
+        return new(k, context, env);
+    });
     return context;
 });
 
