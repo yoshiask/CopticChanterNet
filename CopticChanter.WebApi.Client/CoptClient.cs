@@ -18,7 +18,7 @@ public class CoptClient(Url? baseUrl = null)
     public async Task<AvailableContent> GetAvailableContentAsync()
         => await GetBase().AppendPathSegment("content").GetJsonAsync<AvailableContent>();
 
-    public async Task<string> PostCustomContentAsync(string type, Stream stream, string? sessionKey)
+    public async Task<CustomContentResponse> PostCustomContentAsync(string type, Stream stream, string? sessionKey)
     {
         StreamContent content = new(stream);
         content.Headers.ContentType = new(ContentTypes.TypeToMime(type));
@@ -28,7 +28,7 @@ public class CoptClient(Url? baseUrl = null)
             .SetQueryParam("sessionKey", sessionKey)
             .PostAsync(content);
 
-        return await response.GetStringAsync();
+        return await response.GetJsonAsync<CustomContentResponse>();
     }
 
     public async Task<Layout> GetLayoutAsync(string type, string id, string? sessionKey,
