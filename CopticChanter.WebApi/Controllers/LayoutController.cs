@@ -3,6 +3,7 @@ using System.Xml.Linq;
 using CopticChanter.WebApi.Core;
 using CoptLib.IO;
 using CoptLib.Models;
+using CoptLib.Models.Sequences;
 using CoptLib.ViewModels;
 using CoptLib.Writing;
 using Microsoft.AspNetCore.Mvc;
