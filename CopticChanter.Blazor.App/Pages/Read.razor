@@ -19,9 +19,12 @@ else
 }
 else if (IsLoaded && Table != null)
 {
-    <p>Excluded Languages:</p><InputText @bind-Value="ExcludedTags"/>
-    <button @onclick="LayoutOptionsChanged">Go</button>
-    
+    <div class="input-group">
+        <span class="input-group-text" id="exlg-lbl">Excluded Languages</span>
+        <InputText class="form-control" @bind-Value="ExcludedTags" placeholder="Comma-separated list of languages to hide" aria-label="Excluded Languages" aria-describedby="exlg-lbl" />
+        <button class="btn btn-outline-secondary" @onclick="LayoutOptionsChanged">Go</button>
+    </div>
+
     <hr/>
     <CoptLayout Table="@Table" />
 }
