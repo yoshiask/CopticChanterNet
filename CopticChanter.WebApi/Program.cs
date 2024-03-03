@@ -1,3 +1,4 @@
+global using SessionIndex = System.Collections.Concurrent.ConcurrentDictionary<string, CopticChanter.WebApi.Session>;
 using CopticChanter.WebApi.DependencyInjection;
 using CoptLib.Scripting;
 

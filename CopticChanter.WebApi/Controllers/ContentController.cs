@@ -59,6 +59,7 @@ public class ContentController : Controller
             return BadRequest($"Invalid type '{type}'");
         }
 
+        session.UpdateLastModified();
         CustomContentResponse response = new(session.Key, loadedContent.Key!);
         return Ok(response);
     }

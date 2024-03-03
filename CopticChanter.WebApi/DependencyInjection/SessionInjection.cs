@@ -1,5 +1,5 @@
-﻿using CoptLib.IO;
-using System.Collections.Concurrent;
+﻿using CopticChanter.WebApi.Services;
+using CoptLib.IO;
 
 namespace CopticChanter.WebApi.DependencyInjection;
 
@@ -7,7 +7,7 @@ public static class SessionInjection
 {
     public static IServiceCollection AddCoptSessions(this IServiceCollection services)
     {
-        services.AddKeyedSingleton<ConcurrentDictionary<string, Session>>("sessions");
+        services.AddKeyedSingleton<SessionIndex>("sessions");
 
         services.AddScoped(ctx =>
         {
@@ -17,7 +17,7 @@ public static class SessionInjection
             var sessionKey = httpContext.Request.Query["sessionKey"].FirstOrDefault()
                 ?? Guid.NewGuid().ToString("N").ToUpperInvariant();
 
-            var sessions = ctx.GetRequiredKeyedService<ConcurrentDictionary<string, Session>>("sessions");
+            var sessions = ctx.GetRequiredKeyedService<SessionIndex>("sessions");
             var context = sessions.GetOrAdd(sessionKey, k =>
             {
                 ILoadContext context = new LoadContext();
@@ -26,6 +26,8 @@ public static class SessionInjection
             });
             return context;
         });
+
+        services.AddHostedService<SessionCleaupService>();
 
         return services;
     }
