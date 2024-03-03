@@ -3,7 +3,6 @@ using System.Xml.Linq;
 using CopticChanter.WebApi.Core;
 using CoptLib.IO;
 using CoptLib.Models;
-using CoptLib.Models.Sequences;
 using CoptLib.ViewModels;
 using CoptLib.Writing;
 using Microsoft.AspNetCore.Mvc;
@@ -24,12 +23,10 @@ public class LayoutController : Controller
     
     [Route("{type}/{id}")]
     [HttpGet]
-    public async Task<IActionResult> GetLayout(string type, string id, [FromQuery] string? sessionKey,
+    public async Task<IActionResult> GetLayout(string type, string id, [FromServices] ILoadContext context,
         [FromQuery] DateTime? date, [FromQuery(Name = "exclude")] List<string>? excludedLanguageTags)
     {
-        sessionKey ??= Guid.NewGuid().ToString("N").ToUpper();
-        
-        var context = _sessions.GetOrAdd(sessionKey, _ => new LoadContext());
+        var sessionKey = (string)Request.HttpContext.Items["sessionKey"]!;
         if (date is not null)
             context.SetDate(LocalDateTime.FromDateTime(date.Value));
         var excludedLanguages = excludedLanguageTags?.Select(LanguageInfo.Parse).ToList() ?? [];
