@@ -1,5 +1,7 @@
 ﻿using CopticChanter.WebApi.Core;
+using CopticChanter.WebApi.Core.Responses;
 using CoptLib.IO;
+using CoptLib.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Xml.Linq;
 
@@ -27,9 +29,11 @@ public class ContentController : Controller
         var context = session.Context;
 
         var stream = file.OpenReadStream();
+        IContextualLoad loadedContent;
         if (type == "DOC")
         {
             var doc = context.LoadDoc(stream);
+            loadedContent = doc;
             await session.Content.AddAsync(doc);
         }
         else if (type == "SET")
@@ -39,6 +43,7 @@ public class ContentController : Controller
             DocSetReader setReader = new(setFolder, context);
             await setReader.ReadDocs();
 
+            loadedContent = setReader.Set;
             await session.Content.AddAsync(setReader.Set);
         }
         else if (type == "SEQ")
@@ -46,9 +51,15 @@ public class ContentController : Controller
             var seqXml = await XDocument.LoadAsync(stream, LoadOptions.None, default);
             var seq = SequenceReader.ParseSequenceXml(seqXml, session.Context);
 
+            loadedContent = seq;
             await session.Content.AddAsync(seq);
         }
+        else
+        {
+            return BadRequest($"Invalid type '{type}'");
+        }
 
-        return Ok(Request.HttpContext.Items["sessionKey"]);
+        CustomContentResponse response = new(session.Key, loadedContent.Key!);
+        return Ok(response);
     }
 }
