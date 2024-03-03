@@ -33,17 +33,19 @@ public static class AvailableContentInjection
             using var setArchive = SharpCompress.Archives.Zip.ZipArchive.Open(stream);
             using var setFolder = new OwlCore.Storage.SharpCompress.ReadOnlyArchiveFolder(setArchive, id, file);
             DocSetReader setReader = new(setFolder);
-            setReader.ReadDocs().Wait();
+            setReader.ReadMetadata().Wait();
 
             sets.Add(setReader.Set.Key!, setReader.Set.Name);
             
+            // Add included docs
+            /*setReader.ReadDocs().Wait();
             foreach (var doc in setReader.Set.IncludedDocs)
             {
                 if (docs.ContainsKey(doc.Key!))
                     continue;
 
                 docs.Add(doc.Key!, doc.Name);
-            }
+            }*/
         }
 
         Dictionary<string, string> sequences = new(AvailableContent.Sequences.Count);
