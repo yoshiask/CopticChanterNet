@@ -94,7 +94,8 @@ public class LayoutController : Controller
 
         Layout layout = new(session.Key, table);
         var layoutXml = await layout.ToXmlStringAsync();
-        
+
+        session.UpdateLastModified();
         return File(layoutXml, "application/xml");
     }
 }

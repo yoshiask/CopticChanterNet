@@ -11,6 +11,7 @@ public class Session
         Context = context;
 
         Content = new MemoryContentSource();
+        LastModified = DateTimeOffset.Now;
 
         var contextSource = new LoadContextContentSource(context);
         var globalSource = new EnvironmentContentSource(env, context);
@@ -24,4 +25,8 @@ public class Session
     public IModifiableContentSource Content { get; }
 
     public IContentSource MergedContent { get; }
+
+    public DateTimeOffset LastModified { get; private set; }
+
+    public void UpdateLastModified() => LastModified = DateTimeOffset.Now;
 }
