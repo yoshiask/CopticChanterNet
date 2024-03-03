@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Xml.Linq;
+using CopticChanter.WebApi.ContentSources;
 using CopticChanter.WebApi.Core;
 using CoptLib.IO;
 using CoptLib.Models;
@@ -24,31 +25,49 @@ public class LayoutController : Controller
     
     [Route("{type}/{id}")]
     [HttpGet]
-    public async Task<IActionResult> GetLayout(string type, string id, [FromServices] ILoadContext context,
+    public async Task<IActionResult> GetLayout(string type, string id, [FromServices] Session session,
         [FromQuery] DateTime? date, [FromQuery(Name = "exclude")] List<string>? excludedLanguageTags)
     {
         var sessionKey = (string)Request.HttpContext.Items["sessionKey"]!;
+        var context = session.Context;
+
         if (date is not null)
-            context.SetDate(LocalDateTime.FromDateTime(date.Value));
+            session.Context.SetDate(LocalDateTime.FromDateTime(date.Value));
         var excludedLanguages = excludedLanguageTags?.Select(LanguageInfo.Parse).ToList() ?? [];
 
         type = type.ToUpperInvariant();
-        Stream stream;
-        try
+
+        IActionResult TryGetStream()
         {
-            stream = AvailableContent.Open(type, id, _env);
-        }
-        catch (KeyNotFoundException)
-        {
-            return NotFound($"No {type} with ID '{id}' was found");
+            try
+            {
+                return File(AvailableContent.Open(type, id, _env), "");
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound($"No {type} with ID '{id}' was found");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Failed to load {type} with ID '{id}':\r\n{ex}");
+            }
         }
 
         List<List<IDefinition>> table;
         DocLayoutOptions layoutOptions = new(excludedLanguages: excludedLanguages);
         if (type == "DOC")
         {
-            var doc = context.LookupDefinition(id) as Doc
-                ?? context.LoadDoc(stream);
+            var doc = await session.MergedContent.TryGetDocAsync(id);
+            if (doc is null)
+            {
+                var result = TryGetStream();
+                if (result is not FileStreamResult streamResult)
+                    return result;
+                var stream = streamResult.FileStream;
+
+                doc = context.LoadDoc(stream);
+                await session.Content.AddAsync(doc);
+            }
 
             doc.ApplyTransforms();
             var docLayout = new DocLayout(doc, layoutOptions);
@@ -56,12 +75,23 @@ public class LayoutController : Controller
         }
         else if (type == "SET")
         {
-            using var setArchive = SharpCompress.Archives.Zip.ZipArchive.Open(stream);
-            using var setFolder = new OwlCore.Storage.SharpCompress.ReadOnlyArchiveFolder(setArchive, id, id);
-            DocSetReader setReader = new(setFolder, context);
-            await setReader.ReadDocs();
-            
-            var set = setReader.Set!;
+            var set = await session.MergedContent.TryGetSetAsync(id);
+            if (set is null)
+            {
+                var result = TryGetStream();
+                if (result is not FileStreamResult streamResult)
+                    return result;
+                var stream = streamResult.FileStream;
+
+                using var setArchive = SharpCompress.Archives.Zip.ZipArchive.Open(stream);
+                using var setFolder = new OwlCore.Storage.SharpCompress.ReadOnlyArchiveFolder(setArchive, id, id);
+                DocSetReader setReader = new(setFolder, context);
+                await setReader.ReadDocs();
+
+                set = setReader.Set;
+                await session.Content.AddAsync(set);
+            }
+
             DocSetViewModel setVm = new(set)
             {
                 LayoutOptions = layoutOptions
@@ -72,8 +102,18 @@ public class LayoutController : Controller
         }
         else if (type == "SEQ")
         {
-            var seqXml = await XDocument.LoadAsync(stream, LoadOptions.None, default);
-            var seq = SequenceReader.ParseSequenceXml(seqXml, context);
+            var seq = await session.MergedContent.TryGetSequenceAsync(id);
+            if (seq is null)
+            {
+                var result = TryGetStream();
+                if (result is not FileStreamResult streamResult)
+                    return result;
+                var stream = streamResult.FileStream;
+
+                var seqXml = await XDocument.LoadAsync(stream, LoadOptions.None, default);
+                seq = SequenceReader.ParseSequenceXml(seqXml, context);
+                await session.Content.AddAsync(seq);
+            }
 
             var docResolver = SequenceEx.LazyLoadedDocResolverFactory(context,
                 AvailableContent.Sets.Keys
@@ -82,7 +122,8 @@ public class LayoutController : Controller
                         var setStream = AvailableContent.Open("SET", setId, _env);
                         var setArchive = SharpCompress.Archives.Zip.ZipArchive.Open(setStream);
                         return new OwlCore.Storage.SharpCompress.ReadOnlyArchiveFolder(setArchive, setId, setId);
-                    }).ToAsyncEnumerable()
+                    })
+                    .ToAsyncEnumerable()
             );
             
             var docs = await seq.EnumerateDocs(docResolver).ToListAsync();
