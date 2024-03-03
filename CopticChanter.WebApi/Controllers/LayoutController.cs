@@ -37,37 +37,13 @@ public class LayoutController : Controller
 
         type = type.ToUpperInvariant();
 
-        IActionResult TryGetStream()
-        {
-            try
-            {
-                return File(AvailableContent.Open(type, id, _env), "");
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound($"No {type} with ID '{id}' was found");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Failed to load {type} with ID '{id}':\r\n{ex}");
-            }
-        }
-
         List<List<IDefinition>> table;
         DocLayoutOptions layoutOptions = new(excludedLanguages: excludedLanguages);
         if (type == "DOC")
         {
             var doc = await session.MergedContent.TryGetDocAsync(id);
             if (doc is null)
-            {
-                var result = TryGetStream();
-                if (result is not FileStreamResult streamResult)
-                    return result;
-                var stream = streamResult.FileStream;
-
-                doc = context.LoadDoc(stream);
-                await session.Content.AddAsync(doc);
-            }
+                return NotFound($"No doc with ID '{id}' was found");
 
             doc.ApplyTransforms();
             var docLayout = new DocLayout(doc, layoutOptions);
@@ -77,20 +53,7 @@ public class LayoutController : Controller
         {
             var set = await session.MergedContent.TryGetSetAsync(id);
             if (set is null)
-            {
-                var result = TryGetStream();
-                if (result is not FileStreamResult streamResult)
-                    return result;
-                var stream = streamResult.FileStream;
-
-                using var setArchive = SharpCompress.Archives.Zip.ZipArchive.Open(stream);
-                using var setFolder = new OwlCore.Storage.SharpCompress.ReadOnlyArchiveFolder(setArchive, id, id);
-                DocSetReader setReader = new(setFolder, context);
-                await setReader.ReadDocs();
-
-                set = setReader.Set;
-                await session.Content.AddAsync(set);
-            }
+                return NotFound($"No set with ID '{id}' was found");
 
             DocSetViewModel setVm = new(set)
             {
@@ -104,16 +67,7 @@ public class LayoutController : Controller
         {
             var seq = await session.MergedContent.TryGetSequenceAsync(id);
             if (seq is null)
-            {
-                var result = TryGetStream();
-                if (result is not FileStreamResult streamResult)
-                    return result;
-                var stream = streamResult.FileStream;
-
-                var seqXml = await XDocument.LoadAsync(stream, LoadOptions.None, default);
-                seq = SequenceReader.ParseSequenceXml(seqXml, context);
-                await session.Content.AddAsync(seq);
-            }
+                return NotFound($"No sequence with ID '{id}' was found");
 
             var docResolver = SequenceEx.LazyLoadedDocResolverFactory(context,
                 AvailableContent.Sets.Keys
