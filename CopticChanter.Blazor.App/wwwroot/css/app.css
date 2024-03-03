@@ -7,9 +7,22 @@
         url("../fonts/GoNotoCurrent-Regular.woff2")  format("woff2");
 }
 
+@font-face {
+    font-family: 'League Spartan YGA';
+    src:
+        local("League Spartan YGA"),
+        local("League Spartan YGA Regular"),
+        url("../fonts/LeagueSpartanYGA-VF.ttf")  format("truetype-variations"),
+}
+
+:root {
+    --font-header: "League Spartan YGA", "Go Noto Current", "Segoe UI Variable Display", "Noto Sans", Helvetica, Arial, sans-serif;
+    --font-body: "Go Noto Current", "Noto Sans", Helvetica, Arial, sans-serif;
+}
+
+
 html, body {
-    font-family: 'Go Noto Current', 'Noto Sans',
-        'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: var(--font-body);
 }
 
 h1:focus {
@@ -113,14 +126,17 @@ code {
 }
 
 h1 {
+    font-family: var(--font-header);
     font-weight: bolder;
 }
 
 h2 {
+    font-family: var(--font-header);
     font-weight: bold;
 }
 
 h3 {
+    font-family: var(--font-header);
     font-weight: 600;
 }
 
