@@ -10,13 +10,13 @@
 
     <ItemGroup>
         <ProjectReference Include="..\CopticChanter.WebApi.Core\CopticChanter.WebApi.Core.csproj" />
-        <ProjectReference Include="..\libs\CopticChanter\CoptLib\CoptLib.csproj"/>
+        <ProjectReference Include="..\libs\CopticChanter\CoptLib\CoptLib.csproj" />
 
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
         <PackageReference Include="NeoLua" Version="1.3.14" />
         <PackageReference Include="OwlCore.ComponentModel" Version="0.6.0" />
         <PackageReference Include="OwlCore.Storage.SharpCompress" Version="0.0.1" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
