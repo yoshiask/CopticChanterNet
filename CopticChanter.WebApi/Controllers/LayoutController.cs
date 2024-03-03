@@ -1,7 +1,6 @@
 ﻿using System.Collections.Concurrent;
-using System.Xml.Linq;
 using CopticChanter.WebApi.ContentSources;
-using CopticChanter.WebApi.Core;
+using CopticChanter.WebApi.Core.Responses;
 using CoptLib.IO;
 using CoptLib.Models;
 using CoptLib.Models.Sequences;

@@ -5,7 +5,7 @@ using System.Xml.Linq;
 using CoptLib.IO;
 using CoptLib.Models;
 
-namespace CopticChanter.WebApi.Core;
+namespace CopticChanter.WebApi.Core.Responses;
 
 [Serializable]
 public record Layout(string SessionKey, List<List<IDefinition>> Rows)
@@ -32,7 +32,7 @@ public static class LayoutReaderWriter
         var layoutXml = xml.Root!;
         var sessionKey = layoutXml.Attribute("Session")?.Value
             ?? throw new InvalidDataException("No session key was found.");
-        
+
         Layout layout = new(sessionKey, new());
 
         foreach (var rowXml in layoutXml.Elements())
@@ -58,7 +58,7 @@ public static class LayoutReaderWriter
             }
             xResponse.Add(xRow);
         }
-        
+
         XDocument xDoc = new();
         xDoc.Add(xResponse);
         return xDoc;
@@ -67,7 +67,7 @@ public static class LayoutReaderWriter
     public static Stream ToXmlString(this Layout layout)
     {
         var xml = layout.ToXml();
-        
+
         MemoryStream stream = new();
         StreamWriter streamWriter = new(stream, Encoding.Unicode);
         using var xmlWriter = XmlWriter.Create(streamWriter);
@@ -77,26 +77,26 @@ public static class LayoutReaderWriter
         return stream;
     }
 
-    #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
     public static async Task<Stream> ToXmlStringAsync(this Layout layout, CancellationToken token = default)
     {
         var xml = layout.ToXml();
 
         MemoryStream stream = new();
         StreamWriter streamWriter = new(stream, Encoding.Unicode);
-        
-        #if NETCOREAPP2_0_OR_GREATER
+
+#if NETCOREAPP2_0_OR_GREATER
         await
-        #endif
-            using var xmlWriter = XmlWriter.Create(streamWriter, new XmlWriterSettings
-        {
-            Async = true,
-        });
+#endif
+        using var xmlWriter = XmlWriter.Create(streamWriter, new XmlWriterSettings
+            {
+                Async = true,
+            });
         await xml.WriteToAsync(xmlWriter, token);
         await xmlWriter.FlushAsync();
 
         stream.Position = 0;
         return stream;
     }
-    #endif
+#endif
 }
