@@ -27,7 +27,6 @@ public class LayoutController : Controller
     public async Task<IActionResult> GetLayout(string type, string id, [FromServices] Session session,
         [FromQuery] DateTime? date, [FromQuery(Name = "exclude")] List<string>? excludedLanguageTags)
     {
-        var sessionKey = (string)Request.HttpContext.Items["sessionKey"]!;
         var context = session.Context;
 
         if (date is not null)
@@ -93,7 +92,7 @@ public class LayoutController : Controller
             return BadRequest($"Invalid type '{type}'");
         }
 
-        Layout layout = new(sessionKey, table);
+        Layout layout = new(session.Key, table);
         var layoutXml = await layout.ToXmlStringAsync();
         
         return File(layoutXml, "application/xml");

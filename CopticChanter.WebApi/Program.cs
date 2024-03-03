@@ -36,7 +36,6 @@ builder.Services.AddScoped(ctx =>
 
     var sessionKey = httpContext.Request.Query["sessionKey"].FirstOrDefault()
         ?? Guid.NewGuid().ToString("N").ToUpperInvariant();
-    httpContext.Items["sessionKey"] = sessionKey;
 
     var sessions = ctx.GetRequiredKeyedService<ConcurrentDictionary<string, Session>>("sessions");
     var context = sessions.GetOrAdd(sessionKey, k =>
