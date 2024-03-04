@@ -1,0 +1,61 @@
+﻿@using CoptLib.Writing.Lexicon
+
+@if (Entry == null)
+{
+    <p><em>No entry selected</em></p>
+}
+else
+{
+    <h3>@Entry.Forms[0].Orthography</h3>
+
+    <div>
+        <div>
+            <h4>Forms</h4>
+            <ul>
+                @foreach (var form in Entry.Forms)
+                {
+                    <li>@form.Orthography [@form.Usage.ToString()]</li>
+                }
+            </ul>
+        </div>
+
+        <div>
+            <h4>Senses</h4>
+            <div class="senses-table">
+                @{int index = 1;}
+                @foreach (var sense in Entry.Senses)
+                {
+                    <div class="senses-index">@(index++).</div>
+
+                    @foreach (var translation in sense.Translations)
+                    {
+                        <div class="senses-translation">(@(translation.Language.ToString())) @translation.ToString()</div>
+                    }
+
+                    <div class="senses-translation" style="text-indent: 2em; color: var(--bs-secondary);">@sense.Bibliography</div>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .senses-table {
+        display: grid;
+        grid-template-columns: min-content max-content;
+        grid-column-gap: 1em;
+    }
+
+    .senses-index {
+        grid-column: 1;
+    }
+
+    .senses-translation {
+        grid-column: 2;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public LexiconEntry? Entry { get; set; }
+}
