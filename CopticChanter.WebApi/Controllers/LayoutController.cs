@@ -31,7 +31,12 @@ public class LayoutController : Controller
 
         if (date is not null)
             session.Context.SetDate(LocalDateTime.FromDateTime(date.Value));
-        var excludedLanguages = excludedLanguageTags?.Select(LanguageInfo.Parse).ToList() ?? [];
+
+        var excludedLanguages = excludedLanguageTags?
+            .Select(p => p.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+            .SelectMany(p => p)
+            .Select(LanguageInfo.Parse)
+            .ToList() ?? [];
 
         type = type.ToUpperInvariant();
 
