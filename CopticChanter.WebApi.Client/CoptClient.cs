@@ -57,4 +57,17 @@ public class CoptClient(Url? baseUrl = null)
         var xml = XDocument.Load(response);
         return LayoutReaderWriter.FromXml(xml);
     }
+
+    public async Task<LexiconSearchResponse> SearchLexiconAsync(string query, LanguageInfo usage)
+    {
+        var request = GetBase()
+            .AppendPathSegments("lexicon")
+            .SetQueryParam("q", query)
+            .SetQueryParam("usage", usage.ToString());
+
+        var response = await request.GetStreamAsync();
+
+        var xml = XDocument.Load(response);
+        return LexiconSearchResponseReaderWriter.FromXml(xml);
+    }
 }
