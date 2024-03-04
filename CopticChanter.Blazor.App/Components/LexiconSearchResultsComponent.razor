@@ -1,0 +1,22 @@
+﻿@using CoptLib.Writing.Lexicon
+<table class="table">
+    <tbody>
+        @foreach (var entry in Entries ?? [])
+        {
+            <tr>
+                <td><a href="/lexicon/@entry.Id">@JoinOrthographies(entry)</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public List<LexiconEntry>? Entries { get; set; }
+
+    public static string JoinOrthographies(LexiconEntry entry)
+    {
+        var forms = entry.Forms;
+        return string.Join(", ", forms.Select(f => f.Orthography));
+    }
+}

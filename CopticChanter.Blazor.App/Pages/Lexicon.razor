@@ -1,0 +1,66 @@
+﻿@page "/lexicon"
+@page "/lexicon/{Id}"
+@using CopticChanter.Blazor.App.Components
+@inherits LexiconBase
+
+<PageTitle>Lexicon</PageTitle>
+
+<div class="input-grid">
+    <div class="input-group" style="grid-row: 1">
+        <span class="input-group-text" id="q-lbl">Term</span>
+        <InputText class="form-control" @bind-Value="Query" placeholder="The keywords to search for" aria-label="Term" aria-describedby="q-lbl" />
+    </div>
+
+    <div class="input-group" style="grid-row: 2">
+        <span class="input-group-text" id="usg-lbl">Language</span>
+        <InputText class="form-control" @bind-Value="UsageStr" placeholder="The usage language" aria-label="Language" aria-describedby="usg-lbl" />
+    </div>
+
+    <button class="btn btn-outline-secondary" style="grid-row: 3; width: min-content;" @onclick="BeginSearch">Search</button>
+</div>
+
+<hr />
+
+@if (ErrorMessage != null)
+{
+    <p>@ErrorMessage</p>
+}
+else if (Loading)
+{
+    <p>
+        <em>Searching...</em>
+    </p>
+}
+else if (Response != null)
+{
+    if (Response.Entries.Count <= 0)
+    {
+        <p><em>No results</em></p>
+    }
+    else
+    {
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4">
+                    <LexiconSearchResultsComponent Entries="Response.Entries" />
+                </div>
+                <div class="col-8">
+                    <LexiconEntryComponent Entry="GetSelectedEntry()"/>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+<p>Data adapted from <a href="https://doi.org/10.17169/refubium-2333">Kellia</a> under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 license</a>.</p>
+
+<style>
+    .input-grid {
+        display: grid;
+        gap: 10px;
+    }
+
+    h3 {
+        font-family: var(--font-body);
+    }
+</style>

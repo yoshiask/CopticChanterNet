@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoptLib", "libs\CopticChant
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CopticChanter.Blazor.App", "CopticChanter.Blazor.App\CopticChanter.Blazor.App.csproj", "{DB22A7BB-9EC5-4066-BE27-42BD4934844F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopticChanter.WebApi", "CopticChanter.WebApi\CopticChanter.WebApi.csproj", "{A1C266E7-0BB6-45F6-A5EE-0AF4E9D94721}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CopticChanter.WebApi", "CopticChanter.WebApi\CopticChanter.WebApi.csproj", "{A1C266E7-0BB6-45F6-A5EE-0AF4E9D94721}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopticChanter.WebApi.Core", "CopticChanter.WebApi.Core\CopticChanter.WebApi.Core.csproj", "{28D6377D-D1FE-47EC-A351-EE86168EB989}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CopticChanter.WebApi.Core", "CopticChanter.WebApi.Core\CopticChanter.WebApi.Core.csproj", "{28D6377D-D1FE-47EC-A351-EE86168EB989}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopticChanter.WebApi.Client", "CopticChanter.WebApi.Client\CopticChanter.WebApi.Client.csproj", "{F0ED1001-66CB-4835-8A61-83D6407EF20C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CopticChanter.WebApi.Client", "CopticChanter.WebApi.Client\CopticChanter.WebApi.Client.csproj", "{F0ED1001-66CB-4835-8A61-83D6407EF20C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
