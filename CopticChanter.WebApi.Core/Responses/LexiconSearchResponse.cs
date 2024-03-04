@@ -149,7 +149,7 @@ public static class LexiconSearchResponseReaderWriter
                 xGrammar.SetValue(grammar.Text);
                 xGrammarGroup.Add(xGrammar);
             }
-            xResponse.Add(xGrammarGroup);
+            xEntry.Add(xGrammarGroup);
 
             xResponse.Add(xEntry);
         }
