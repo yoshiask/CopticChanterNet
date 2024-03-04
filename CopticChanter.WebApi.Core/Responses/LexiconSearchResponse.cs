@@ -42,7 +42,7 @@ public static class LexiconSearchResponseReaderWriter
             List<Sense> senses = [];
             foreach (var xSense in xEntry.Element("Senses")?.Elements() ?? [])
             {
-                var bibliography = xSense.Attribute(nameof(Sense.Bibliography))?.Value;
+                var bibliography = xSense.Attribute(nameof(Sense.Bibliography))?.Value ?? "";
 
                 TranslationCollection translations = [];
                 foreach (var xTranslation in xSense.Elements())
@@ -56,9 +56,11 @@ public static class LexiconSearchResponseReaderWriter
                     };
                     translations.Add(translation);
                 }
+
+                senses.Add(new(translations, bibliography));
             }
 
-            XElement xGrammarGroup = new("GrammarGroup");
+            XElement xGrammarGroup = xEntry.Element("GrammarGroup");
             var partOfSpeechStr = xGrammarGroup.Attribute(nameof(GrammarGroup.PartOfSpeech))?.Value!;
             var partOfSpeech = (PartOfSpeech)Enum.Parse(typeof(PartOfSpeech), partOfSpeechStr);
 
@@ -83,7 +85,6 @@ public static class LexiconSearchResponseReaderWriter
                 grammarGroup.Entries!.Add(grammar);
 
             }
-            xResponse.Add(xGrammarGroup);
 
             LexiconEntry entry = new(id, type, forms, senses, grammarGroup);
             response.Entries.Add(entry);
