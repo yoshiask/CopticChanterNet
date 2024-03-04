@@ -36,6 +36,8 @@ public class LayoutController : Controller
         type = type.ToUpperInvariant();
 
         List<List<IDefinition>> table;
+        string title;
+
         DocLayoutOptions layoutOptions = new(excludedLanguages: excludedLanguages);
         if (type == "DOC")
         {
@@ -46,6 +48,7 @@ public class LayoutController : Controller
             doc.ApplyTransforms();
             var docLayout = new DocLayout(doc, layoutOptions);
             table = docLayout.CreateTable();
+            title = doc.Name;
         }
         else if (type == "SET")
         {
@@ -60,6 +63,7 @@ public class LayoutController : Controller
 
             await setVm.CreateTablesAync();
             table = setVm.Tables.SelectMany(t => t).ToList();
+            title = set.Name;
         }
         else if (type == "SEQ")
         {
@@ -86,13 +90,14 @@ public class LayoutController : Controller
 
             await seqVm.CreateTablesAync();
             table = seqVm.Tables.SelectMany(t => t).ToList();
+            title = seq.Name ?? id;
         }
         else
         {
             return BadRequest($"Invalid type '{type}'");
         }
 
-        Layout layout = new(session.Key, table);
+        Layout layout = new(session.Key, title, table);
         var layoutXml = await layout.ToXmlStringAsync();
 
         session.UpdateLastModified();

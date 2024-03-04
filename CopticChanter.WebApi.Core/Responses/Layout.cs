@@ -8,7 +8,7 @@ using CoptLib.Models;
 namespace CopticChanter.WebApi.Core.Responses;
 
 [Serializable]
-public record Layout(string SessionKey, List<List<IDefinition>> Rows)
+public record Layout(string SessionKey, string Title, List<List<IDefinition>> Rows)
 {
     public bool TryGetDoc([NotNullWhen(true)] out Doc? doc)
     {
@@ -30,10 +30,12 @@ public static class LayoutReaderWriter
     public static Layout FromXml(XDocument xml)
     {
         var layoutXml = xml.Root!;
+
         var sessionKey = layoutXml.Attribute("Session")?.Value
             ?? throw new InvalidDataException("No session key was found.");
+        var title = layoutXml.Attribute("Title")?.Value ?? "";
 
-        Layout layout = new(sessionKey, new());
+        Layout layout = new(sessionKey, title, new());
 
         foreach (var rowXml in layoutXml.Elements())
         {
@@ -48,6 +50,7 @@ public static class LayoutReaderWriter
     {
         XElement xResponse = new("Layout");
         xResponse.SetAttributeValue("Session", layout.SessionKey);
+        xResponse.SetAttributeValue("Title", layout.Title);
         foreach (var row in layout.Rows)
         {
             XElement xRow = new("Row");

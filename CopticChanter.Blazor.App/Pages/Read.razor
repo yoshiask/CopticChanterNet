@@ -1,16 +1,17 @@
 ﻿@page "/read/{type}/{id}"
 @using CoptLib.Models
 @using CopticChanter.WebApi.Client
+@using System.Diagnostics.CodeAnalysis
 
 @inject CoptClient Client
 
-@if (Title == null)
+@if (Layout == null)
 {
     <PageTitle>Coptic Chanter</PageTitle>
 }
 else
 {
-    <PageTitle>@Title - Coptic Chanter</PageTitle>
+    <PageTitle>@Layout.Title - Coptic Chanter</PageTitle>
 }
 
 <div class="input-grid">
@@ -33,14 +34,14 @@ else
 {
     <p>@ErrorMessage</p>
 }
-else if (IsLoaded && Table != null)
+else if (IsLoaded && Layout != null)
 {
-    <CoptLayout Table="@Table" />
+    <CoptLayout Table="@Layout.Rows" />
 }
 else
 {
     <p>
-        <em>Loading @Title...</em>
+        <em>Loading @Id...</em>
     </p>
 }
 
@@ -58,15 +59,15 @@ else
     [Parameter]
     public string? Id { get; set; }
 
+    [Parameter]
+    public string? SessionKey { get; set; }
+
     public bool IsLoaded { get; set; } = false;
 
     public string? ErrorMessage { get; set; }
 
-    public string? Title { get; set; }
+    public CopticChanter.WebApi.Core.Responses.Layout? Layout { get; set; }
 
-    public List<List<IDefinition>>? Table { get; set; }
-
-    public string SessionKey { get; } = Guid.NewGuid().ToString("N").ToUpperInvariant();
 
     public string ExcludedTags { get; set; } = "";
 
@@ -76,27 +77,21 @@ else
     {
         try
         {
-            Title = Id ?? throw new ArgumentNullException(nameof(Id), "An ID must be provided.");
+            ValidateParameters();
+
+            Layout = await Client.GetLayoutAsync(Type, Id, SessionKey);
             StateHasChanged();
 
-            if (Type is null)
-                throw new ArgumentNullException(nameof(Type), "A type must be provided.");
-
-            var layout = await Client.GetLayoutAsync(Type, Id, SessionKey);
-            Table = layout.Rows;
-            StateHasChanged();
-
-            if (Type.ToUpperInvariant() == "DOC" && layout.TryGetDoc(out var doc))
-                Title = doc.Name;
+            SessionKey = Layout.SessionKey;
         }
         catch (Flurl.Http.FlurlHttpException httpEx)
         {
-            Table = null;
+            Layout = null;
             ErrorMessage = await httpEx.GetResponseStringAsync();
         }
         catch (Exception ex)
         {
-            Table = null;
+            Layout = null;
             ErrorMessage = ex.ToString();
         }
 
@@ -114,23 +109,35 @@ else
         ErrorMessage = null;
         try
         {
+            ValidateParameters();
+
             var excludedTags = ExcludedTags.Split(',',
                 StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
-            var layout = await Client.GetLayoutAsync(Type!, Id!, SessionKey, Date, excludedTags);
-            Table = layout.Rows;
+            Layout = await Client.GetLayoutAsync(Type!, Id!, SessionKey, Date, excludedTags);
         }
         catch (Flurl.Http.FlurlHttpException httpEx)
         {
-            Table = null;
+            Layout = null;
             ErrorMessage = await httpEx.GetResponseStringAsync();
         }
         catch (Exception ex)
         {
-            Table = null;
+            Layout = null;
             ErrorMessage = ex.ToString();
         }
 
         StateHasChanged();
+    }
+
+    [MemberNotNull(nameof(Type))]
+    [MemberNotNull(nameof(Id))]
+    private void ValidateParameters()
+    {
+        if (Id is null)
+            throw new ArgumentNullException(nameof(Id), "An ID must be provided.");
+
+        if (Type is null)
+            throw new ArgumentNullException(nameof(Type), "A type must be provided.");
     }
 }
