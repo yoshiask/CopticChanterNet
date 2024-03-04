@@ -124,9 +124,13 @@ public static class LexiconSearchResponseReaderWriter
 
                 foreach (var translation in senses.Translations)
                 {
+                    var translationText = translation.ToString();
+                    if (string.IsNullOrWhiteSpace(translationText))
+                        continue;
+
                     XElement xTranslation = new("Translation");
                     xTranslation.SetAttributeValue(nameof(translation.Language), translation.Language.ToString());
-                    xTranslation.SetValue(translation.ToString()!);
+                    xTranslation.SetValue(translationText);
                     xSense.Add(xTranslation);
                 }
 
