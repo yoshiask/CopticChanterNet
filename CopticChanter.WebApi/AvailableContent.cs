@@ -5,8 +5,10 @@ public static class AvailableContent
     public static IReadOnlyDictionary<string, string> Docs = new Dictionary<string, string>
     {
         ["28c70071-ce5e-4add-aa5c-d093acfb2787"] = "The Morning Doxology.xml",
+        ["urn:tasbehaorg-cr:1216"] = "Hymn of the Ten Strings.xml",
         ["urn:suscopts:seven-tunes"] = "Hymn of the Seven Tunes.xml",
         ["urn:tasbehaorg-cr:471"] = "The Thursday Theotokia (suscopt).xml",
+        ["urn:tasbehaorg:91"] = "Psalm 151.xml",
     };
 
     public static IReadOnlyDictionary<string, string> Sequences = new Dictionary<string, string>
