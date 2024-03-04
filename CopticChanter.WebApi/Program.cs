@@ -29,6 +29,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddCoptSessions();
 builder.Services.AddAvailableContent();
+builder.Services.AddCopticLexicon();
 
 DotNetScript.Register();
 LuaScript.Register();
