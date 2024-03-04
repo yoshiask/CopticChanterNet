@@ -5,6 +5,7 @@ public static class AvailableContent
     public static IReadOnlyDictionary<string, string> Docs = new Dictionary<string, string>
     {
         ["28c70071-ce5e-4add-aa5c-d093acfb2787"] = "The Morning Doxology.xml",
+        ["urn:suscopts:seven-tunes"] = "Hymn of the Seven Tunes.xml",
         ["urn:tasbehaorg-cr:471"] = "The Thursday Theotokia (suscopt).xml",
     };
 
@@ -16,10 +17,10 @@ public static class AvailableContent
 
     public static IReadOnlyDictionary<string, string> Sets = new Dictionary<string, string>
     {
-        ["midnight-praises"] = "midnight-praises.zip",
-        ["apostles-fast"] = "apostles-fast.zip",
-        ["malankara-nativity"] = "malankara-nativity.zip",
-        ["nativity-paramone"] = "nativity-paramone.zip",
+        ["urn:tasbeha:midnight-praises"] = "midnight-praises.zip",
+        ["urn:tasbeha:apostles-fast"] = "apostles-fast.zip",
+        ["urn:mosc:nativity-feast"] = "malankara-nativity.zip",
+        ["urn:tasbeha:nativity-paramone"] = "nativity-paramone.zip",
     };
 
     public static string GetDocPath(string id) => Path.Combine("content/Docs", Docs[id]);
