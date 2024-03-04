@@ -13,19 +13,28 @@ else
     <PageTitle>@Title - Coptic Chanter</PageTitle>
 }
 
+<div class="input-grid">
+    <div class="input-group" style="grid-row: 1">
+        <span class="input-group-text" id="exlg-lbl">Excluded Languages</span>
+        <InputText class="form-control" @bind-Value="ExcludedTags" placeholder="Comma-separated list of languages to hide" aria-label="Excluded Languages" aria-describedby="exlg-lbl" />
+    </div>
+
+    <div class="input-group" style="grid-row: 2">
+        <span class="input-group-text" id="date-lbl">Date</span>
+        <InputDate class="form-control" @bind-Value="Date" placeholder="Select date" aria-label="Date" aria-describedby="date-lbl" />
+    </div>
+
+    <button class="btn btn-outline-secondary" style="grid-row: 3; width: min-content;" @onclick="LayoutOptionsChanged">Go</button>
+</div>
+
+<hr />
+
 @if (ErrorMessage != null)
 {
     <p>@ErrorMessage</p>
 }
 else if (IsLoaded && Table != null)
 {
-    <div class="input-group">
-        <span class="input-group-text" id="exlg-lbl">Excluded Languages</span>
-        <InputText class="form-control" @bind-Value="ExcludedTags" placeholder="Comma-separated list of languages to hide" aria-label="Excluded Languages" aria-describedby="exlg-lbl" />
-        <button class="btn btn-outline-secondary" @onclick="LayoutOptionsChanged">Go</button>
-    </div>
-
-    <hr/>
     <CoptLayout Table="@Table" />
 }
 else
@@ -35,10 +44,17 @@ else
     </p>
 }
 
+<style>
+    .input-grid {
+        display: grid;
+        gap: 10px;
+    }
+</style>
+
 @code {
     [Parameter]
     public string? Type { get; set; }
-    
+
     [Parameter]
     public string? Id { get; set; }
 
@@ -53,24 +69,30 @@ else
     public string SessionKey { get; } = Guid.NewGuid().ToString("N").ToUpperInvariant();
 
     public string ExcludedTags { get; set; } = "";
-    
+
+    public DateTime Date { get; set; } = DateTime.Now;
+
     protected override async Task OnInitializedAsync()
     {
         try
         {
             Title = Id ?? throw new ArgumentNullException(nameof(Id), "An ID must be provided.");
             StateHasChanged();
-            
+
             if (Type is null)
                 throw new ArgumentNullException(nameof(Type), "A type must be provided.");
 
             var layout = await Client.GetLayoutAsync(Type, Id, SessionKey);
             Table = layout.Rows;
             StateHasChanged();
-            
+
             if (Type.ToUpperInvariant() == "DOC" && layout.TryGetDoc(out var doc))
                 Title = doc.Name;
-            StateHasChanged();
+        }
+        catch (Flurl.Http.FlurlHttpException httpEx)
+        {
+            Table = null;
+            ErrorMessage = await httpEx.GetResponseStringAsync();
         }
         catch (Exception ex)
         {
@@ -79,6 +101,7 @@ else
         }
 
         IsLoaded = true;
+        StateHasChanged();
     }
 
     private async void LayoutOptionsChanged()
@@ -88,12 +111,26 @@ else
             return;
         }
 
-        var excludedTags = ExcludedTags.Split(',',
-            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-        
-        var layout = await Client.GetLayoutAsync(Type!, Id!, SessionKey, null, excludedTags);
-        Table = layout.Rows;
+        ErrorMessage = null;
+        try
+        {
+            var excludedTags = ExcludedTags.Split(',',
+                StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+
+            var layout = await Client.GetLayoutAsync(Type!, Id!, SessionKey, Date, excludedTags);
+            Table = layout.Rows;
+        }
+        catch (Flurl.Http.FlurlHttpException httpEx)
+        {
+            Table = null;
+            ErrorMessage = await httpEx.GetResponseStringAsync();
+        }
+        catch (Exception ex)
+        {
+            Table = null;
+            ErrorMessage = ex.ToString();
+        }
+
         StateHasChanged();
     }
-
 }
