@@ -1,7 +1,5 @@
 ﻿using CoptLib.Writing.Lexicon;
-using System.Text;
 using System.Xml.Linq;
-using System.Xml;
 using CoptLib.Models;
 using CoptLib.Writing;
 using CoptLib.Models.Text;
@@ -22,71 +20,7 @@ public static class LexiconSearchResponseReaderWriter
 
         foreach (var xEntry in xResponse.Elements())
         {
-            string id = xEntry.Attribute(nameof(LexiconEntry.Id))?.Value!;
-
-            var typeStr = xEntry.Attribute(nameof(LexiconEntry.Type))?.Value!;
-            var type = (EntryType)Enum.Parse(typeof(EntryType), typeStr);
-
-
-            List<Form> forms = [];
-            foreach (var xForm in xEntry.Element("Forms")?.Elements() ?? [])
-            {
-                var formTypeStr = xForm.Attribute(nameof(Form.Type))?.Value!;
-                var formType = (FormType)Enum.Parse(typeof(FormType), formTypeStr);
-                var usage = LanguageInfo.Parse(xForm.Attribute(nameof(Form.Usage))?.Value!);
-                var orthography = xForm.Value;
-
-                forms.Add(new(formType, usage, orthography));
-            }
-
-            List<Sense> senses = [];
-            foreach (var xSense in xEntry.Element("Senses")?.Elements() ?? [])
-            {
-                var bibliography = xSense.Attribute(nameof(Sense.Bibliography))?.Value ?? "";
-
-                TranslationCollection translations = [];
-                foreach (var xTranslation in xSense.Elements())
-                {
-                    var translationLanguage = LanguageInfo.Parse(xTranslation.Attribute(nameof(IMultilingual.Language))?.Value!);
-                    var translationText = xTranslation.Value;
-
-                    var translation = new Run(translationText, null)
-                    {
-                        Language = translationLanguage,
-                    };
-                    translations.Add(translation);
-                }
-
-                senses.Add(new(translations, bibliography));
-            }
-
-            XElement xGrammarGroup = xEntry.Element("GrammarGroup");
-            var partOfSpeechStr = xGrammarGroup.Attribute(nameof(GrammarGroup.PartOfSpeech))?.Value!;
-            var partOfSpeech = (PartOfSpeech)Enum.Parse(typeof(PartOfSpeech), partOfSpeechStr);
-
-            var numberStr = xGrammarGroup.Attribute(nameof(GrammarGroup.Number))?.Value!;
-            var number = (Number)Enum.Parse(typeof(Number), numberStr);
-
-            var genderStr = xGrammarGroup.Attribute(nameof(GrammarGroup.Gender))?.Value;
-            Gender? gender = null;
-            if (Enum.TryParse<Gender>(genderStr, out var parsedGender))
-                gender = parsedGender;
-
-            var subclass = xGrammarGroup.Attribute(nameof(GrammarGroup.Subclass))?.Value;
-            var note = xGrammarGroup.Attribute(nameof(GrammarGroup.Note))?.Value;
-
-            GrammarGroup grammarGroup = new(partOfSpeech, number, gender, [], subclass, note);
-            foreach (var xGrammar in xGrammarGroup.Elements())
-            {
-                var grammarTypeStr = xGrammar.Attribute(nameof(GrammarEntry.Type))?.Value!;
-                var grammarType = (GrammarType)Enum.Parse(typeof(GrammarType), grammarTypeStr);
-
-                GrammarEntry grammar = new(grammarType, xGrammar.Value);
-                grammarGroup.Entries!.Add(grammar);
-
-            }
-
-            LexiconEntry entry = new(id, type, forms, senses, grammarGroup);
+            var entry = LexiconEntryReaderWriter.FromXml(xEntry);
             response.Entries.Add(entry);
         }
 
@@ -106,6 +40,87 @@ public static class LexiconSearchResponseReaderWriter
 
         XDocument xDoc = new();
         xDoc.Add(xResponse);
+        return xDoc;
+    }
+}
+
+public static class LexiconEntryReaderWriter
+{
+    public static LexiconEntry FromXml(XDocument xDoc) => FromXml(xDoc.Root!);
+
+    public static LexiconEntry FromXml(XElement xEntry)
+    {
+        string id = xEntry.Attribute(nameof(LexiconEntry.Id))?.Value!;
+
+        var typeStr = xEntry.Attribute(nameof(LexiconEntry.Type))?.Value!;
+        var type = (EntryType)Enum.Parse(typeof(EntryType), typeStr);
+
+
+        List<Form> forms = [];
+        foreach (var xForm in xEntry.Element("Forms")?.Elements() ?? [])
+        {
+            var formTypeStr = xForm.Attribute(nameof(Form.Type))?.Value!;
+            var formType = (FormType)Enum.Parse(typeof(FormType), formTypeStr);
+            var usage = LanguageInfo.Parse(xForm.Attribute(nameof(Form.Usage))?.Value!);
+            var orthography = xForm.Value;
+
+            forms.Add(new(formType, usage, orthography));
+        }
+
+        List<Sense> senses = [];
+        foreach (var xSense in xEntry.Element("Senses")?.Elements() ?? [])
+        {
+            var bibliography = xSense.Attribute(nameof(Sense.Bibliography))?.Value ?? "";
+
+            TranslationCollection translations = [];
+            foreach (var xTranslation in xSense.Elements())
+            {
+                var translationLanguage = LanguageInfo.Parse(xTranslation.Attribute(nameof(IMultilingual.Language))?.Value!);
+                var translationText = xTranslation.Value;
+
+                var translation = new Run(translationText, null)
+                {
+                    Language = translationLanguage,
+                };
+                translations.Add(translation);
+            }
+
+            senses.Add(new(translations, bibliography));
+        }
+
+        XElement xGrammarGroup = xEntry.Element("GrammarGroup")!;
+        var partOfSpeechStr = xGrammarGroup.Attribute(nameof(GrammarGroup.PartOfSpeech))?.Value!;
+        var partOfSpeech = (PartOfSpeech)Enum.Parse(typeof(PartOfSpeech), partOfSpeechStr);
+
+        var numberStr = xGrammarGroup.Attribute(nameof(GrammarGroup.Number))?.Value!;
+        var number = (Number)Enum.Parse(typeof(Number), numberStr);
+
+        var genderStr = xGrammarGroup.Attribute(nameof(GrammarGroup.Gender))?.Value;
+        Gender? gender = null;
+        if (Enum.TryParse<Gender>(genderStr, out var parsedGender))
+            gender = parsedGender;
+
+        var subclass = xGrammarGroup.Attribute(nameof(GrammarGroup.Subclass))?.Value;
+        var note = xGrammarGroup.Attribute(nameof(GrammarGroup.Note))?.Value;
+
+        GrammarGroup grammarGroup = new(partOfSpeech, number, gender, [], subclass, note);
+        foreach (var xGrammar in xGrammarGroup.Elements())
+        {
+            var grammarTypeStr = xGrammar.Attribute(nameof(GrammarEntry.Type))?.Value!;
+            var grammarType = (GrammarType)Enum.Parse(typeof(GrammarType), grammarTypeStr);
+
+            GrammarEntry grammar = new(grammarType, xGrammar.Value);
+            grammarGroup.Entries!.Add(grammar);
+
+        }
+
+        return new LexiconEntry(id, type, forms, senses, grammarGroup);
+    }
+
+    public static XDocument ToXml(this LexiconEntry entry)
+    {
+        XDocument xDoc = new();
+        xDoc.Add(entry.ToElementXml());
         return xDoc;
     }
 
@@ -167,12 +182,5 @@ public static class LexiconSearchResponseReaderWriter
         }
         xEntry.Add(xGrammarGroup);
         return xEntry;
-    }
-
-    public static XDocument ToXml(this LexiconEntry entry)
-    {
-        XDocument xDoc = new();
-        xDoc.Add(entry.ToElementXml());
-        return xDoc;
     }
 }
