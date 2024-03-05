@@ -2,6 +2,7 @@
 using CopticChanter.WebApi.Core;
 using CopticChanter.WebApi.Core.Responses;
 using CoptLib.Writing;
+using CoptLib.Writing.Lexicon;
 using Flurl;
 using Flurl.Http;
 
@@ -69,5 +70,16 @@ public class CoptClient(Url? baseUrl = null)
 
         var xml = XDocument.Load(response);
         return LexiconSearchResponseReaderWriter.FromXml(xml);
+    }
+
+    public async Task<LexiconEntry> GetEntryAsync(string id)
+    {
+        var request = GetBase()
+            .AppendPathSegments("lexicon", id);
+
+        var response = await request.GetStreamAsync();
+
+        var xml = XDocument.Load(response);
+        return LexiconEntryReaderWriter.FromXml(xml);
     }
 }
