@@ -100,62 +100,7 @@ public static class LexiconSearchResponseReaderWriter
 
         foreach (var entry in response.Entries)
         {
-            XElement xEntry = new("Entry");
-            
-            xEntry.SetAttributeValue(nameof(entry.Type), entry.Type);
-            xEntry.SetAttributeValue(nameof(entry.Id), entry.Id);
-
-            XElement xForms = new("Forms");
-            foreach (var form in entry.Forms)
-            {
-                XElement xForm = new("Form");
-                xForm.SetAttributeValue(nameof(form.Type), form.Type);
-                xForm.SetAttributeValue(nameof(form.Usage), form.Usage.ToString());
-                xForm.SetValue(form.Orthography);
-                xForms.Add(xForm);
-            }
-            xEntry.Add(xForms);
-
-            XElement xSenses = new("Senses");
-            foreach (var senses in entry.Senses)
-            {
-                XElement xSense = new("Sense");
-                xSense.SetAttributeValue(nameof(senses.Bibliography), senses.Bibliography);
-
-                foreach (var translation in senses.Translations)
-                {
-                    var translationText = translation.ToString();
-                    if (string.IsNullOrWhiteSpace(translationText))
-                        continue;
-
-                    XElement xTranslation = new("Translation");
-                    xTranslation.SetAttributeValue(nameof(translation.Language), translation.Language.ToString());
-                    xTranslation.SetValue(translationText);
-                    xSense.Add(xTranslation);
-                }
-
-                xSenses.Add(xSense);
-            }
-            xEntry.Add(xSenses);
-
-            XElement xGrammarGroup = new("GrammarGroup");
-            xGrammarGroup.SetAttributeValue(nameof(entry.GrammarGroup.PartOfSpeech), entry.GrammarGroup.PartOfSpeech);
-            xGrammarGroup.SetAttributeValue(nameof(entry.GrammarGroup.Number), entry.GrammarGroup.Number);
-            if (entry.GrammarGroup.Subclass is not null)
-                xGrammarGroup.SetAttributeValue(nameof(entry.GrammarGroup.Subclass), entry.GrammarGroup.Subclass);
-            if (entry.GrammarGroup.Note is not null)
-                xGrammarGroup.SetAttributeValue(nameof(entry.GrammarGroup.Note), entry.GrammarGroup.Note);
-            if (entry.GrammarGroup.Gender is not null)
-                xGrammarGroup.SetAttributeValue(nameof(entry.GrammarGroup.Gender), entry.GrammarGroup.Gender);
-            foreach (var grammar in entry.GrammarGroup.Entries ?? [])
-            {
-                XElement xGrammar = new("Grammar");
-                xGrammar.SetAttributeValue(nameof(grammar.Type), grammar.Type.ToString());
-                xGrammar.SetValue(grammar.Text);
-                xGrammarGroup.Add(xGrammar);
-            }
-            xEntry.Add(xGrammarGroup);
-
+            var xEntry = entry.ToElementXml();
             xResponse.Add(xEntry);
         }
 
@@ -164,39 +109,70 @@ public static class LexiconSearchResponseReaderWriter
         return xDoc;
     }
 
-    public static Stream ToXmlString(this LexiconSearchResponse layout)
+    public static XElement ToElementXml(this LexiconEntry entry)
     {
-        var xml = layout.ToXml();
+        XElement xEntry = new("Entry");
+        
+        xEntry.SetAttributeValue(nameof(entry.Type), entry.Type);
+        xEntry.SetAttributeValue(nameof(entry.Id), entry.Id);
 
-        MemoryStream stream = new();
-        StreamWriter streamWriter = new(stream, Encoding.Unicode);
-        using var xmlWriter = XmlWriter.Create(streamWriter);
-        xml.WriteTo(xmlWriter);
-        xmlWriter.Flush();
-
-        return stream;
-    }
-
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
-    public static async Task<Stream> ToXmlStringAsync(this LexiconSearchResponse layout, CancellationToken token = default)
-    {
-        var xml = layout.ToXml();
-
-        MemoryStream stream = new();
-        StreamWriter streamWriter = new(stream, Encoding.Unicode);
-
-#if NETCOREAPP2_0_OR_GREATER
-        await
-#endif
-        using var xmlWriter = XmlWriter.Create(streamWriter, new XmlWriterSettings
+        XElement xForms = new("Forms");
+        foreach (var form in entry.Forms)
         {
-            Async = true,
-        });
-        await xml.WriteToAsync(xmlWriter, token);
-        await xmlWriter.FlushAsync();
+            XElement xForm = new("Form");
+            xForm.SetAttributeValue(nameof(form.Type), form.Type);
+            xForm.SetAttributeValue(nameof(form.Usage), form.Usage.ToString());
+            xForm.SetValue(form.Orthography);
+            xForms.Add(xForm);
+        }
+        xEntry.Add(xForms);
 
-        stream.Position = 0;
-        return stream;
+        XElement xSenses = new("Senses");
+        foreach (var senses in entry.Senses)
+        {
+            XElement xSense = new("Sense");
+            xSense.SetAttributeValue(nameof(senses.Bibliography), senses.Bibliography);
+
+            foreach (var translation in senses.Translations)
+            {
+                var translationText = translation.ToString();
+                if (string.IsNullOrWhiteSpace(translationText))
+                    continue;
+
+                XElement xTranslation = new("Translation");
+                xTranslation.SetAttributeValue(nameof(translation.Language), translation.Language.ToString());
+                xTranslation.SetValue(translationText);
+                xSense.Add(xTranslation);
+            }
+
+            xSenses.Add(xSense);
+        }
+        xEntry.Add(xSenses);
+
+        XElement xGrammarGroup = new("GrammarGroup");
+        xGrammarGroup.SetAttributeValue(nameof(entry.GrammarGroup.PartOfSpeech), entry.GrammarGroup.PartOfSpeech);
+        xGrammarGroup.SetAttributeValue(nameof(entry.GrammarGroup.Number), entry.GrammarGroup.Number);
+        if (entry.GrammarGroup.Subclass is not null)
+            xGrammarGroup.SetAttributeValue(nameof(entry.GrammarGroup.Subclass), entry.GrammarGroup.Subclass);
+        if (entry.GrammarGroup.Note is not null)
+            xGrammarGroup.SetAttributeValue(nameof(entry.GrammarGroup.Note), entry.GrammarGroup.Note);
+        if (entry.GrammarGroup.Gender is not null)
+            xGrammarGroup.SetAttributeValue(nameof(entry.GrammarGroup.Gender), entry.GrammarGroup.Gender);
+        foreach (var grammar in entry.GrammarGroup.Entries ?? [])
+        {
+            XElement xGrammar = new("Grammar");
+            xGrammar.SetAttributeValue(nameof(grammar.Type), grammar.Type.ToString());
+            xGrammar.SetValue(grammar.Text);
+            xGrammarGroup.Add(xGrammar);
+        }
+        xEntry.Add(xGrammarGroup);
+        return xEntry;
     }
-#endif
+
+    public static XDocument ToXml(this LexiconEntry entry)
+    {
+        XDocument xDoc = new();
+        xDoc.Add(entry.ToElementXml());
+        return xDoc;
+    }
 }

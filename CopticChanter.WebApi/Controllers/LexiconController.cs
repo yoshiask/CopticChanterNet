@@ -1,4 +1,5 @@
-﻿using CopticChanter.WebApi.Core.Responses;
+﻿using CopticChanter.WebApi.Core;
+using CopticChanter.WebApi.Core.Responses;
 using CoptLib.Writing;
 using CoptLib.Writing.Lexicon;
 using Microsoft.AspNetCore.Mvc;
@@ -21,11 +22,34 @@ public class LexiconController(ILexicon _lexicon) : Controller
         var entries = await _lexicon.SearchAsync(query, usage).ToListAsync();
 
         LexiconSearchResponse response = new(query, entries);
-        var stream = await LexiconSearchResponseReaderWriter.ToXmlStringAsync(response);
+        var xResponse = response.ToXml();
+        var stream = await xResponse.ToStringAsync();
         
-        return File(stream, "application/xml");
+        return File(stream, ContentTypes.MIMETYPE_XML);
     }
 
+    [Route("{id}")]
+    [HttpGet]
+    public async Task<IActionResult> Entry(string id)
+    {
+        await InitLexiconAsync();
+
+        try
+        {
+            var entry = await _lexicon.GetEntryAsync(id) as LexiconEntry;
+            if (entry is null)
+                return NotFound("Super entries are not supported.");
+
+            var xEntry = entry.ToXml();
+            var stream = await xEntry.ToStringAsync();
+            return File(stream, ContentTypes.MIMETYPE_XML);
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound($"No entry with ID '{id}' was found in the lexicon.");
+        }
+    }
+    
     private async Task InitLexiconAsync()
     {
         if (_lexicon is IAsyncInit l)

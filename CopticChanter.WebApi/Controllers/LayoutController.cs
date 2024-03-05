@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using CopticChanter.WebApi.ContentSources;
+using CopticChanter.WebApi.Core;
 using CopticChanter.WebApi.Core.Responses;
 using CoptLib.IO;
 using CoptLib.Models;
@@ -103,9 +104,10 @@ public class LayoutController : Controller
         }
 
         Layout layout = new(session.Key, title, table);
-        var layoutXml = await layout.ToXmlStringAsync();
+        var xLayout = layout.ToXml();
+        var stream = await xLayout.ToStringAsync();
 
         session.UpdateLastModified();
-        return File(layoutXml, "application/xml");
+        return File(stream, ContentTypes.MIMETYPE_XML);
     }
 }

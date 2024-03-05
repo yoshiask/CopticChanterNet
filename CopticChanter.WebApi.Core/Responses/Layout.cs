@@ -66,40 +66,4 @@ public static class LayoutReaderWriter
         xDoc.Add(xResponse);
         return xDoc;
     }
-
-    public static Stream ToXmlString(this Layout layout)
-    {
-        var xml = layout.ToXml();
-
-        MemoryStream stream = new();
-        StreamWriter streamWriter = new(stream, Encoding.Unicode);
-        using var xmlWriter = XmlWriter.Create(streamWriter);
-        xml.WriteTo(xmlWriter);
-        xmlWriter.Flush();
-
-        return stream;
-    }
-
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
-    public static async Task<Stream> ToXmlStringAsync(this Layout layout, CancellationToken token = default)
-    {
-        var xml = layout.ToXml();
-
-        MemoryStream stream = new();
-        StreamWriter streamWriter = new(stream, Encoding.Unicode);
-
-#if NETCOREAPP2_0_OR_GREATER
-        await
-#endif
-        using var xmlWriter = XmlWriter.Create(streamWriter, new XmlWriterSettings
-            {
-                Async = true,
-            });
-        await xml.WriteToAsync(xmlWriter, token);
-        await xmlWriter.FlushAsync();
-
-        stream.Position = 0;
-        return stream;
-    }
-#endif
 }
