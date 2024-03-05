@@ -24,8 +24,11 @@ public class LexiconBase : ComponentBase
     public string? ErrorMessage { get; set; }
 
     public LexiconSearchResponse? Response { get; set; }
+    
+    public LexiconEntry? SelectedEntry { get; set; }
 
     public bool Loading { get; set; } = false;
+    public bool Searching { get; set; } = false;
 
 
     public string Query { get; set; } = "";
@@ -34,9 +37,37 @@ public class LexiconBase : ComponentBase
 
     public IAsyncRelayCommand SearchCommand { get; }
 
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+
+        if (Id is null)
+            return;
+
+        Loading = true;
+        ErrorMessage = null;
+        try
+        {
+            SelectedEntry = await Client.GetEntryAsync(Id);
+        }
+        catch (Flurl.Http.FlurlHttpException httpEx)
+        {
+            SelectedEntry = null;
+            ErrorMessage = await httpEx.GetResponseStringAsync();
+        }
+        catch (Exception ex)
+        {
+            SelectedEntry = null;
+            ErrorMessage = ex.ToString();
+        }
+
+        Loading = false;
+        StateHasChanged();
+    }
+
     private async Task SearchAsync()
     {
-        Loading = true;
+        Searching = true;
         ErrorMessage = null;
         try
         {
@@ -55,7 +86,7 @@ public class LexiconBase : ComponentBase
             ErrorMessage = ex.ToString();
         }
 
-        Loading = false;
+        Searching = false;
         StateHasChanged();
     }
 
@@ -66,6 +97,8 @@ public class LexiconBase : ComponentBase
         if (Id is null)
             return null;
 
-        return Response?.Entries.FirstOrDefault(e => e.Id == Id);
+        return Response is null
+            ? SelectedEntry
+            : Response.Entries.FirstOrDefault(e => e.Id == Id);
     }
 }

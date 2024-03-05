@@ -25,32 +25,45 @@
 {
     <p>@ErrorMessage</p>
 }
-else if (Loading)
-{
-    <p>
-        <em>Searching...</em>
-    </p>
-}
-else if (Response != null)
-{
-    if (Response.Entries.Count <= 0)
-    {
-        <p><em>No results</em></p>
-    }
-    else
-    {
-        <div class="container-fluid">
-            <div class="row">
+
+<div class="container-fluid">
+    <div class="row">
+        @if (Searching)
+        {
+            <p>
+                <em>Searching...</em>
+            </p>
+        }
+        else if (Response != null)
+        {
+            if (Response.Entries.Count <= 0)
+            {
+                <p><em>No results</em></p>
+            }
+            else
+            {
                 <div class="col-4">
-                    <LexiconSearchResultsComponent Entries="Response.Entries" />
+                    <LexiconSearchResultsComponent Entries="Response.Entries"/>
                 </div>
-                <div class="col-8">
-                    <LexiconEntryComponent Entry="GetSelectedEntry()"/>
-                </div>
+            }
+        }
+        
+        @if (Loading)
+        {
+            <p>
+                <em>Loading...</em>
+            </p>
+        }
+        else if (Id != null)
+        {
+            <div class="col-8">
+                <LexiconEntryComponent Entry="GetSelectedEntry()"/>
             </div>
-        </div>
-    }
-}
+        }
+    </div>
+</div>
+
+
 
 <p>Data adapted from <a href="https://doi.org/10.17169/refubium-2333">Kellia</a> under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 license</a>.</p>
 
