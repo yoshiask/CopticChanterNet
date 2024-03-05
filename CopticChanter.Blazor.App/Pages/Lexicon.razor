@@ -30,24 +30,23 @@
     <div class="row">
         @if (Searching)
         {
-            <p>
-                <em>Searching...</em>
-            </p>
+            <p class="col-4"><em>Searching...</em></p>
         }
         else if (Response != null)
         {
-            if (Response.Entries.Count <= 0)
+            <div class="col-4">
+            @if (Response.Entries.Count <= 0)
             {
                 <p><em>No results</em></p>
             }
             else
             {
-                <div class="col-4">
-                    <LexiconSearchResultsComponent Entries="Response.Entries"/>
-                </div>
+                <LexiconSearchResultsComponent Entries="Response.Entries"/>
             }
+            </div>
         }
         
+        <div class="col-8">
         @if (Loading)
         {
             <p>
@@ -56,10 +55,9 @@
         }
         else if (Id != null)
         {
-            <div class="col-8">
-                <LexiconEntryComponent Entry="GetSelectedEntry()"/>
-            </div>
+            <LexiconEntryComponent Entry="GetSelectedEntry()"/>
         }
+        </div>
     </div>
 </div>
 

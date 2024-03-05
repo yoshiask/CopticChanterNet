@@ -97,8 +97,7 @@ public class LexiconBase : ComponentBase
         if (Id is null)
             return null;
 
-        return Response is null
-            ? SelectedEntry
-            : Response.Entries.FirstOrDefault(e => e.Id == Id);
+        return Response?.Entries.FirstOrDefault(e => e.Id == Id)
+            ?? SelectedEntry;
     }
 }
