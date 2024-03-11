@@ -1,0 +1,51 @@
+﻿@page "/linguistics"
+@using CommunityToolkit.Mvvm.Input
+@using CopticChanter.Blazor.App.Components
+@inherits LinguisticsBase
+
+<PageTitle>Linguistics</PageTitle>
+
+<div class="input-grid">
+    <div class="input-group" style="grid-row: 1">
+        <span class="input-group-text" id="txt-lbl">Text*</span>
+        <InputText class="form-control" @bind-Value="Text" placeholder="The text to transliterate" aria-label="Text" aria-describedby="txt-lbl" />
+    </div>
+
+    <div class="input-group" style="grid-row: 2">
+        <span class="input-group-text" id="dst-lbl">Target Language*</span>
+        <InputText class="form-control" @bind-Value="DstStr" placeholder="The language to transliterate to" aria-label="DstLanguage" aria-describedby="dst-lbl" />
+    </div>
+
+    <div class="input-group" style="grid-row: 3">
+        <span class="input-group-text" id="src-lbl">Source Language</span>
+        <InputText class="form-control" @bind-Value="SrcStr" placeholder="The language to transliterate from" aria-label="SrcLanguage" aria-describedby="src-lbl" />
+    </div>
+
+    <button class="btn btn-outline-secondary" style="grid-row: 4; width: min-content;" @onclick="BeginTransliteration">Transliterate</button>
+</div>
+
+<style>
+    .input-grid {
+        display: grid;
+        gap: 10px;
+    }
+
+    h3 {
+        font-family: var(--font-body);
+    }
+</style>
+
+<hr />
+
+@if (ErrorMessage != null)
+{
+    <p>@ErrorMessage</p>
+}
+else if (Response == null)
+{
+    <p><em>No response.</em></p>
+}
+else
+{
+    <p>@Response</p>
+}
