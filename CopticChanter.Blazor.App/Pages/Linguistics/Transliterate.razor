@@ -1,9 +1,9 @@
-﻿@page "/linguistics"
+﻿@page "/linguistics/transliterate"
 @using CommunityToolkit.Mvvm.Input
 @using CopticChanter.Blazor.App.Components
-@inherits LinguisticsBase
+@inherits TransliterateBase
 
-<PageTitle>Linguistics</PageTitle>
+<PageTitle>Transliterate</PageTitle>
 
 <div class="input-grid">
     <div class="input-group" style="grid-row: 1">
@@ -43,7 +43,7 @@
 }
 else if (Response == null)
 {
-    <p><em>No response.</em></p>
+    <p><em>Enter text to transliterate above.</em></p>
 }
 else
 {

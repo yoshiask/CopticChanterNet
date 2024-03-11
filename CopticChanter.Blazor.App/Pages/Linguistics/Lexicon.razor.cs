@@ -5,7 +5,7 @@ using CoptLib.Writing.Lexicon;
 using Microsoft.AspNetCore.Components;
 using OwlCore.Extensions;
 
-namespace CopticChanter.Blazor.App.Pages;
+namespace CopticChanter.Blazor.App.Pages.Linguistics;
 
 public class LexiconBase : ComponentBase
 {
@@ -24,7 +24,7 @@ public class LexiconBase : ComponentBase
     public string? ErrorMessage { get; set; }
 
     public LexiconSearchResponse? Response { get; set; }
-    
+
     public LexiconEntry? SelectedEntry { get; set; }
 
     public bool Loading { get; set; } = false;

@@ -5,11 +5,11 @@ using OwlCore.Extensions;
 
 namespace CopticChanter.Blazor.App.Pages;
 
-public class LinguisticsBase : ComponentBase
+public class TransliterateBase : ComponentBase
 {
-    public LinguisticsBase()
+    public TransliterateBase()
     {
-        TransliterateCommand = new AsyncRelayCommand(SearchAsync);
+        TransliterateCommand = new AsyncRelayCommand(TransliterateAsync);
     }
 
     [Inject]
@@ -29,14 +29,14 @@ public class LinguisticsBase : ComponentBase
 
     public IAsyncRelayCommand TransliterateCommand { get; }
 
-    private async Task SearchAsync()
+    private async Task TransliterateAsync()
     {
         Loading = true;
         ErrorMessage = null;
         try
         {
             var dst = CoptLib.Writing.LanguageInfo.Parse(DstStr);
-            CoptLib.Writing.LanguageInfo.TryParse(SrcStr, out var src);
+            _ = CoptLib.Writing.LanguageInfo.TryParse(SrcStr, out var src);
 
             Response = await Client.TransliterateAsync(Text, dst, src);
         }
