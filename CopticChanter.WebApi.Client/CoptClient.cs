@@ -82,4 +82,16 @@ public class CoptClient(Url? baseUrl = null)
         var xml = XDocument.Load(response);
         return LexiconEntryReaderWriter.FromXml(xml);
     }
+
+    public async Task<string> TransliterateAsync(string text, LanguageInfo dst, LanguageInfo? src = null, string? syllableSeparator = null)
+    {
+        var request = GetBase()
+            .AppendPathSegments("linguistics", "transliterate")
+            .SetQueryParam("text", text)
+            .SetQueryParam("dst", dst.ToString())
+            .SetQueryParam("src", src?.ToString())
+            .SetQueryParam("syll", syllableSeparator);
+
+        return await request.GetStringAsync();
+    }
 }
