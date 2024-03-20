@@ -1,4 +1,6 @@
-﻿namespace CopticChanter.WebApi;
+﻿using OwlCore.Storage;
+
+namespace CopticChanter.WebApi;
 
 public static class AvailableContent
 {   
@@ -43,5 +45,13 @@ public static class AvailableContent
     public static Stream Open(string type, string id, IWebHostEnvironment env)
     {
         return env.WebRootFileProvider.GetFileInfo(GetPath(type, id)).CreateReadStream();
+    }
+
+    public static IFolder OpenSetFolder(string id, IWebHostEnvironment env)
+    {
+        var path = Path.Combine(env.WebRootPath, GetSetPath(id));
+        // Strip file extension
+        path = path[..^(Path.GetExtension(path).Length)];
+        return new OwlCore.Storage.SystemIO.SystemFolder(path);
     }
 }
