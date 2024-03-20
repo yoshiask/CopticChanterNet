@@ -79,12 +79,7 @@ public class LayoutController : Controller
 
             var docResolver = SequenceEx.LazyLoadedDocResolverFactory(context,
                 AvailableContent.Sets.Keys
-                    .Select(setId =>
-                    {
-                        var setStream = AvailableContent.Open("SET", setId, _env);
-                        var setArchive = SharpCompress.Archives.Zip.ZipArchive.Open(setStream);
-                        return new OwlCore.Storage.SharpCompress.ReadOnlyArchiveFolder(setArchive, setId, setId);
-                    })
+                    .Select(setId => AvailableContent.OpenSetFolder(setId, _env))
                     .ToAsyncEnumerable()
             );
             

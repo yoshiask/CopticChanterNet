@@ -4,10 +4,10 @@ public static class AvailableContent
 {   
     public static IReadOnlyDictionary<string, string> Docs = new Dictionary<string, string>
     {
-        ["28c70071-ce5e-4add-aa5c-d093acfb2787"] = "The Morning Doxology.xml",
+        ["28c70071-ce5e-4add-aa5c-d093acfb2787"] = "../Sets/midnight-praises/docs/42.xml",
         ["urn:tasbehaorg-cr:1216"] = "Hymn of the Ten Strings.xml",
         ["urn:suscopts:seven-tunes"] = "Hymn of the Seven Tunes.xml",
-        ["urn:tasbehaorg-cr:471"] = "The Thursday Theotokia (suscopt).xml",
+        ["urn:tasbehaorg-cr:471"] = "../Sets/midnight-praises/docs/20 4 Thursday.xml",
         ["urn:tasbehaorg:91"] = "Psalm 151.xml",
     };
 
@@ -25,9 +25,9 @@ public static class AvailableContent
         ["urn:tasbeha:nativity-paramone"] = "nativity-paramone.zip",
     };
 
-    public static string GetDocPath(string id) => Path.Combine("content/Docs", Docs[id]);
-    public static string GetSetPath(string id) => Path.Combine("content/Sets", Sets[id]);
-    public static string GetSequencePath(string id) => Path.Combine("content/Sequences", Sequences[id]);
+    public static string GetDocPath(string id) => Path.Combine("content", "Docs", Docs[id]);
+    public static string GetSetPath(string id) => Path.Combine("content", "Sets", Sets[id]);
+    public static string GetSequencePath(string id) => Path.Combine("content", "Sequences", Sequences[id]);
 
     public static string GetPath(string type, string id)
     {
