@@ -2,6 +2,7 @@
 using CopticChanter.WebApi.ContentSources;
 using CopticChanter.WebApi.Core;
 using CopticChanter.WebApi.Core.Responses;
+using CoptLib;
 using CoptLib.IO;
 using CoptLib.Models;
 using CoptLib.Models.Sequences;
@@ -98,6 +99,15 @@ public class LayoutController : Controller
             return BadRequest($"Invalid type '{type}'");
         }
 
+        // Add Coptic date to layout
+        LanguageInfo dateLanguage = new(KnownLanguage.Coptic);
+        Comment dateComment = new(null)
+        {
+            Language = dateLanguage,
+            SourceText = context.CurrentDate.Format(dateLanguage)
+        };
+        table.Insert(0, [dateComment]);
+        
         Layout layout = new(session.Key, title, table);
         var xLayout = layout.ToXml();
         var stream = await xLayout.ToStringAsync();
