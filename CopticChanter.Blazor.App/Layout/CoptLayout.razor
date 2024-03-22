@@ -2,11 +2,15 @@
 @using CoptLib.Models.Text
 @using CoptLib.Extensions
 
+@inject NavigationManager NavigationManager
+
 @code
 {
     [Parameter]
     public List<List<IDefinition>> Table { get; set; } = new();
 
+    public List<Doc> Docs { get; } = [];
+    
     private int fontSize = 18;
 }
 
@@ -49,18 +53,52 @@
 
         return (css, classes);
     }
+
+    private void OnDocSelectionChanged(ChangeEventArgs args)
+    {
+        var url = NavigationManager.Uri;
+        UriBuilder builder = new(url)
+        {
+            Fragment = args.Value?.ToString()
+        };
+        NavigationManager.NavigateTo(builder.ToString());
+    }
 }
 
 <link rel="stylesheet" href="css/app.css" />
 <link rel="stylesheet" href="css/docText.css" />
 
-<p>Font size:</p><InputNumber @bind-Value="fontSize"/>
+<div class="input-grid">
+    <div class="input-group" style="grid-column: 1;">
+        <span class="input-group-text" id="ftsz-lbl">Font Size</span>
+        <InputNumber class="form-control" @bind-Value="fontSize" aria-label="Font Size" aria-describedby="ftsz-lbl" />
+    </div>
+
+    <div class="input-group" style="grid-column: 2">
+        <span class="input-group-text" id="docs-lbl">Docs</span>
+        <select name="docs" id="docs" class="form-control" @oninput="OnDocSelectionChanged"
+                title="Skip to document" aria-describedby="docs-lbl">
+            <option value="top">(Top)</option>
+            @foreach (var doc in Docs)
+            {
+                <option value="@doc.Key">@doc.Name</option>
+            }
+            
+            <!-- Hack to prevent duplicates after refreshing the layout -->
+            @{Docs.Clear();}
+        </select>
+    </div>
+</div>
+
+<hr/>
 
 <style>
     table {
         font-size: @(fontSize)px;
     }
 </style>
+
+<div id="top" class="docName"></div>
 
 <table>
     @{
@@ -73,6 +111,7 @@
                 // Set flag so the title of the translations
                 // can be displayed in bold font
                 currentDoc = doc;
+                Docs.Add(doc);
                 continue;
             }
 
@@ -93,7 +132,7 @@
 
                     if (item is IContent content)
                     {
-                        if (content.Inlines.Count == 1 && content.Inlines[0] is Run singleRun)
+                        if (content.Inlines is [Run singleRun])
                         {
                             // Avoid using multiple inlines when Text can be used directly
                             text = singleRun.Text;
@@ -101,7 +140,7 @@
                         else
                         {
                             // Convert the CoptLib InlineCollection to HTML
-                            foreach (Inline inline in content.Inlines)
+                            foreach (var inline in content.Inlines)
                             {
                                 HandleInline(inline);
                             }
