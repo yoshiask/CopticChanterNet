@@ -46,12 +46,11 @@ public static class AvailableContent
     {
         return env.WebRootFileProvider.GetFileInfo(GetPath(type, id)).CreateReadStream();
     }
-
+    
     public static IFolder OpenSetFolder(string id, IWebHostEnvironment env)
     {
-        var path = Path.Combine(env.WebRootPath, GetSetPath(id));
-        // Strip file extension
-        path = path[..^(Path.GetExtension(path).Length)];
-        return new OwlCore.Storage.SystemIO.SystemFolder(path);
+        var setStream = Open("SET", id, env);
+        var setArchive = SharpCompress.Archives.Zip.ZipArchive.Open(setStream);
+        return new OwlCore.Storage.SharpCompress.ReadOnlyArchiveFolder(setArchive, id, id);
     }
 }
