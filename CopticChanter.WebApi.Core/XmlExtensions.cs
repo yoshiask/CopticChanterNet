@@ -6,6 +6,12 @@ namespace CopticChanter.WebApi.Core;
 
 public static class XmlExtensions
 {
+    public static Task<Stream> ToStringAsync(this XElement xml, CancellationToken token = default)
+    {
+        XDocument doc = new(xml);
+        return doc.ToStringAsync(token);
+    }
+    
     public static async Task<Stream> ToStringAsync(this XDocument xml, CancellationToken token = default)
     {
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER

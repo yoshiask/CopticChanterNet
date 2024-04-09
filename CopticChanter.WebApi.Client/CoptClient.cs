@@ -16,6 +16,8 @@ public class CoptClient(Url? baseUrl = null)
 
     public IFlurlRequest GetBase() => new FlurlRequest(BaseUrl.Clone());
 
+    public IFlurlRequest GetBase(string? sessionKey) => GetBase().SetQueryParam("sessionKey", sessionKey);
+
     public async Task<AvailableContent> GetAvailableContentAsync()
         => await GetBase().AppendPathSegment("content").GetJsonAsync<AvailableContent>();
 
@@ -24,9 +26,8 @@ public class CoptClient(Url? baseUrl = null)
         StreamContent content = new(stream);
         content.Headers.ContentType = new(ContentTypes.TypeToMime(type));
 
-        var response = await GetBase()
+        var response = await GetBase(sessionKey)
             .AppendPathSegment("content")
-            .SetQueryParam("sessionKey", sessionKey)
             .PostAsync(content);
 
         return await response.GetJsonAsync<CustomContentResponse>();
@@ -42,9 +43,8 @@ public class CoptClient(Url? baseUrl = null)
     public async Task<Layout> GetLayoutAsync(string type, string id, string? sessionKey,
         DateTime? date, IEnumerable<string>? excludedLanguageTags)
     {
-        var request = GetBase()
-            .AppendPathSegments("layout", type, id)
-            .SetQueryParam("sessionKey", sessionKey);
+        var request = GetBase(sessionKey)
+            .AppendPathSegments("layout", type, id);
 
         if (date is not null)
             request = request.SetQueryParam("date", date);
@@ -93,5 +93,15 @@ public class CoptClient(Url? baseUrl = null)
             .SetQueryParam("syll", syllableSeparator);
 
         return await request.GetStringAsync();
+    }
+
+    public async Task<string> TestScriptAsync(string scriptBody, string typeId, string? sessionKey)
+    {
+        var response = await GetBase(sessionKey)
+            .AppendPathSegments("authoring", "script")
+            .SetQueryParam("typeId", typeId)
+            .PostStringAsync(scriptBody);
+
+        return await response.GetStringAsync();
     }
 }
