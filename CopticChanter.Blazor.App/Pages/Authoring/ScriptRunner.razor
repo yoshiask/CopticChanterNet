@@ -11,7 +11,7 @@
 
     <div class="input-group" style="grid-row: 2">
         <span class="input-group-text" id="dst-lbl">Script Language*</span>
-        <InputText class="form-control" @bind-Value="TypeId" placeholder="The ID of the scripting programming language" aria-label="DstLanguage" aria-describedby="dst-lbl" />
+        <InputText class="form-control" @bind-Value="TypeId" placeholder="The ID of the scripting programming language (e.g. `lua` or `csharp`)" aria-label="DstLanguage" aria-describedby="dst-lbl" />
     </div>
     
     <button class="btn btn-outline-secondary" style="grid-row: 4; width: min-content;" @onclick="BeginRun">Run</button>

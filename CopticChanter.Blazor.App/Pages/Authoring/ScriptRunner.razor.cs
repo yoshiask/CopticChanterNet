@@ -26,7 +26,7 @@ public class ScriptRunnerBase : ComponentBase
 
     public string Body { get; set; } = "";
 
-    public string TypeId { get; set; } = "dotnet";
+    public string TypeId { get; set; } = "lua";
 
     public IAsyncRelayCommand RunCommand { get; }
 
