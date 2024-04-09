@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using CopticChanter.WebApi.Core;
+using CopticChanter.WebApi.Core.Requests;
 using CopticChanter.WebApi.Core.Responses;
 using CoptLib.Writing;
 using CoptLib.Writing.Lexicon;
@@ -83,16 +84,13 @@ public class CoptClient(Url? baseUrl = null)
         return LexiconEntryReaderWriter.FromXml(xml);
     }
 
-    public async Task<string> TransliterateAsync(string text, LanguageInfo dst, LanguageInfo? src = null, string? syllableSeparator = null)
+    public async Task<string> TransliterateAsync(TransliterationRequest requestBody)
     {
-        var request = GetBase()
+        var response = await GetBase()
             .AppendPathSegments("linguistics", "transliterate")
-            .SetQueryParam("text", text)
-            .SetQueryParam("dst", dst.ToString())
-            .SetQueryParam("src", src?.ToString())
-            .SetQueryParam("syll", syllableSeparator);
+            .PostJsonAsync(requestBody);
 
-        return await request.GetStringAsync();
+        return await response.GetStringAsync();
     }
 
     public async Task<string> TestScriptAsync(string scriptBody, string typeId, string? sessionKey)

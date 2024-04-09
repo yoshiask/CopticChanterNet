@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using System.Diagnostics.CodeAnalysis;
+using CommunityToolkit.Mvvm.Input;
 using CopticChanter.WebApi.Client;
 using Microsoft.AspNetCore.Components;
 using OwlCore.Extensions;
@@ -13,7 +14,8 @@ public class TransliterateBase : ComponentBase
     }
 
     [Inject]
-    public CoptClient Client { get; set; }
+    [NotNull]
+    public CoptClient? Client { get; set; }
 
     public string? ErrorMessage { get; set; }
 
@@ -35,10 +37,7 @@ public class TransliterateBase : ComponentBase
         ErrorMessage = null;
         try
         {
-            var dst = CoptLib.Writing.LanguageInfo.Parse(DstStr);
-            _ = CoptLib.Writing.LanguageInfo.TryParse(SrcStr, out var src);
-
-            Response = await Client.TransliterateAsync(Text, dst, src);
+            Response = await Client.TransliterateAsync(new(Text, DstStr, SrcStr, null));
         }
         catch (Flurl.Http.FlurlHttpException httpEx)
         {
