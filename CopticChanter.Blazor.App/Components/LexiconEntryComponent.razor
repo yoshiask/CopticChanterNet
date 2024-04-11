@@ -1,4 +1,5 @@
 ﻿@using CoptLib.Writing.Lexicon
+@using CoptLib.Extensions
 
 @if (Entry == null)
 {
@@ -10,11 +11,31 @@ else
 
     <div>
         <div>
+            <h4>Grammar</h4>
+            <p>Part of Speech: @(Entry.GrammarGroup.PartOfSpeech.ToDisplayString())</p>
+            @if (Entry.GrammarGroup.Gender is not null)
+            {
+                <p>Gender: @Entry.GrammarGroup.PartOfSpeech</p>
+            }
+            <p>Number: @Entry.GrammarGroup.Number</p>
+            @if (Entry.GrammarGroup.Subclass is not null)
+            {
+                <p>Subclass: @Entry.GrammarGroup.Subclass</p>
+            }
+            
+            @if (Entry.GrammarGroup.Note is not null)
+            {
+                <p><em>@Entry.GrammarGroup.Note</em></p>
+            }
+            <br/>
+        </div>
+        
+        <div>
             <h4>Forms</h4>
             <ul>
                 @foreach (var form in Entry.Forms)
                 {
-                    <li>@form.Orthography [@form.Usage.ToString()]</li>
+                    <li>@form.Orthography [@form.Usage.ToDisplayString()]</li>
                 }
             </ul>
         </div>
@@ -22,14 +43,14 @@ else
         <div>
             <h4>Senses</h4>
             <div class="senses-table">
-                @{int index = 1;}
+                @{ int index = 1; }
                 @foreach (var sense in Entry.Senses)
                 {
                     <div class="senses-index">@(index++).</div>
 
                     @foreach (var translation in sense.Translations)
                     {
-                        <div class="senses-translation">(@(translation.Language.ToString())) @translation.ToString()</div>
+                        <div class="senses-translation">(@(translation.Language.ToDisplayString())) @translation.ToString()</div>
                     }
 
                     <div class="senses-translation" style="text-indent: 2em; color: var(--bs-secondary);">@sense.Bibliography</div>
