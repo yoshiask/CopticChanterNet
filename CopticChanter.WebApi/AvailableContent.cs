@@ -22,7 +22,7 @@ public static class AvailableContent
     public static IReadOnlyDictionary<string, string> Sets = new Dictionary<string, string>
     {
         ["urn:tasbeha:midnight-praises"] = "midnight-praises.zip",
-        ["urn:suscopts:matins:palm-sunday"] = "cop-matins-palm-sunday.zip",
+        ["urn:suscopts:palm-sunday"] = "cop-palm-sunday.zip",
         ["urn:tasbeha:apostles-fast"] = "apostles-fast.zip",
         ["urn:mosc:nativity-feast"] = "malankara-nativity.zip",
         ["urn:tasbeha:nativity-paramone"] = "nativity-paramone.zip",
