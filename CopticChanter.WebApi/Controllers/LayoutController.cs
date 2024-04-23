@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using CopticChanter.WebApi.ContentSources;
 using CopticChanter.WebApi.Core;
+using CopticChanter.WebApi.Core.Requests;
 using CopticChanter.WebApi.Core.Responses;
 using CoptLib;
 using CoptLib.IO;
@@ -25,27 +26,23 @@ public class LayoutController : Controller
     }
     
     [Route("{type}/{id}")]
-    [HttpGet]
+    [HttpPost]
     public async Task<IActionResult> GetLayout(string type, string id, [FromServices] Session session,
-        [FromQuery] DateTime? date, [FromQuery(Name = "exclude")] List<string>? excludedLanguageTags)
+        LayoutRequest? request)
     {
         var context = session.Context;
 
-        if (date is not null)
-            session.Context.SetDate(LocalDateTime.FromDateTime(date.Value));
+        if (request?.Date is not null)
+            session.Context.SetDate(LocalDateTime.FromDateTime(request.Date.Value));
 
-        var excludedLanguages = excludedLanguageTags?
-            .Select(p => p.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
-            .SelectMany(p => p)
-            .Select(LanguageInfo.Parse)
-            .ToList() ?? [];
-
-        type = type.ToUpperInvariant();
-
+        var excludedLanguages = request?.GetValidExcludedLanguages();
+        var transliterations = request?.GetValidTransliterations();
+        DocLayoutOptions layoutOptions = new(excludedLanguages: excludedLanguages, transliterations: transliterations);
+        
         List<List<IDefinition>> table;
         string title;
 
-        DocLayoutOptions layoutOptions = new(excludedLanguages: excludedLanguages);
+        type = type.ToUpperInvariant();
         if (type == "DOC")
         {
             var doc = await session.MergedContent.TryGetDocAsync(id);
