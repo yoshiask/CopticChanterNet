@@ -6,6 +6,8 @@ namespace CopticChanter.WebApi.Core.Requests;
 [method: JsonConstructor]
 public record LayoutRequest(DateTime? Date, IEnumerable<string> ExcludedLanguages, IEnumerable<string> Transliterations)
 {
+    public static LayoutRequest Default { get; } = new(null, [], []);
+    
     public static LayoutRequest Create(DateTime? date, IEnumerable<LanguageInfo>? excludedLanguages,
         IEnumerable<LanguageInfo>? transliterations)
     {

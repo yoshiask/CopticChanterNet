@@ -40,7 +40,7 @@ public class CoptClient(Url? baseUrl = null)
         var request = GetBase(sessionKey)
             .AppendPathSegments("layout", type, id);
 
-        var response = await request.PostUrlEncodedAsync(options);
+        var response = await request.PostUrlEncodedAsync(options ?? LayoutRequest.Default);
         var xmlStream = await response.GetStreamAsync();
         
         var xml = XDocument.Load(xmlStream);
