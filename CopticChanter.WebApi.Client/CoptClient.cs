@@ -35,28 +35,15 @@ public class CoptClient(Url? baseUrl = null)
     }
 
     public async Task<Layout> GetLayoutAsync(string type, string id, string? sessionKey,
-        DateTime? date = null, IEnumerable<LanguageInfo>? excludedLanguages = null)
-    {
-        var exclude = excludedLanguages?.Select(l => l.ToString());
-        return await GetLayoutAsync(type, id, sessionKey, date, exclude);
-    }
-
-    public async Task<Layout> GetLayoutAsync(string type, string id, string? sessionKey,
-        DateTime? date, IEnumerable<string>? excludedLanguageTags)
+        LayoutRequest? options)
     {
         var request = GetBase(sessionKey)
             .AppendPathSegments("layout", type, id);
 
-        if (date is not null)
-            request = request.SetQueryParam("date", date);
-
-        if (excludedLanguageTags is not null)
-            request = excludedLanguageTags
-                .Aggregate(request, (current, tag) => current.AppendQueryParam("exclude", tag));
-
-        var response = await request.GetStreamAsync();
+        var response = await request.PostUrlEncodedAsync(options);
+        var xmlStream = await response.GetStreamAsync();
         
-        var xml = XDocument.Load(response);
+        var xml = XDocument.Load(xmlStream);
         return LayoutReaderWriter.FromXml(xml);
     }
 
