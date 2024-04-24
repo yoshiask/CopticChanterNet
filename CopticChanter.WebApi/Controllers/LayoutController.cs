@@ -27,9 +27,10 @@ public class LayoutController : Controller
     
     [Route("{type}/{id}")]
     [HttpPost]
-    public async Task<IActionResult> GetLayout(string type, string id, [FromServices] Session session,
-        LayoutRequest? request)
+    public async Task<IActionResult> GetLayout(string type, string id, [FromServices] Session session)
     {
+        var request = await Helpers.TryDeserializeJson<LayoutRequest>(Request.Body);
+        
         var context = session.Context;
 
         if (request?.Date is not null)
