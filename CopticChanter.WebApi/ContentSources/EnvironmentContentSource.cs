@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace CopticChanter.WebApi.ContentSources;
 
-public class EnvironmentContentSource(IWebHostEnvironment _env, ILoadContext _context) : IContentSource
+public class EnvironmentContentSource(IWebHostEnvironment _env, ILoadContext _context, ILogger _log) : IContentSource
 {
     public async Task<Doc> GetDocAsync(string id)
     {
@@ -20,7 +20,15 @@ public class EnvironmentContentSource(IWebHostEnvironment _env, ILoadContext _co
         using var setArchive = SharpCompress.Archives.Zip.ZipArchive.Open(stream);
         using var setFolder = new OwlCore.Storage.SharpCompress.ReadOnlyArchiveFolder(setArchive, id, id);
         DocSetReader setReader = new(setFolder, _context);
-        await setReader.ReadDocs();
+        try
+        {
+            await setReader.ReadDocs();
+        }
+        catch (Exception ex)
+        {
+            _log?.LogError(ex, "Failed to load set '{}'", id);
+            throw;
+        }
 
         return setReader.Set;
     }
