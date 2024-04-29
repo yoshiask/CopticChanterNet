@@ -5,7 +5,7 @@ namespace CopticChanter.WebApi;
 
 public class Session
 {
-    public Session(string key, ILoadContext context, IWebHostEnvironment env)
+    public Session(string key, ILoadContext context, IWebHostEnvironment env, ILogger<Session> log)
     {
         Key = key;
         Context = context;
@@ -14,7 +14,7 @@ public class Session
         LastModified = DateTimeOffset.Now;
 
         var contextSource = new LoadContextContentSource(context);
-        var globalSource = new EnvironmentContentSource(env, context);
+        var globalSource = new EnvironmentContentSource(env, context, log);
         MergedContent = new MergedContentSource([contextSource, Content, globalSource]);
     }
 

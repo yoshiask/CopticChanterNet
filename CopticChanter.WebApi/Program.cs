@@ -27,6 +27,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
+builder.Services.AddLogging();
+
 builder.Services.AddCoptSessions();
 builder.Services.AddAvailableContent();
 builder.Services.AddCopticLexicon();

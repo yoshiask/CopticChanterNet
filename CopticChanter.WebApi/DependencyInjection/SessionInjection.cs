@@ -21,8 +21,7 @@ public static class SessionInjection
             var context = sessions.GetOrAdd(sessionKey, k =>
             {
                 ILoadContext context = new LoadContext();
-                var env = ctx.GetRequiredService<IWebHostEnvironment>();
-                return new(k, context, env);
+                return ActivatorUtilities.CreateInstance<Session>(ctx, k, context);
             });
             return context;
         });
