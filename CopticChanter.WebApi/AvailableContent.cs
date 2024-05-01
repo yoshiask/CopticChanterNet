@@ -16,6 +16,7 @@ public static class AvailableContent
     public static IReadOnlyDictionary<string, string> Sequences = new Dictionary<string, string>
     {
         ["midnight-praises"] = "midnight-praises-sequence.xml",
+        ["cop-pascha-week"] = "cop-pascha-week.xml",
         ["nativity-paramoun"] = "nativity-paramoun-sequence.xml",
     };
 
