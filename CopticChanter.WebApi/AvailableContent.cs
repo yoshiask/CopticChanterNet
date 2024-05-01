@@ -23,6 +23,7 @@ public static class AvailableContent
     {
         ["urn:tasbeha:midnight-praises"] = "midnight-praises.zip",
         ["urn:suscopts:palm-sunday"] = "cop-palm-sunday.zip",
+        ["urn:suscopts:pascha"] = "cop-pascha-week.zip",
         ["urn:tasbeha:apostles-fast"] = "apostles-fast.zip",
         ["urn:mosc:nativity-feast"] = "malankara-nativity.zip",
         ["urn:tasbeha:nativity-paramone"] = "nativity-paramone.zip",
