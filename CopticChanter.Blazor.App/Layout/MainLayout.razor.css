@@ -9,13 +9,13 @@ main {
 }
 
 .sidebar {
-    /* Resurrection */
-    background-image: linear-gradient(180deg, #F9A825 0%, #F57F17 125%);
+    /* Annual */
+    background-image: linear-gradient(180deg, #C62828 0%, #B60064 125%);
 
     /* Pascha */
     /*background-image: linear-gradient(180deg, #283593 0%, #0E1345 125%);*/
-    /* Annual */
-    /*background-image: linear-gradient(180deg, #c62828 0%, #B60064 125%);*/
+    /* Resurrection */
+    /*background-image: linear-gradient(180deg, #F9A825 0%, #F57F17 125%);*/
 }
 
 .top-row {
