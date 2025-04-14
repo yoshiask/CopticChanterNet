@@ -31,10 +31,10 @@ h1:focus {
 
 a, .btn-link {
     /* Annual */
-    color: #F44336;
+    /*color: #F44336;*/
 
     /* Pascha */
-    /*color: #3F51B5;*/
+    color: #3F51B5;
 
     /* Resurrection */
     /*color: #F57F17;*/
