@@ -20,7 +20,7 @@ else
         <span class="input-group-text" id="exlg-lbl">Excluded Languages</span>
         <InputText class="form-control" @bind-Value="ExcludedTags" placeholder="Comma-separated list of languages to hide" aria-label="Excluded Languages" aria-describedby="exlg-lbl" />
     </div>
-    
+
     <div class="input-group" style="grid-row: 2">
         <span class="input-group-text" id="trnl-lbl">Transliterations</span>
         <InputText class="form-control" @bind-Value="Transliterations" placeholder="Comma-separated list of transliterations to generate. For example, 'cop/en' for Coptic-English." aria-label="Transliterations" aria-describedby="trsl-lbl" />
@@ -53,8 +53,8 @@ else
 
 <style>
     .input-grid {
-        display: grid;
-        gap: 10px;
+    display: grid;
+    gap: 10px;
     }
 </style>
 
@@ -68,25 +68,41 @@ else
     [Parameter]
     public string? SessionKey { get; set; }
 
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? ExcludedTags { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? Transliterations { get; set; }
+
     public bool IsLoaded { get; set; } = false;
 
     public string? ErrorMessage { get; set; }
 
+    public LayoutRequest? Options { get; set; }
+
     public CopticChanter.WebApi.Core.Responses.Layout? Layout { get; set; }
-
-
-    public string ExcludedTags { get; set; } = "";
-    public string Transliterations { get; set; } = "";
 
     public DateTime Date { get; set; } = DateTime.Now;
 
     protected override async Task OnInitializedAsync()
     {
+        ErrorMessage = null;
         try
         {
             ValidateParameters();
+            
+            var excludedTags = ExcludedTags?.Split(',',
+                StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+                ?? [];
+            var transliterations = Transliterations?.Split(',',
+                StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+                ?? [];
 
-            Layout = await Client.GetLayoutAsync(Type, Id, SessionKey, null);
+            Options = new(Date, excludedTags, transliterations);
+
+            Layout = await Client.GetLayoutAsync(Type, Id, SessionKey, Options);
             StateHasChanged();
 
             SessionKey = Layout.SessionKey;
@@ -106,39 +122,9 @@ else
         StateHasChanged();
     }
 
-    private async void LayoutOptionsChanged()
+    private async Task LayoutOptionsChanged()
     {
-        if (!IsLoaded)
-        {
-            return;
-        }
-
-        ErrorMessage = null;
-        try
-        {
-            ValidateParameters();
-
-            var excludedTags = ExcludedTags.Split(',',
-                StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-            var transliterations = Transliterations.Split(',',
-                StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-
-            LayoutRequest options = new(Date, excludedTags, transliterations);
-
-            Layout = await Client.GetLayoutAsync(Type!, Id!, SessionKey, options);
-        }
-        catch (Flurl.Http.FlurlHttpException httpEx)
-        {
-            Layout = null;
-            ErrorMessage = await httpEx.GetResponseStringAsync();
-        }
-        catch (Exception ex)
-        {
-            Layout = null;
-            ErrorMessage = ex.ToString();
-        }
-
-        StateHasChanged();
+        await OnInitializedAsync();
     }
 
     [MemberNotNull(nameof(Type))]
