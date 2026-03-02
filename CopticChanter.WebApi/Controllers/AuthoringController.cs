@@ -32,7 +32,7 @@ public class AuthoringController : Controller
             return Ok(output?.ToString() ?? "");
         
         var xml = DocWriter.SerializeTransformedObject(def);
-        var stream = await xml.ToStringAsync();
-        return File(stream, ContentTypes.MIMETYPE_XML);
+        var stream = await xml.ToStreamAsync();
+        return File(stream, ContentTypes.MIMETYPE_XML_UTF16);
     }
 }

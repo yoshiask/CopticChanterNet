@@ -23,9 +23,9 @@ public class LexiconController(ILexicon _lexicon) : Controller
 
         LexiconSearchResponse response = new(query, entries);
         var xResponse = response.ToXml();
-        var stream = await xResponse.ToStringAsync();
+        var stream = await xResponse.ToStreamAsync();
         
-        return File(stream, ContentTypes.MIMETYPE_XML);
+        return File(stream, ContentTypes.MIMETYPE_XML_UTF16);
     }
 
     [Route("{id}")]
@@ -41,8 +41,8 @@ public class LexiconController(ILexicon _lexicon) : Controller
                 return NotFound("Super entries are not supported.");
 
             var xEntry = entry.ToXml();
-            var stream = await xEntry.ToStringAsync();
-            return File(stream, ContentTypes.MIMETYPE_XML);
+            var stream = await xEntry.ToStreamAsync();
+            return File(stream, ContentTypes.MIMETYPE_XML_UTF16);
         }
         catch (KeyNotFoundException)
         {

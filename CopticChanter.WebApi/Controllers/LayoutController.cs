@@ -108,9 +108,9 @@ public class LayoutController : Controller
         
         Layout layout = new(session.Key, title, table);
         var xLayout = layout.ToXml();
-        var stream = await xLayout.ToStringAsync();
+        var stream = await xLayout.ToStreamAsync();
 
         session.UpdateLastModified();
-        return File(stream, ContentTypes.MIMETYPE_XML);
+        return File(stream, ContentTypes.MIMETYPE_XML_UTF16);
     }
 }

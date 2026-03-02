@@ -6,17 +6,32 @@ namespace CopticChanter.WebApi.Core;
 
 public static class XmlExtensions
 {
-    public static Task<Stream> ToStringAsync(this XElement xml, CancellationToken token = default)
+
+    /// <summary>
+    /// Writes the XML element to a stream using the UTF-16 encoding.
+    /// </summary>
+    public static Task<Stream> ToStreamAsync(this XElement xml, CancellationToken token = default)
     {
         XDocument doc = new(xml);
-        return doc.ToStringAsync(token);
+        return doc.ToStreamAsync(token);
     }
-    
-    public static async Task<Stream> ToStringAsync(this XDocument xml, CancellationToken token = default)
+
+    /// <summary>
+    /// Writes the XML document to a stream using the UTF-16 encoding.
+    /// </summary>
+    public static Task<Stream> ToStreamAsync(this XDocument xml, CancellationToken token = default)
+    {
+        return xml.ToStreamAsync(Encoding.Unicode, token);
+    }
+
+    /// <summary>
+    /// Writes the XML document to a stream using the specified encoding.
+    /// </summary>
+    public static async Task<Stream> ToStreamAsync(this XDocument xml, Encoding encoding, CancellationToken token = default)
     {
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
         MemoryStream stream = new();
-        StreamWriter streamWriter = new(stream, Encoding.Unicode);
+        StreamWriter streamWriter = new(stream, encoding);
 
 #if NETCOREAPP2_0_OR_GREATER
         await
@@ -32,7 +47,7 @@ public static class XmlExtensions
         return stream;
 #else
         MemoryStream stream = new();
-        StreamWriter streamWriter = new(stream, Encoding.Unicode);
+        StreamWriter streamWriter = new(stream, encoding);
         using var xmlWriter = XmlWriter.Create(streamWriter);
         xml.WriteTo(xmlWriter);
         await xmlWriter.FlushAsync();

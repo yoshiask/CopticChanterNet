@@ -6,8 +6,8 @@ public static class ContentTypes
 {
     public const string MIMETYPE_DOCXML = "application/com.askharoun.coptic.doc+xml";
     public const string MIMETYPE_SET = "application/com.askharoun.coptic.set+zip";
-    public const string MIMETYPE_SEQXML = "application/com.askharoun.coptic.seq+zip";
-    public const string MIMETYPE_XML = "application/xml";
+    public const string MIMETYPE_SEQXML = "application/com.askharoun.coptic.seq+xml";
+    public const string MIMETYPE_XML_UTF16 = "application/xml; charset=utf-16";
 
     public static string TypeToMime(string type)
     {
